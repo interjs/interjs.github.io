@@ -125,6 +125,11 @@
                     <li>
                         <span class="hl">text</span> - O valor dessa propriedade vai indicar o texto do elemento criado.
                     </li>
+					<li>
+					<span class="hl">renderIf</span> - Essa propriedade apenas aceita valores booleanos(true/false), como
+					o nome o descreve, ele serve para renderizar condicionalmente o elemento, se o valor da referida propriedade for
+					true o elemento será renderizado, se for false o elemento não será renderizado.
+					</li>
                     <li>
                         <span class="hl">attrs</span> - Deve ser um objecto, e as propriedades do referido objecto
                         serão os atributos do elemento e os valores das propriedades serão os respectivos valores
@@ -135,8 +140,7 @@
                     <li>
                         <span class="hl">events</span> - Deve ser um objecto, e as propriedades do referido objecto
                         serão os eventos que o elemento escutará, e os valores das propriedades devem ser funções que
-                        serão executadas quando os eventos ocorrerem, se o valor <span class="hl">null</span> 
-                        ou <span class="hl">undefined</span> o evento não será criado, e o nome do evento deve ser oficial do DOM.
+                        serão executadas quando os eventos ocorrerem, e o nome do evento deve ser oficial do DOM.
                     </li>
 
                     <li>
