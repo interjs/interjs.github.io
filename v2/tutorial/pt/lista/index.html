@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+       <title>Lista</title>
+        
+    </head>
+    <body>
+        <style>
+       .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+
+        </style>
+        
+        <div class="main">
+           
+            <aside>
+                <nav>
+                    <ul class="social">
+                        
+                       <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                       <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                       <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul class="nav">
+                    <li>
+                            <a href="/v2/tutorial/pt/introducao/">
+                                Introdução
+                            </a>
+                            </li>
+                            <li>
+                            <a href="/v2/tutorial/pt/instalacao/">
+                                Instalação
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/v2/tutorial/pt/referencia">Referência</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/lista">Lista</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+          
+        <article>
+            <div>
+                <h1>Lista</h1>
+
+                <p>Para renderizar uma lista, nós usamos 
+                    a função nativa do Inter, chamada <span class="hl">renderList</span>, como as outras
+                    funções ela apenas recebe um objecto como o seu argumento e o referido
+                    objecto deve ter as seguintes propriedades:
+                </p>
+
+                
+                    <ul class="items">
+
+                    <li>
+                       <span class="hl">in</span> - Deve ser uma string que vai indicar o valor do atributo id do elemento onde a Lista
+                        será renderizada.
+                    </li>
+                    <li>
+                       <span class="hl">each</span>  - Representa os dados em que a lista será baseada, esses dados podem ser Array,
+                    Objecto, Set, Map ou número. 
+                    </li>
+                    <li>
+                        <span class="hl">do</span>  - Deve ser um método que será invocada pela quantidade dos dados. Para
+                        mais info vai até a parte que fala sobre a <a href="opçaodo">opção do</a> nessa matéria.
+                    </li>
+                    
+                </ul>
+
+                <h2>
+                    A função template
+                </h2>
+
+                <p>
+                    O template da nossa lista deve ser expresso com a função template,
+                    essa função recebe apenas um objecto como o seu argumento e referido objecto
+                    aceita as seguintes propriedades:
+                </p>
+
+                <ul class="items">
+
+                    <li>
+                        <span class="hl">tag</span>(obrigatório) - O valor
+                        dessa propriedade deve indicar o nome da tag que será criada,
+                        o valor deve ser apenas uma string ou uma função. Se for uma função
+                        a função  deve retornar uma string(que vai representar o nome da tag).
+                    </li>
+
+                    <li>
+                        <span class="hl">text</span> - O valor dessa propriedade vai indicar o texto do elemento criado.
+                    </li>
+                    <li>
+                        <span class="hl">attrs</span> - Deve ser um objecto, e as propriedades do referido objecto
+                        serão os atributos do elemento e os valores das propriedades serão os respectivos valores
+                        dos atributos. Se o valor for uma função a função será invocada e o valor
+                        retornado pela função será o valor do atributo. Se o valor for <span class="hl">null</span>
+                        <span class="hl">undefined</span>, ou <span class="hl">false</span> o atributo não será criado.
+                    </li>
+                    <li>
+                        <span class="hl">events</span> - Deve ser um objecto, e as propriedades do referido objecto
+                        serão os eventos que o elemento escutará, e os valores das propriedades devem ser funções que
+                        serão executadas quando os eventos ocorrerem, se o valor <span class="hl">null</span> 
+                        ou <span class="hl">undefined</span> o evento não será criado, e o nome do evento deve ser oficial do DOM.
+                    </li>
+
+                    <li>
+                        <span class="hl">styles</span> - Deve ser um objecto, e as propriedades do referido objecto
+                        serão os nomes dos estilos que serão aplicados no elemento e os valores serão os valores dos respectivos estilos. Se o valor
+                        for uma função, a função será executada e o valor retornado pela função será o valor do estilo.
+                        Se o valor for <span class="hl">null</span> ou <span class="hl">undefined</span>
+                        o estilo não será criado, e o nome do estilo deve ser oficial do CSS.
+                    </li>
+                    <li>
+                        <span class="hl">children</span> - Deve ser uma array de objectos que aceitam as mesmas
+                        propriedades que o objecto da função <span class="hl">template</span>
+                        e os elementos produzidos na referida array serão os filhos do elemento que estamos a nos referir.
+                    </li>
+
+                </ul>
+
+    
+                <p>Vê um exemplo</p>
+       
+<textarea id="Editor1">
+
+<div id="lista1"></div>
+
+ <script>
+
+const dados=[
+    {nome:"Piter", idade:24, casado:false},
+    {nome:"Bob", idade:19, casado:false},
+    {nome:"Armando", idade:42, casado:true}
+    ];
+
+    let reator;
+
+    renderList({
+        in:"lista1",
+        each:dados,
+        do(usuario){
+
+            reator=this;
+
+            return template({
+                    tag:"div", children:[{
+                        tag:"h2", text:usuario.nome
+                    },{
+                        tag:"div", children:[{
+                        tag:"p", text:`O ${usuario.nome} é casado.`, renderIf:usuario.casado
+                        },{
+                          tag:"p", text:`O ${usuario.nome} tem ${usuario.idade} anos`
+                        }]
+                    },{
+                        tag:"button", text:"Casou", attrs:{disabled:usuario.casado},
+                        events:{onclick:()=>usuario.casado=true}
+                    }]
+            })
+
+        }
+    })
+
+</script>
+
+                </textarea>
+<div class="demo">
+    <div id="lista1"></div>   
+    <div class="space"></div>
+</div>
+<h3 id="opcaodo">Opção do</h3>
+<div class="warning">
+                <p>
+                    Dentro do metódo do,
+                    a palavra-chave <span class="hl">this</span>, indica
+                    o reator da lista.
+                </p>
+
+</div>
+
+<p>
+    Os tipos de argumentos que esse método recebe, depende do tipo de dados em que a lista é baseada.
+    Se for uma array, essa função vai receber três argumentos.
+</p>
+
+<ul class="items">
+
+    <li>O primeiro argumento será o item atual da iteração.</li>
+    <li>O segundo argumento será a posição do item atual na array.</li>
+    <li>O terceiro argumento será o reator da lista.</li>
+
+</ul>
+
+<p>
+    Se o tipo de dados for um Set, a função vai receber dois argumentos:
+</p>
+
+<ul class="items">
+    <li>O primeiro argumento será o item atual da iteração.</li>
+    <li>O segundo argumento será o reator da lista.</li>
+</ul>
+
+<p>
+    Se o tipo de dados for objecto ou Map a função vai receber três argumentos.
+</p>
+
+<ul class="items">
+
+    <li>O primeiro argumento será o nome da propriedade atual da iteração.</li>
+    <li>O segundo argumento será a o valor da propriedade.</li>
+    <li>O terceiro argumento será o reator da lista.</li>
+
+</ul>
+
+<p>Se o tipo de dados for um número(Number), a função vai receber apenas um
+    argumento, que será o número atual da iteração.
+</p>
+<p>
+    O referido método deve retornar a  função template.
+</p>
+
+<h2>O reator da lista</h2>
+<div class="greenlight">
+<p>A função <span class="hl">renderList</span> também retorna
+o reator da lista.</p>
+</div>
+
+<p>
+    O Inter é reativo por padrão, então, quando você alterar os dados da lista O Inter vai
+    se aperceber e atualizar a lista para refletir as novas informações.
+</p>
+<p>
+    Se os dados em que a lista é baseada for Array, Objecto, Map ou Set, se você usar um método
+    que modifica os dados o Inter vai reagir à essa alteração. Volte para o exemplo
+    anterior, abra o console e tenta fazer o seguinte: reator[0].nome="Jonatan" você
+    vai ver que a parte da interface que usa aquele valor será atualizada, ou ainda podes
+    ir mais longe, fazendo assim: reator.push({nome:"Teu nome", idade:"Tua idade", casado:false}) você
+    vai acrescentar um novo dado no final da lista.
+</p>
+
+<p>
+    Quando o reator for uma Array, como no exemplo anterior, a referida Array terá
+    algumas propriedades reativas específicas do Inter, elas são:
+</p>
+
+<h3 id="#reatorotherArray">OtherArray</h3>
+
+<p>Essa é uma propriedade reativa, só de definição, é usada quando
+    querermos definir uma outra array onde a listagem será baseada,
+    obviamente que o valor da referida propriedade deve ser uma Array.
+</p>
+
+
+<textarea id="Editor2">
+
+<div>
+
+<div id="lista2"></div>
+
+<button onclick="alternar()">Alternar</button>
+
+</div>
+<script>
+
+const animais=["Cão","Gato","Lobo"],
+      frutas=["Maçã", "Laranja", "Banana"];
+ let  lista="animais",
+      reator2;
+
+      renderList({
+       in:"lista2",
+       each:array1,
+       do(item){
+
+        reator2=this;
+
+        return template({
+                tag:"div", children:[{
+                    tag:"h5", text:item, 
+                },{
+                    tag:"p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
+                }]
+      
+            })
+
+       }
+      })
+
+
+ 
+function alternar(){
+
+    if(lista=="animais"){
+
+     lista="frutas";
+     reator2.otherArray=frutas;
+
+    }else{
+
+        lista="animais";
+        reator2.otherArray=animais;
+
+    }
+
+}
+
+</script>
+
+
+</textarea>
+<div class="demo">
+    <div>
+        <div id="lista2">
+        
+        </div>
+        <button onclick="alternar()">Alternar</button>
+        </div>
+<div class="space"></div>          
+</div>
+<h3>AddItems</h3>
+<p>
+    Esse método é usado para acrescentar uma certa quantidade de dados na a array. 
+    Ele aceita dois argumentos, o primeiro deve uma Array, e os items daquela Array
+    serão adicionada na Array reatora. O segundo argumento deve ser um número, que vai indicar
+    a posição em que os items serão adicionados. Se a posição for 0 ou menor que zero(número negativo),
+    os items serão adicionados no princípio da Array, se a posição for omitida ou se for maior que o número de items da Array retora,
+    os items serão adicionados no final da Array, caso contrário, os items serão adicionados na posição pretendida.
+</p>
+
+<textarea id="Editor3">
+
+<div>
+
+<button onclick="adicionar3Amigos(this)">Adicionar 3 amigos</button>
+
+<div id="amigos"></div>
+
+</div>
+
+<script>
+
+const amigos=[
+    {nome:"Bob"},
+    {nome:"Érica"},
+    {nome:"Marta"}
+];
+
+const reator3=renderList({
+    in:"amigos",
+    each:[{nome:"Emília"}],
+    do(amigo){
+
+    return template({
+        tag:"div", children:[{
+            tag:"h4", text:amigo.name
+        }]
+    })
+
+    }
+})
+
+function adicionar3Amigos(button){
+
+   //Adiciona no princípio da lista.
+    reator3.addItems(amigos, 0);
+    button.setAttribute("disabled", true);
+
+
+}
+
+</script>
+
+</textarea>
+
+<div class="demo">
+    <div>
+
+        <button onclick="adicionar3Amigos(this)">Adicionar 3 amigos</button>
+        
+        <div id="amigos"></div>
+        
+        </div>
+        <div class="space"></div>
+</div>
+
+<h2>Se a opção each for número</h2>
+
+<p>
+    A opção each pode receber um número como o seu valor,
+    e o método do será executado contando de 0 até o referido número menos -1. Por exemplo
+    se a opção each for igual a 3, quer dizer que terá 3 items na lista, e o método
+    do será executado com apenas 1 argumento, e referido argumento vai indicar o número atual(de 0 até o número anterior do valor da opção each).
+    
+</p>
+
+<textarea id="Editor4">
+    
+<ol id="lista4"></ol>
+
+<script>
+
+ renderList({
+     in:"lista4",
+     each:5,
+     do(numero){
+
+        return template({
+            tag:"li", text:`Esse é o ${numeroOrdinal(numero+1)} item da lista`
+        })
+
+     }
+
+ })
+
+ function numeroOrdinal(numero){
+
+    if(numero==1){
+
+        return "primeiro";
+
+    }if(numero==2){
+
+        return "segundo";
+
+    }if(numero==3){
+
+        return "terceiro";
+
+    }if(numero==4){
+
+        return "quarto"
+
+    }if(numero==5){
+
+        return "quinto";
+
+    }
+
+ }
+
+</script>
+
+</textarea>
+<div class="demo">
+    <ol id="lista4"></ol>
+    <div class="space"></div>
+</div>
+
+<p>
+    Quando por exemplo, o valor da opção each for uma array de objectos, o Inter vai definir
+    algumas propriedades reativas nos referidos objectos. E elas são:
+</p>
+
+<h3>
+    setProps
+</h3>
+<p>Essa propriedade será útil quando quisermos atualizar mais de uma propriedade do objecto, e o valor
+    dessa propriedade deve ser um objecto em que as suas propriedades serão os nomes das propriedades que pretendermos atualizar,
+    e os valores serão os novos valores das respectivas propriedades.
+</p>
+<textarea id="Editor5">
+    
+<div id="lista5"></div>
+
+<script>
+
+ const jogadores=[{
+     nome:"Anderson", respeito:0, nivel:1
+ },{
+     nome:"William", respeito:10, nivel:11
+ },{
+     nome:"Emília", respeito:3, nivel:4
+ }]
+
+ renderList({
+     in:"lista5",
+     each:jogadores,
+     do(jogador){
+
+        return template({
+            tag:"div", children:[{
+                tag:"h4", text:`Jogador: ${jogador.nome}`
+            },{
+                tag:"div", children:[{
+                 tag:"p", text:`Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
+                }]
+            },{
+                tag:"button", text:"Outro nível", events:{onclick:()=>outronivel(jogador)}
+            }]
+        })
+
+     }
+ })
+
+ function outronivel(jogador){
+
+    jogador.setProps={
+        nivel:jogador.nivel+1,
+        respeito:jogador.respeito+1
+    }
+
+ }
+
+</script>
+
+</textarea>
+<div class="demo">
+    <div id="lista5"></div>
+    <div class="space"></div>
+</div>
+<h3>defineProps</h3>
+<p>
+    Essa propriedade é similar à <span class="hl">setProps</span>,
+    a diferença é que nós usamos a referida propriedade para adicionar propriedades
+    reativas no objecto.
+</p>
+
+<h3>
+    deleteProps
+</h3>
+<p>
+    Nós uamos essa propriedade para deletar as propriedades do objecto e reagir à essa alteração, ou seja,
+    ela é uma propriedade reativa como as que já foram mencionadas, quando nós usamos essa propriedade
+    para deletar as propriedades do objecto, o Inter vai se aperceber e vai atualizar a interface para refletir as novas
+    informações. Essa propriedade só aceita uma Array como o seu valor, e os items da referida Array devem ser os nomes
+    das propriedades que serão deletadas.
+</p>
+
+<p>Essa matéria te explicou tudo sobre lista em Inter.</p>
+                <div class="space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+       const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula",
+        viewPortMargin: Infinity
+
+      }
+
+
+      for(let i=1; i<6; i++){
+
+        
+      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+
+      }
+
+      const dados=[
+    {nome:"Piter", idade:24, casado:false},
+    {nome:"Bob", idade:19, casado:false},
+    {nome:"Armando", idade:42, casado:true}
+    ];
+
+    let reator;
+
+    renderList({
+        in:"lista1",
+        each:dados,
+        do(usuario){
+
+            reator=this;
+
+            return template({
+                    tag:"div", children:[{
+                        tag:"h2", text:usuario.nome
+                    },{
+                        tag:"div", children:[{
+                        tag:"p", text:`O ${usuario.nome} é casado.`, renderIf:usuario.casado
+                        },{
+                          tag:"p", text:`O ${usuario.nome} tem ${usuario.idade} anos`
+                        }]
+                    },{
+                        tag:"button", text:"Casou", attrs:{disabled:usuario.casado},
+                        events:{onclick:()=>usuario.casado=true}
+                    }]
+            })
+
+        }
+    })
+
+    const animais=["Cão","Gato","Lobo"],
+      frutas=["Maçã", "Laranja", "Banana"];
+
+let  lista="animais",
+     reator2;
+
+      renderList({
+       in:"lista2",
+       each:animais,
+       do(item){
+
+        reator2=this;
+
+        return template({
+                tag:"div", children:[{
+                    tag:"h4", text:item
+                },{
+                    tag:"p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
+                }]
+        })
+
+       }
+      })
+
+function alternar(){
+
+if(lista=="animais"){
+
+
+lista="frutas";
+reator2.otherArray=frutas
+
+}else{
+
+    lista="animais"
+    reator2.otherArray=animais;
+
+}
+
+}
+
+
+const jogadores=[{
+     nome:"Anderson", respeito:0, nivel:1
+ },{
+     nome:"William", respeito:10, nivel:11
+ },{
+     nome:"Emília", respeito:3, nivel:4
+ }]
+
+ renderList({
+     in:"lista5",
+     each:jogadores,
+     do(jogador){
+
+        return template({
+            tag:"div", children:[{
+                tag:"h4", text:`Jogador: ${jogador.nome}`
+            },{
+                tag:"div", children:[{
+                 tag:"p", text:`Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
+                }]
+            },{
+                tag:"button", text:"Outro nível", events:{onclick:()=>outronivel(jogador)}
+            }]
+        })
+
+     }
+ })
+
+ function outronivel(jogador){
+
+    jogador.setProps={
+        nivel:jogador.nivel+1,
+        respeito:jogador.respeito+1
+    }
+
+ }
+
+ 
+const amigos=[
+    {nome:"Bob"},
+    {nome:"Érica"},
+    {nome:"Marta"}
+];
+
+const reator3=renderList({
+    in:"amigos",
+    each:[{nome:"Emília"}],
+    do(amigo){
+
+    return template({
+        tag:"div", children:[{
+            tag:"h4", text:amigo.nome
+        }]
+    })
+
+    }
+})
+
+function adicionar3Amigos(button){
+
+   //Adiciona no princípio da lista.
+    reator3.addItems(amigos, 0);
+    button.setAttribute("disabled", true);
+
+
+}
+
+
+renderList({
+     in:"lista4",
+     each:5,
+     do(numero){
+
+        return template({
+            tag:"li", text:`Esse é o ${numeroOrdinal(numero+1)} item da lista`
+        })
+
+     }
+
+ })
+
+ function numeroOrdinal(numero){
+
+    if(numero==1){
+
+        return "primeiro";
+
+    }if(numero==2){
+
+        return "segundo";
+
+    }if(numero==3){
+
+        return "terceiro";
+
+    }if(numero==4){
+
+        return "quarto"
+
+    }if(numero==5){
+
+        return "quinto";
+
+    }
+
+ }
+
+
+</script>
+       </script>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"><link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+        <title>Instalação</title>
+        
+    </head>
+    <body>
+        <style>
+       .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+
+        </style>
+        
+        <div class="main">
+           
+            <aside>
+            
+                <nav>
+                    <ul class="social">
+                        
+                       <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                       <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                       <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul class="nav">
+                    <li>
+                            <a href="/v2/tutorial/pt/introducao/">
+                                Introdução
+                            </a>
+                            </li>
+                            <li>
+                            <a href="/v2/tutorial/pt/instalacao/">
+                                Instalação
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/v2/tutorial/pt/referencia">Referência</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/lista">Lista</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+          
+        <article>
+<div>
+    <h1>Instalação</h1>
+    
+    <p>
+        Para instalares o Inter não será necessário fazeres mil configurações,
+        basta instares ele apartir do CDN(jsDelivr) ou baixando ele e usares directamente apartir
+        do teu máquina.
+    </p>
+
+    <h3>CDN</h3>
+    <textarea id="Editor1">
+
+    <!--Instala a última versão do Inter-->
+    <script src="https://cdn.jsdelivr.net/gh/DenisPower1/inter/inter.min.js"></script>
+    <!--Instala uma versão específica-->
+    <script src="https://cdn.jsdelivr.net/gh/interjs/inter@numero-da-versao/inter.min.js"></script>
+    <script>
+
+        // Teu código 
+
+    </script>
+    </textarea>
+    <h3>Localmente</h3>
+    <p>
+        Queres usar o Inter directamente em sua máquina? É super simples, baixa
+        ele clicando em <a href="https://github.com/interjs/inter/releases/download/v2.0.0/inter.min.js">Baixar</a>, e agora é só importar ele em uma tag script
+    </p>
+
+    <textarea id="Editor2">
+
+    <script src="inter.js"></script>
+    <script>
+    
+            // Teu código 
+    
+    </script>
+    </textarea>
+
+    <p>É só isso! Agora vamos pôr a mão no código?</p>
+    <div class="Space"></div>
+</div>
+</article>
+</div>
+<script>
+    const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula",
+        viewPortMargin: Infinity
+
+      }
+
+
+      for(let i=1; i<3; i++){
+
+        
+      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+
+      }
+
+</script>
+</body>
+</html>

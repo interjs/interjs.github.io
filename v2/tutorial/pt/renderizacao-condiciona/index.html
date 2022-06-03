@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+        <title>Renderização condicional</title>
+        <style>
+                     .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+        </style>
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+            <nav>
+                <ul class="social">
+                    
+                   <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                   <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                   <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="nav">
+                <li>
+                        <a href="/v2/tutorial/pt/introducao/">
+                            Introdução
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/v2/tutorial/pt/instalacao/">
+                            Instalação
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/referencia">Referência</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/lista">Lista</a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <article>
+            <div>
+                <h1>Renderização condicional</h1>
+                 <div class="warning">
+                     <p>Essa matéria pressupõe que tenhas conhecimento
+                         sobre referência no Inter
+                     </p>
+                 </div>
+                 <p>
+                     No Inter para renderizar condicionalmente elementos HTML, nós usamos
+                     os seguintes atributos nativos do Inter.
+                 </p>
+
+                  <h3 id="atributo-_if">Atributo _if</h3> 
+                 <p>O valor desse atributo deve ser o nome de uma das propriedades do objecto
+                     data(da função renderIf()), e se o valor da referida propriedade for verdadeiro o elemento será renderizado, caso o contrário o elemento
+                     não será renderizado.
+                 </p>
+<textarea id="Editor1">
+
+<div id="alvo1">
+
+    <h5 _if="profMiguel">
+      O professor Miguel é o melhor!
+    </h5>
+
+    <p>Professor: { prof } </p>
+
+    <button onclick="alternar()">Alternar</button>
+
+</div>
+<script>
+
+  const ref1=Ref({
+      in:"alvo1",
+      data:{
+         prof:"João" 
+      }
+  });
+
+  const _if1=renderIf({
+      in:"alvo1",
+      data:{
+          profMiguel:false,
+      }
+  });
+
+  ref1.observe((ref, valor)=>{
+
+    if(ref=="prof"){
+
+        _if1.profMiguel=valor=="Miguel";
+
+    }
+
+  })
+
+  function alternar(){
+
+    if(ref1.prof=="João"){
+
+        ref1.prof="Miguel";
+
+    }else{
+
+        ref1.prof="João";
+
+    } 
+
+  }
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="alvo1">
+
+        <h5 _if="profMiguel">
+            O professor Miguel é o melhor!
+        </h5>
+    
+        <p>Professor: { prof } </p>
+    
+        <button onclick="alternar()">Alternar</button>
+        
+    </div>
+    <div class="space"></div>
+</div>
+
+<p>
+    Nós usamos a função renderIf para analisar o template em busca dos elementos que serão renderizados
+    condicionalmente, e a referida função aceita apenas um objecto como o seu argumento,
+    o valor da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento
+    pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>
+    deve ser um objecto, em que as suas propriedades vão indicar as propriedades condicionais e os valores dessas
+    propriedades devem receber apenas valores booleanos(true/false).
+</p>
+<p>
+    A função renderIf retorna um objecto reativo, que vai nos permitir alterar os valores das propriedades condicionais, e esse tipo de objecto
+    no Inter chamamos de reator.
+</p>
+<h3 id="atributo-_else">Atributo _else</h3>
+<p>
+    O elemento com o atributo <span class="hl">_else</span> deve aparecer depois de
+    um elemento com o atributo <span class="hl">_if</span>, se o elemento
+    com o atributo <span class="hl">_if</span> não for renderizado, o elemento
+    com o atributo <span class="hl">_else</span> será renderizado. E o referido atributo
+    não espera nenhum valor.
+</p>
+
+
+<textarea id="Editor2">
+
+<div id="alvo2">
+ 
+ <p>O Armando é: <strong _if="adulto">um adulto</strong>
+
+    <strong _else>uma criancinha</strong>
+
+</p>
+
+<button onclick="toggle()">Alternar</button>
+</div>
+<script>
+
+   const _if2=renderIf({
+       in:"alvo2",
+       data:{
+           adulto:true
+       }
+   })
+
+   function toggle(){
+
+    if(_if2.adulto){
+
+        _if2.adulto=false;
+
+    }else{
+
+        _if2.adulto=true;
+
+    }
+
+   }
+   
+</script>
+
+</textarea>
+<div class="demo">
+    <div id="alvo2">
+ 
+        <p>O Armando é: <strong _if="adulto">um adulto</strong>
+       
+           <strong _else>uma criancinha</strong>
+       
+       </p>
+       
+       <button onclick="toggle()">Alternar</button>
+       </div>
+       <div class="space"></div>
+</div>
+
+<h3 id="atributo-_ifNot">Atributo _ifNot </h3>
+<p>Esse atributo é o inverso do atributo <span class="hl">_if</span>. O elemento
+com o referido atributo só será renderizado caso o valor da propriedade condicional desse atributo
+for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não for igual a true</span>
+</p>
+
+<textarea id="Editor3">
+
+<div id="alvo3">
+
+<p _ifNot="amigo">
+    Você é mesmo amigo do Interjs?
+</p>
+
+</div>
+
+<script>
+
+  const _if3=renderIf({
+      in:"alvo3",
+      data:{
+          amigo:false
+      }
+  })
+
+</script>
+
+</textarea>
+<div class="demo">
+    <div id="alvo3">
+        <p _ifNot="amigo">
+            Você é mesmo amigo do Interjs?
+        </p>
+        </div>
+    <div class="space"></div>
+</div>
+
+<h3 id="propriedade-observe">Propriedade observe</h3>
+<p>Esse método é bem similar ao da referência. Ele será uma propriedade
+    do objecto reator da renderização condicional, ele recebe apenas uma função como o seu argumento,
+    e a referida função será invocada toda vez que o valor de uma propriedade condicional for alterado.
+    E a função será invocada com os seguintes argumentos:
+</p>
+<ul class="items">
+    <li>O primeiro argumento vai indicar o nome da propriedade que o seu
+        valor foi alterado.
+    </li>
+    <li>O segundo argumento vai indicar o novo valor da propriedade.</li>
+</ul>
+<textarea id="Editor4">
+    
+<div id="alvo4">
+
+ <p>Geremias está  <span _if="casado">
+     casado.
+ </span>
+
+ <span _else>
+     solteirão!
+ </span>
+
+ <button onclick="alternarEstado()">Clica para { estado } </button>
+</div>
+
+<script>
+  
+  const _if4=renderIf({
+      in:"alvo4",
+      data:{
+         casado:true 
+      }
+  });
+
+  const ref2=Ref({
+      in:"alvo4",
+      data:{
+          estado:"ficar solteiro"
+      }
+  });
+
+  _if4.observe((prop, valor)=>{
+
+    if(prop=="casado"){
+
+        ref2.estado=valor ? "ficar solteiro" : "casar"
+
+    }
+
+  })
+
+  function alternarEstado(){
+
+    if(_if4.casado){
+
+        _if4.casado=false;
+    }else{
+
+        _if4.casado=true;
+
+    }
+
+  }
+  
+</script>
+
+</textarea>
+<div class="demo">
+    <div id="alvo4">
+        <p>Geremias está  <span _if="casado">
+            casado.
+        </span>
+        <span _else>
+            solteirão!
+        </span>
+        <button onclick="alternarEstado()">Clica para { estado } </button>
+       </div>
+    <div class="space"></div>
+</div>
+
+<h3 id="propriedade-setconds">Propriedade setConds</h3>
+<p>
+    Nós usamos essa propriedade quando pretendermos definir o valor de múltiplas propriedades condicionais.
+    Essa propriedade recebe apenas um objecto como o seu valor, e as propriedades do referido objecto
+    devem ser as propriedades condicionais cujo os seus valores serão alterados, e os valores
+    serão os novos valores para as respectivas propriedades.
+</p>
+<div class="warning">
+    <p>Não foi dado uma demonstração propositalmente, eu acho que a explicação é o suficiente.
+        
+    </p>
+</div>
+<div class="warning">
+<p>
+    Um elemento não pode ter mais de um atributo condicional(<span class="hl">_if</span>, <span class="hl">_else</span>, <span class="hl">_ifNot</span>).
+    E essa matéria te explicou tudo sobre a renderização condicional.
+
+</p>
+</div>
+
+                <div class="Space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+           const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+
+      for(let i=1; i<5; i++){
+
+        
+      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+
+      }
+
+      const ref1=Ref({
+      in:"alvo1",
+      data:{
+         prof:"João" 
+      }
+  });
+
+  const _if1=renderIf({
+      in:"alvo1",
+      data:{
+          profMiguel:false,
+      }
+  });
+
+  ref1.observe((ref, valor)=>{
+
+    if(ref=="prof"){
+
+        _if1.profMiguel=valor=="Miguel";
+
+    }
+
+  })
+
+  function alternar(){
+
+    if(ref1.prof=="João"){
+
+        ref1.prof="Miguel";
+
+    }else{
+
+        ref1.prof="João";
+
+    } 
+
+  }
+
+  const _if2=renderIf({
+       in:"alvo2",
+       data:{
+           adulto:true
+       }
+   })
+
+   function toggle(){
+
+    if(_if2.adulto){
+
+        _if2.adulto=false;
+
+    }else{
+
+        _if2.adulto=true;
+
+    }
+
+   }
+   
+   const _if3=renderIf({
+      in:"alvo3",
+      data:{
+          amigo:false
+      }
+  })
+
+  const _if4=renderIf({
+      in:"alvo4",
+      data:{
+         casado:true 
+      }
+  });
+
+  const ref2=Ref({
+      in:"alvo4",
+      data:{
+          estado:"ficar solteiro"
+      }
+  });
+
+  _if4.observe((prop, valor)=>{
+
+    if(prop=="casado"){
+
+        ref2.estado=valor ? "ficar solteiro" : "casar"
+
+    }
+
+  })
+
+  function alternarEstado(){
+
+    if(_if4.casado){
+
+        _if4.casado=false;
+    }else{
+
+        _if4.casado=true;
+
+    }
+
+  }
+  
+       </script>
+    </body>
+</html>

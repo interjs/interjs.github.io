@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+        <title>Gerenciador de atributos</title>
+        <style>
+            img{
+                width: 40vh;
+                height: 20vh;
+            }
+            .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+        </style>
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+
+            <nav>
+                <ul class="social">
+                    
+                   <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                   <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                   <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                </ul>
+            </nav>
+
+            <nav>
+                <ul class="nav">
+                <li>
+                        <a href="/v2/tutorial/pt/introducao/">
+                            Introdução
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/v2/tutorial/pt/instalacao/">
+                            Instalação
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/referencia">Referência</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/lista">Lista</a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </aside>
+        
+        <article>
+            <div>
+                <h1>Gerenciador de atributos</h1>
+                 <p>
+                     O gerenciador de atributo permite com que nós façamos
+                     as seguintes operações de uma maneira reativa e elegante:
+                 </p>
+
+                 <ul class="items">
+                     <li>
+                         Criar um ou vários atributos.
+                     </li>
+                     <li>
+                         Atualizar o valor de um ou vários atributos.
+                     </li>
+                     <li>
+                         Deletar um ou vários atributos.
+                     </li>
+                 </ul>
+
+                 <p>Para definir o gerenciador de atributo em um elemento
+                     nós usamos a seguinte sintáxe: {...nomeDoGerenciador}
+                 </p>
+                 <p>A sintaxe acima mencionada deve ser o único atributo do elemento alvo,
+                     e para analisar o template em busca de gerenciadores, nós usamos a função
+                     <span class="hl">toAttrs</span> e a referida função
+                     aceita apenas um objecto como o seu argumento, e o objecto deve ter a propriedade <span class="hl">in</span>
+                     que vai indicar o valor do atributo id do elemento pai onde os elementos com os gerenciadores se encontram e 
+                      a propriedade <span class="hl">data</span> que deve ser um objecto em que as suas propriedades 
+                     vão indicar os nomes dos gerenciadores e os valores dessas propriedades devem ser um objecto em que
+                     as suas propriedades vão indicar os nomes dos atributos/eventos que serão definidos no elemento onde o gerenciador for
+                     encontrado, e os valores serão os valores dos respectivos atributos/eventos.
+                 </p>
+<textarea id="Editor1">
+
+<div id="alvo1">
+
+<img {...imagem}>
+
+</div>
+<script>
+
+const { imagem }=toAttrs({
+    in:"alvo1",
+    data:{
+        imagem:{
+           src:"/images/orlando.jpg",
+           alt:"Foto de Orlando",
+           title:"Foto de Orlando"
+        }
+    }
+})
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="alvo1">
+
+        <img {...imagem}>
+        
+        </div>
+        <div class="space"></div>
+</div>
+
+<h3>Objecto gerenciador</h3>
+<p>
+    A função <span class="hl">toAttrs</span>
+    vai retornar os objectos gerenciadores, e as propriedades
+    desses objectos serão reativas, quer dizer que, quando as suas propriedades
+    forem alteradas a interface será também alterada para refletir o novo valor.
+    No exemplo anterior a função retornou o objecto data, e nós desestruturamos
+    o referido objecto para extrair o objecto gerenciador <span class="hl">imagem</span>.
+    Se você abrir agora nessa página o console do navegador e modificar
+    uma das propriedades do objecto <span class="hl">imagem</span>
+    vais notar que a interface será atualizada para refletir o novo valor. E quando
+    a propriedade for o nome de um evento do DOM, por exemplo o <span class="hl">onclick</span>,
+    a palavra-chave <span class="hl">this</span> dentro da função que será invocada quando o referido
+    evento ocorrer vai indicar o objecto gerenciador.
+</p>
+<p>
+    Para deletar um atributo com o gerenciador basta definirmos o valor
+    <span class="hl">null</span> na propriedade que pretendermos deletar.
+</p>
+<p>
+O nome do gerenciador deve estar sempre em letras minúsculas, e um gerenciador
+apenas controla um elemento, se tentares definir um gerenciador para mais de um elemento
+o primeiro elemento é o que será controlado.
+</p>
+
+<h3>Propriedade seAttrs</h3>
+<p>
+    Ela será uma propriedade do objecto gerenciador, ela é usada
+    para atualizar os valores de múltiplos atributos de uma só vez.
+    Ela recebe apenas um objecto como o seu valor, e as propriedades
+    do referido objecto devem ser as propriedade cujo os seus  valores serão
+    atualizados e os valores serão os valores das respectivas propriedades.
+</p>
+<textarea id="Editor2">
+    
+<div id="alvo2">
+    <img {...slide}>
+</div>
+
+ <script>
+
+const slides=[
+{
+  src:"/images/luna.jpg",
+  alt:"Foto de Luna",
+  title:"Slide 1"
+},
+{
+   src:"/images/Inter.png",
+   alt:"Foto de Inter",
+   title:"Slide 2"
+},{
+   src:"/images/Ramon.jpg",
+   alt:"Foto de Ramon",
+   title:"Slide 3"
+}
+]
+
+let pos=0;
+
+toAttrs({
+    in:"alvo2",
+    data:{
+       src:slides[0].src,
+       alt:slides[0].alt,
+       title:slides[0].title,
+       onclick(){
+
+         if(pos<2){
+
+            pos++;
+            this.setAttrs=slides[pos];
+
+         }else{
+
+            pos=0;
+            this.setAttrs=slides[pos];
+
+         }
+
+       } 
+    }
+})
+ </script>
+
+</textarea>
+<div class="demo">
+    <div id="alvo2">
+        <img {...slide}>
+    </div>
+<div class="space"></div>    
+</div>
+<p>Tenta clicar na imagem e vê o que acontece. Essa matéria te explicou tudo sobre
+    o gerenciador de atributos.
+</p>
+                <div class="Space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+           const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+
+      for(let i=1; i<3; i++){
+
+        
+      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+
+      }
+
+const {imagem}=toAttrs({
+    in:"alvo1",
+    data:{
+        imagem:{
+           src:"/images/orlando.jpg",
+           alt:"Foto de Orlando",
+           title:"Foto de Orlando"
+        }
+    }
+})
+
+
+const slides=[
+{
+  src:"/images/luna.jpg",
+  alt:"Foto de Luna",
+  title:"Slide 1"
+},
+{
+   src:"/images/Inter.png",
+   alt:"Foto de Inter",
+   title:"Slide 2"
+},{
+   src:"/images/Ramon.jpg",
+   alt:"Foto de Ramon",
+   title:"Slide 3"
+}
+]
+
+let pos=0;
+
+toAttrs({
+    in:"alvo2",
+    data:{
+      slide:{ 
+       src:slides[0].src,
+       alt:slides[0].alt,
+       title:slides[0].title,
+       onclick(){
+
+         if(pos<2){
+
+            pos++;
+            this.setAttrs=slides[pos];
+
+         }else{
+            pos=0;
+            this.setAttrs=slides[pos];
+
+         }
+
+       } 
+    }
+}
+})
+       </script>
+    </body>
+</html>

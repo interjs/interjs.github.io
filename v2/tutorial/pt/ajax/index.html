@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+        <title>Ajax</title>
+<style>
+    
+    .CodeMirror {
+                border: 1px solid #eee;
+                height: auto;
+              }
+
+              img{
+                  height: 20vh;
+                  width: 20vw;
+              }
+</style>        
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+            
+            <nav>
+                <ul class="social">
+                    
+                   <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                   <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                   <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                </ul>
+            </nav>
+
+            <nav>
+                <ul class="nav">
+                <li>
+                        <a href="/v2/tutorial/pt/introducao/">
+                            Introdução
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/v2/tutorial/pt/instalacao/">
+                            Instalação
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/referencia">Referência</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/lista">Lista</a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                    </li>
+                </ul>
+            </nav>        
+</aside>
+
+        
+        <article>
+            <div>
+                <h1>Ajax</h1>
+                 <div class="warning">
+                     <p>Essa matéria pressupõe que você tenha noção
+                         sobre comunicação com servidor.
+                     </p>
+                 </div>
+
+                 <p>
+                     O Ajax é uma técnica usada para se comunicar assincronamente com o servidor,
+                     ou seja, o Ajax permite o envio e a recepção de dados do servidor sem que a página recarregue!
+                 </p>
+                 <p>Para isso no Inter nós devemos usar o <span class="hl">constructor Backend</span>
+                nome muito descriptivo né? Quando criarmos uma <span class="hl">instância</span>
+            para o referido <span class="hl">constructor</span>, ele terá o método <span class="hl">request</span> que nós usamos para as configurações
+        da requisição, e o referido método aceita apenas um objecto como o seu argumento, e objecto aceita as seguintes propriedades:</p>
+
+        <ul class="items">
+            <li>
+                <span class="hl">type</span>(obrigatório) - Deve ser uma string que vai indicar o tipo de requisição.
+            </li>
+            <li>
+                <span class="hl">path</span>(obrigatório) - Deve ser uma string que vai indicar o endereço onde será feito a requisição.
+            </li>
+            <li>
+                <span class="hl">headers</span> - Deve ser um objecto em que as suas propriedades
+                vão indicar os nomes dos cabeçalhos da requisição e os seus valores vão indicar os valores dos respectivos cabeçalhos.
+            </li>
+            <li>
+                <span class="hl">events</span> - Deve ser um objecto em que as suas propriedades vão indicar os nomes dos eventos e os seus valores
+                devem ser as funções que serão invocada quando os eventos ocorrerem.
+            </li>
+            <li>
+                <span class="hl">timeout</span> - Essa propriedade apenas aceita números como o seu valor e esses números
+                vão indicar o tempo em mil segundos, se o tempo da requesição ultrapassar o estabelecido com essa propriedade a requesição
+                será cancelada e o evento <span class="hl">ontimeout</span> será acionado.
+            </li>
+
+            <li>
+                <span class="hl">body</span> - O valor dessa propriedade indica o corpo da requisição, ou seja, os dados que
+                serão enviados para o servidor.
+            </li>
+            
+        </ul>
+
+        <p>
+            O método <span class="hl">request</span> retorna um objecto com alguns métodos
+            que tem dois objectivos, o primeiro é que quando eles forem invocados
+            vão dar início a requisição, o segundo é que eles vão nos ajudar a reagir ao resultado da requisição. E os métodos são:
+        </p>
+
+        <ul class="items">
+            <li>
+                <span class="hl">okay</span> - Esse método apenas aceita uma função como o seu
+                argumento, e a função será invocada caso a requisição for um sucesso.
+            </li>
+            <li>
+                <span class="hl">error</span> - Esse método apenas aceita uma função como o seu argumento,
+                e a função será invocada caso a requisição não for um sucesso.
+            </li>
+
+            <li>
+                <span class="hl">response</span> - Esse método é usado quando quisermos reagir ao sucesso e ao erro
+                em uma requisição, ele aceita dois argumentos, o primeiro será o <span class="hl">okay</span>(a função que será executado se a requisição for um sucesso)
+                e o segundo será o <span class="hl">error</span>(a função que será invocada caso a requisição não for um sucesso)
+            </li>
+
+        </ul>
+
+        <p>
+            As funções passada como argumento dos referidos métodos serão invocadas com um objecto como o seu argumento, e as propriedades
+            desse objecto vão indicar o resultado da requisição. As propriedades são:
+        </p>
+
+        <ul class="items">
+            <li>
+                <span class="hl">data</span> - É uma propriedade só de leitura que retorna a informação enviada pelo servidor.
+            </li>
+            <li>
+                <span class="hl">status</span> - É uma propriedade só de leitura que retorna o <span class="hl">statusCode</span> enviado pelo servidor.
+            </li>
+            <li>
+                <span class="hl">statusText</span> - É uma propriedade só de leitura que retorna o significado do <span class="hl">statusCode</span> enviado
+                pelo servidor.
+            </li>
+            <li>
+                <span class="hl">headers</span> - É uma propriedade só de leitura que retorna os cabeçalhos enviados pelo servidor.
+            </li>
+            <li>
+                <span class="hl">isObj</span> - É um método que serve para verificar se a resposta enviada pelo servidor foi um objecto <span class="hl">JSON</span>, se for, vai
+                retornar true, caso o contrário, retorna false.
+            </li>
+
+        </ul>
+                <p>
+                    Agora que sabes o essencial do <span class="hl">Ajax</span>, vamos pôr a mão no código!
+                </p>
+
+                <textarea id="Editor1">
+
+<div id="ajax1">
+
+    <h3>Identidade</h3>
+    <ul>
+        <li>Nome: { nome }</li>
+        <li>Idade: { idade }</li>
+        <li>Moradia: { moradia }</li>
+        <li>Estado cívil: { ec }</li>
+        <li>Número de filhos: { nf }</li>
+    </ul>
+    
+    <div>
+        <img src={imagem} alt="Foto de { nome }">
+    </div>
+
+
+   <ul id="lista-de-usuarios"></ul>
+
+
+</div>
+<script>
+
+const usuarios=["./user1.json", "./user2.json", "./user3.json"];
+
+const ref=Ref({
+    in:"ajax1",
+    data:{
+        nome:"...",
+        idade:"...",
+        moradia:"...",
+        ec:"...",
+        nf:"...",
+        imagem:""
+    }
+})
+
+renderList({
+    in:"lista-de-usuarios",
+    each:usuarios,
+    do(usuario, i){
+
+        return template({
+            tag:"li", children:[{
+                tag:"span", text:`Usuário ${i+1}`
+            },{
+                tag:"button", text:"Carregar info", events:{
+                    onclick:carregarInfo(usuario)
+                }
+            }]
+        })
+
+    }
+})
+
+function carregarInfo(caminho){
+
+    const ajax1=new Backend();
+
+    ajax1.request({
+        type:"get",
+        path:caminho
+    }).okay(({ data })=>{
+
+        ref.setRefs=data;
+
+    })
+
+}
+
+</script>
+
+                </textarea>
+<div class="demo">
+                  
+<div id="ajax1">
+
+    <h3>Identidade</h3>
+    <ul>
+        <li>Nome: { nome }</li>
+        <li>Idade: { idade }</li>
+        <li>Moradia: { moradia }</li>
+        <li>Estado cívil: { ec }</li>
+        <li>Número de filhos: { nf }</li>
+    </ul>
+    
+    <div>
+        <img src={imagem} alt="Foto de { nome }">
+    </div>
+
+
+   <ul id="lista-de-usuarios"></ul>
+
+
+</div>
+<div class="space"></div>
+</div>
+<h3>Os eventos no Ajax</h3>
+<p>
+    Nós podemos definir os escutadores de eventos em uma requisição feita com o Ajax,
+    e esses escutadores devem ser declarados como propriedades do objecto <span class="hl">events</span>, os eventos são:
+</p>
+<ul class="items">
+    <li>
+        <span class="hl">onprogress</span> - Como o nome o descreve, esse evento será acionado
+        enquanto a requisição está a ser feita, e a função que deve ser invocada quando o evento ocorrer
+        será invocada com um argumento, que será um objecto com duas propriedade. A propriedade
+        <span class="hl">progress</span> vai indicar o progresso(de 0 à 100) da requisição, principalmente
+        em requisições do tipo <span class="hl">POST</span> e <span class="hl">PUT</span>, e o método
+        <span class="hl">abort</span> quando for invocado vai abortar/cancelar a requisição e o evento
+        <span class="hl">onabort</span> será acionado.
+    </li>
+    <li>
+        <span class="hl">ontimeout</span> - Esse evento vai ser acionado quando o tempo de requisição ultrapassar
+        o estabelecido(pelo navegador ou pelo programador com a propriedade <span class="hl">timeout</span>)
+    </li>
+    <li>
+        <span class="hl">onabort</span> - Esse evento será acionado quando a requisição for cancelada com o método <span class="hl">abort</span>.
+    </li>
+
+</ul>
+
+<p>E é tudo! Essa matéria te explicou tudo sobre Ajax no Inter. Se você leu o tutorial do princípio
+    até aqui e entendeste tudo, então parabéns, você agora pode programar com o Inter numa boa! Passa
+    lá no repositório do Inter no <a href="https://github.com/interjs/inter">Github</a> e deixe uma estrela, dessa forma estarás ajudando na repercursão do Inter.
+</p>
+                <div class="Space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+           const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+
+      for(let i=1; i<2; i++){
+
+        
+      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+
+      }
+
+      const usuarios=["./user1.json", "./user2.json", "./user3.json"];
+
+const ref=Ref({
+    in:"ajax1",
+    data:{
+        nome:"...",
+        idade:"...",
+        moradia:"...",
+        ec:"...",
+        nf:"...",
+        imagem:"./images/Inter.png"
+    }
+})
+
+renderList({
+    in:"lista-de-usuarios",
+    each:usuarios,
+    do(usuario, i){
+
+        return template({
+            tag:"li", children:[{
+                tag:"span", text:`Usuário ${i+1}`
+            },{
+                tag:"button", text:"Carregar info", events:{
+                    onclick:()=>carregarInfo(usuario)
+                }
+            }]
+        })
+
+    }
+})
+
+function carregarInfo(caminho){
+
+    const ajax1=new Backend();
+
+    ajax1.request({
+        type:"get",
+        path:caminho
+    }).okay(({ data })=>{
+
+        ref.setRefs=data;
+
+    })
+
+}
+
+       </script>
+    </body>
+</html>

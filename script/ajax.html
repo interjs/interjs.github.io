@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./docs.css">
+        <link rel="stylesheet" href="./codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="./codemirror/css/theme.css">
+        <script src="./codemirror/js/codemirror.js"></script>
+        <script src="./codemirror/js/css.js"></script>
+        <script src="./codemirror/js/htmlmixed.js"></script>
+        <script src="./codemirror/js/javascript.js"></script>
+        <script src="./codemirror/js/vbscript.js"></script>
+        <script src="./codemirror/js/xml.js"></script>
+        <script src="./script/inter.js"></script>
+
+
+        <title>Ajax</title>
+        
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+
+
+            <nav>
+                <ul>
+                <li>
+                        <a href="">
+                            Introduction
+                        </a>
+                        </li>
+                        <li>
+                        <a href="">
+                            installation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">Reference</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">Attribute<br> manager</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">Conditional rendering</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">List rendering</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">Costum events</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">Container rendering</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">storage</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">Ajax</a>
+                    </li>
+                    
+                    <li>
+                        <a href="">Routing</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </aside>
+        <article>
+            <div>
+                <h1>Renderização condicional</h1>
+                 <div class="warning">
+                     <p>Essa matéria pressupõe que você tenha noção
+                         sobre comunicação com servidor.
+                     </p>
+                 </div>
+
+                 <p>
+                     O Ajax é uma técnica usada para se comunicar assincronamente com o servidor,
+                     ou seja, o Ajax permite o envio e a recepção de dados do servidor sem que a página recarregue!
+                 </p>
+                 <p>Para isso no Inter nós devemos usar o <span class="hl">constructor</span> <span class="hl">Backend</span>
+                nome muito descriptivo né? Quando criarmos uma <span class="hl">instância</span>
+            para o referido <span class="hl">constructor</span>, ele terá o método <span class="hl">request</span> que nós usamos para as configurações
+        da requisição, e o referido método aceita apenas um objecto como o seu argumento, e objecto aceita as seguintes propriedades:</p>
+
+        <ul class="listItems">
+            <li>
+                <span class="hl">type</span>(obrigatório) - Deve ser uma string que vai indicar o tipo de requisição.
+            </li>
+            <li>
+                <span class="hl">path</span>(obrigatório) - Deve ser uma string que vai indicar o endereço onde será feito a requisição.
+            </li>
+            <li>
+                <a class="hashtag">#</a> <span class="hl">headers</span> - Deve ser um objecto em que as suas propriedades
+                vão indicar os nomes dos cabeçalhos da requisição e os seus valores vão indicar os valores dos respectivos cabeçalhos.
+            </li>
+            <li>
+                <span class="hl">events</span> - Deve ser um objecto em que as suas propriedades vão indicar os nomes dos eventos e os seus valores
+                devem ser as funções que serão invocada quando os eventors ocorrerem.
+            </li>
+            <li>
+                <span class="hl">timeout</span> - Essa propriedade apenas aceita números como o seu valor e esses números
+                vão indicar o tempo em mil segundos, se o tempo da requesição ultrapassar o estabelecido com essa propriedade a requesição
+                será cancelada e o evento <span class="hl">ontimeout</span> será acionado.
+            </li>
+            
+        </ul>
+                
+                <div class="space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+           const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+
+      for(let i=1; i<6; i++){
+
+        
+      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+
+      }
+
+
+       </script>
+    </body>
+</html>

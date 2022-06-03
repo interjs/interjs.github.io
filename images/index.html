@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="utf-8">
+       
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="follow,noindex">
+        <link rel="stylesheet" href="/style/Docs.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/scripts/all.js"></script>
+        <script src="/scripts/inter.js"></script>
+        <link rel="shortcut icon" href="/foto/Inter.png">
+        <title>Acesso proíbido</title>
+    <style>
+        
+
+        .go-home{
+       width: 16vw;
+       height: 5vh;
+       background-color: hsl(219, 60%, 60%);
+      box-shadow: 1px 1px 2px black;
+      margin-left: 29%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 100ms ease-in;
+      
+      
+   }
+   .go-home>a{
+    text-decoration: none;
+       color: white;
+   }
+   .go-home:hover{
+       transform: scale(1.1,1.1);
+   }
+
+@media(max-width: 599px){
+    .go-home{
+       width: 24vw;
+       height: 5vh;
+       
+      margin-left: 33%;
+     
+      
+      
+   }
+}
+   
+    </style>
+    </head>
+    <body>
+        <header>
+            <div class="languages">
+                <a href="#">English</a>
+                <a href="#">Português</a>
+            </div>
+            <nav>
+                <a href="https://github.com/DenisPower1/inter"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/groups/3015405535345615/">
+                 <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://gitter.im/Interjs/community"><i class="fab fa-gitter"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a>
+            </nav>
+            <div class="menu" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+             </div>
+     
+        </header>
+        <article>
+            <aside id="lateral-menu">
+                <div>
+                    <h2>Sobre</h2>
+                      <nav>
+                          <li class="li"  ><a href="/v1/tutorial/pt/porque-o-inter">Por que o Inter?</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/compatibilidade" >Compatibilidade</a></li>
+                          <li  class="li"><a href="/v1/tutorial/pt/desenvolvimento">Desenvolvimento</a></li>
+                      </nav>
+                      <h2>Fundamentos</h2>
+                      <nav>
+                          <li  class="li"><a href="/v1/tutorial/pt/instalacao">Instalação</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/introducao" >Introdução</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/referencia" >Referência</a></li>
+                          <li class="li"> <a href="/v1/tutorial/pt/gerenciador-de-atributos">Gerenciador</a> </li>
+                          <li class="li"><a href="/v1/tutorial/pt/objecto-inter">Objecto Inter</a> </li>
+                          <li class="li"><a href="/v1/tutorial/pt/objecto-simulate">Objecto simulate</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/whileloading">whileLoading</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/objecto-data">Objecto data</a></li>
+                          <li  class="li"><a href="/v1/tutorial/pt/eventos-costumizados">eventos</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/formulario">Formulário</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/renderizacao-de-containers">Rend.. de containers</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/reator" class="reat">Reator</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/interface">interface</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/ajax" >Ajax</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/roteador">Roteador</a></li>
+                          <li class="li"><a href="/v1/tutorial/pt/storage">storage</a></li>
+                      </nav>
+                      <h2>Framework</h2>
+                      <nav>
+                          <li class="li"><a href="/libs">Bibliotecas</a></li>
+                          <li class="li"><a href="/novidades">Novidades</a></li>
+                          <li class="li"><a href="/demo">Demo</a></li>
+                          <li class="li"><a href="/baixar-tutorial">Tutorial offline</a></li>
+                          <li class="li"><a href="/suporte" >Suporte</a></li>
+                        </nav>
+                        <div class="Space"><!----></div>
+                      </div>
+            </aside>
+            <section id="main"> 
+                <div>  
+                    <h1>Acesso proíbido</h1>
+                    <p>
+                      Que isso? Você não pode acessar esse link, então
+                      ao invés de tentar acessar esse link, por que que você não começa aprender o Inter? Já aprendeu?
+                      Então partilha o link do tutorial para os outros como você aprenderem também.
+                    </p>
+                    <div class="Space">
+                     
+                    </div>
+                    <div class="go-home-parent">
+                    <div class="go-home">
+                        <a href="/" id="go-home">{ description }</a>
+                    </div>
+                    </div>
+                    <div class="Space">
+                     
+                </div>
+            </div>
+    
+        </section>
+   
+ <script>
+       toHTML({
+                  in:"go-home",
+                  data:{
+                      description:"Página principal"
+                  },
+                  react:"set"
+              })
+              if(window.innerWidth<600){
+                  set.description="Home"
+              }
+              window.onresize=function(){
+                  if(this.innerWidth<600){
+                      set.description="Home"
+                  }else{
+                      set.description="Página principal"
+                  }
+              }
+ </script>
+ <script src="/scripts/menu.js"></script>
+      </article>
+      </body>
+      </html>
