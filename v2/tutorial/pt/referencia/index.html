@@ -128,15 +128,15 @@
                      o valor  da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento pai onde se encontram os elementos com
                     as referências, no nosso exemplo, o elemento pai é a div não é? E por que que nós estamos chamando ele de elemento
                     pai? Ele tem um filho, que é o elemento <span class="hl">p</span>, e no texto desse elemento tem uma referência chamada <span class="hl">mensagem</span>. Agora
-                    voltando para a opção da função Ref. o <span class="hl">data</span> é um objecto em que as suas propriedades serão os nomes das referências
+                    voltando para a opção da função Ref. O <span class="hl">data</span> é um objecto em que as suas propriedades serão os nomes das referências
                     e os seus valores, serão obviamente os textos que vão substituir as referências com os referidos nomes.
                 </p>
 
                 <p>
-                    Nós usamos a referência quando querermos que uma determinada parte da nossa interface seja dinámica, então,
+                    Nós usamos a referência quando quisermos que uma determinada parte da nossa interface seja dinámica, então,
                     geralmente é esperado que a referência mude de valor, e é para isso que existe o <span class="hl">reator</span>.
                     A função Ref retorna um objecto reativo com as mesmas propriedades do objecto data, nós usamos esse objecto quando
-                    pretendemos mudar os valores das referências, agora nessa página abra o console do navegador
+                    pretendermos mudar os valores das referências, agora nessa página abra o console do navegador
                     e digite: _reator.mensagem="Inter é incrível"; ou qualquer outro valor, verás a interface ser atualizada para refletir o novo valor da referência.
                 </p>
                 
@@ -325,7 +325,7 @@ reator4.observe((ref, valorAtual)=>{
 
                 <p>O nome já diz tudo, mas enfim, ela serve para definir múltiplas referências de uma
                     forma bem elegante e menos cansativa, essa propriedade apenas aceita um objecto como o seu
-                    valor, e as propriedades desse objecto serão os nomes das referências e os valores, serão os novos valores
+                    valor, e as propriedades desse objecto devem ser os nomes das referências e os valores, devem ser os novos valores
                     para as respectivas referências.
                 </p>
 
