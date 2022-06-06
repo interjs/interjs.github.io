@@ -118,8 +118,8 @@
                     <li>
                         <span class="hl">tag</span>(obrigatório) - O valor
                         dessa propriedade deve indicar o nome da tag que será criada,
-                        o valor deve ser apenas uma string ou uma função. Se for uma função
-                        a função  deve retornar uma string(que vai representar o nome da tag).
+                        o valor deve ser apenas uma string ou uma função. Se for uma função,
+                        ela  deve retornar uma string(que vai representar o nome da tag).
                     </li>
 
                     <li>
@@ -266,7 +266,7 @@ o reator da lista.</p>
 </div>
 
 <p>
-    O Inter é reativo por padrão, então, quando você alterar os dados da lista O Inter vai
+    O Inter é reativo por padrão, então, quando você alterar os dados da lista, o Inter vai
     se aperceber e atualizar a lista para refletir as novas informações.
 </p>
 <p>
@@ -309,7 +309,7 @@ const animais=["Cão","Gato","Lobo"],
 
       renderList({
        in:"lista2",
-       each:array1,
+       each:animais,
        do(item){
 
         reator2=this;
