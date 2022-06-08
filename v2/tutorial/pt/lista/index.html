@@ -93,8 +93,8 @@
                         será renderizada.
                     </li>
                     <li>
-                       <span class="hl">each</span>  - Representa os dados em que a lista será baseada, esses dados podem ser Array,
-                    Objecto, Set, Map ou número. 
+                       <span class="hl">each</span>  - Representa os dados em que a lista será baseada, o valor dessa propriedade pode
+					   ser Array, Objecto, Set, Map ou número. 
                     </li>
                     <li>
                         <span class="hl">do</span>  - Deve ser um método que será invocado pela quantidade de dados. Para
@@ -132,8 +132,8 @@
 					</li>
                     <li>
                         <span class="hl">attrs</span> - Deve ser um objecto, e as propriedades do referido objecto
-                        serão os atributos do elemento e os valores das propriedades serão os respectivos valores
-                        dos atributos. Se o valor for uma função a função será invocada e o valor
+                        serão os atributos do elemento e os valores das propriedades serão os  valores
+                        dos respectivos atributos. Se o valor for uma função a função será invocada e o valor
                         retornado pela função será o valor do atributo. Se o valor for <span class="hl">null</span>
                         <span class="hl">undefined</span>, ou <span class="hl">false</span> o atributo não será criado.
                     </li>
@@ -219,20 +219,20 @@ const dados=[
 </div>
 
 <p>
-    Os tipos de argumentos que esse método recebe, depende do tipo de dados em que a lista é baseada.
-    Se for uma array, essa função vai receber três argumentos.
+    O número de argumentos que esse método recebe, depende do valor da opção <span class="hl">each</span>.
+    Se o valor for uma Array, essa função vai receber três argumentos.
 </p>
 
 <ul class="items">
 
     <li>O primeiro argumento será o item atual da iteração.</li>
-    <li>O segundo argumento será a posição do item atual na array.</li>
+    <li>O segundo argumento será a posição do item atual na Array.</li>
     <li>O terceiro argumento será o reator da lista.</li>
 
 </ul>
 
 <p>
-    Se o tipo de dados for um Set, a função vai receber dois argumentos:
+    Se o valor for Set, a função vai receber dois argumentos:
 </p>
 
 <ul class="items">
@@ -241,7 +241,7 @@ const dados=[
 </ul>
 
 <p>
-    Se o tipo de dados for objecto ou Map a função vai receber três argumentos.
+    Se o valor for objecto ou Map a função vai receber três argumentos.
 </p>
 
 <ul class="items">
@@ -252,7 +252,7 @@ const dados=[
 
 </ul>
 
-<p>Se o tipo de dados for um número(Number), a função vai receber apenas um
+<p>Se o valor for um número(Number), a função vai receber apenas um
     argumento, que será o número atual da iteração.
 </p>
 <p>
@@ -270,12 +270,12 @@ o reator da lista.</p>
     se aperceber e atualizar a lista para refletir as novas informações.
 </p>
 <p>
-    Se os dados em que a lista é baseada for Array, Objecto, Map ou Set, se você usar um método
-    que modifica os dados o Inter vai reagir à essa alteração. Volte para o exemplo
-    anterior, abra o console e tenta fazer o seguinte: reator[0].nome="Jonatan" você
+    Se o valor da opção <span class="hl">each</span> for Array, Objecto, Map ou Set, se você usar um método
+    que modifica os dados em que a lista for baseada, o Inter vai reagir à essa alteração. Volte para o exemplo
+    anterior, abra o console e tenta fazer o seguinte: reator[0].nome="Jonatan", você
     vai ver que a parte da interface que usa aquele valor será atualizada, ou ainda podes
-    ir mais longe, fazendo assim: reator.push({nome:"Teu nome", idade:"Tua idade", casado:false}) você
-    vai acrescentar um novo dado no final da lista.
+    ir mais longe, fazendo assim: reator.push({nome:"Teu nome", idade:"Tua idade", casado:false}), você
+    vai acrescentar um item no final da lista.
 </p>
 
 <p>
@@ -359,11 +359,11 @@ function alternar(){
 </div>
 <h3>AddItems</h3>
 <p>
-    Esse método é usado para acrescentar uma certa quantidade de dados na a Array reatora. 
-    Ele aceita dois argumentos, o primeiro deve ser uma Array, e os items daquela Array
+    Esse método é usado para acrescentar uma certa quantidade de dados na Array reatora. 
+    Ele aceita dois argumentos, o primeiro argumento deve ser uma Array, e os items daquela Array
     serão adicionados na Array reatora. O segundo argumento deve ser um número, que vai indicar
     a posição em que os items serão adicionados. Se a posição for 0 ou menor que zero(número negativo),
-    os items serão adicionados no princípio da Array reatora, se a posição for omitida ou se for maior que o número de items da Array retora,
+    os items serão adicionados no princípio da Array reatora, se a posição for omitida ou se for maior que o número de items da Array reatora,
     os items serão adicionados no final da Array, caso contrário, os items serão adicionados na posição pretendida.
 </p>
 

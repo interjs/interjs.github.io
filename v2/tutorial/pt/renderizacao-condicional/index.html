@@ -159,7 +159,7 @@
 </div>
 
 <p>
-    Nós usamos a função renderIf para analisar o template em busca dos elementos que serão renderizados
+    Nós usamos a função <span class="hl">renderIf</span> para analisar o template em busca dos elementos que serão renderizados
     condicionalmente, e a referida função aceita apenas um objecto como o seu argumento,
     o valor da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento
     pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>
@@ -235,7 +235,7 @@
 <h3 id="atributo-_ifNot">Atributo _ifNot </h3>
 <p>Esse atributo é o inverso do atributo <span class="hl">_if</span>. O elemento
 com o referido atributo só será renderizado caso o valor da propriedade condicional desse atributo
-for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não for igual a true</span>
+for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não for igual a true</span>.
 </p>
 
 <textarea id="Editor3">
@@ -273,11 +273,11 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <p>Esse método é bem similar ao da referência. Ela será uma propriedade
     do objecto reator da renderização condicional, ele recebe apenas uma função como o seu argumento,
     e a referida função será invocada toda vez que o valor de uma propriedade condicional for alterado.
-    E a função será invocada com os seguintes argumentos:
+    E a função será invocada com dois argumentos:
 </p>
 <ul class="items">
     <li>O primeiro argumento vai indicar o nome da propriedade que o seu
-        valor foi alterado.
+        valor for alterado.
     </li>
     <li>O segundo argumento vai indicar o novo valor da propriedade.</li>
 </ul>

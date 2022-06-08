@@ -157,10 +157,8 @@ const { imagem }=toAttrs({
 <h3>Objecto gerenciador</h3>
 <p>
     A função <span class="hl">toAttrs</span>
-    vai retornar os objectos gerenciadores, e as propriedades
-    desses objectos serão reativas, quer dizer que, quando as suas propriedades
-    forem alteradas a interface será também alterada para refletir o novo valor.
-    No exemplo anterior a função retornou o objecto data, e nós desestruturamos
+     retorna o objecto <span class="hl">data</span>. 
+    No exemplo anterior nós desestruturamos
     o referido objecto para extrair o objecto gerenciador <span class="hl">imagem</span>.
     Se você abrir agora nessa página o console do navegador e modificar
     uma das propriedades do objecto <span class="hl">imagem</span>
@@ -199,7 +197,7 @@ const { imagem }=toAttrs({
 
             if(this.class){
                     
-             // Deleta o atributo classe.
+             // Deleta o atributo class.
 
              this.class=null
 
@@ -256,10 +254,10 @@ criado.
 <h3>Propriedade setAttrs</h3>
 <p>
     Ela será uma propriedade do objecto gerenciador, ela é usada
-    para atualizar os valores de múltiplos atributos de uma só vez.
+    para atualizar os valores de múltiplos atributos de uma única vez.
     Ela recebe apenas um objecto como o seu valor, e as propriedades
-    do referido objecto devem ser as propriedade cujo os seus  valores serão
-    atualizados e os valores serão os valores das respectivas propriedades.
+    do referido objecto devem indicar os nomes dos atributos cujo os seus  valores serão
+    atualizados e os valores serão os valores dos respectivos atributos.
 </p>
 <textarea id="Editor4">
     
@@ -388,8 +386,8 @@ toAttrs({
             onclick(){
 
             if(this.class){
-                    
-             // Deleta o atributo classe.
+                   
+             // Deleta o atributo class.
 
              this.class=null
 
