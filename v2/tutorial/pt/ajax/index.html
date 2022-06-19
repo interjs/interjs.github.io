@@ -116,6 +116,12 @@
                 devem ser as funções que serão invocada quando os eventos ocorrerem.
             </li>
             <li>
+                <span class="hl">security</span> - Deve ser um objecto, será útil quando é requisitado o nome do usuário e a palavra-passe 
+                para estabelecer a comunicação com o servidor. Ele aceita duas propriedades, o <span class="hl">username</span>
+                e o valor dessa propriedade deve indicar o nome do usuário e a <span class="hl">password</span> e o valor
+                dessa propriedade deve indicar a palavra-passe.
+            </li>
+            <li>
                 <span class="hl">timeout</span> - Essa propriedade apenas aceita números como o seu valor e esses números
                 vão indicar o tempo em mil segundos, se o tempo da requisição ultrapassar o estabelecido com essa propriedade a requesição
                 será cancelada e o evento <span class="hl">ontimeout</span> será acionado.
@@ -296,7 +302,7 @@ function carregarInfo(caminho){
     </li>
     <li>
         <span class="hl">ontimeout</span> - Esse evento vai ser acionado quando o tempo de requisição ultrapassar
-        o estabelecido(pelo navegador ou pelo programador com a propriedade <span class="hl">timeout</span>)
+        o estabelecido(pelo navegador ou pelo programador com a propriedade <span class="hl">timeout</span>).
     </li>
     <li>
         <span class="hl">onabort</span> - Esse evento será acionado quando a requisição for cancelada com o método <span class="hl">abort</span>.
