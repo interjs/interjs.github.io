@@ -286,9 +286,11 @@ const slides=[
 
 let pos=0;
 
+
 toAttrs({
     in:"alvo3",
     data:{
+      slide:{ 
        src:slides[0].src,
        alt:slides[0].alt,
        title:slides[0].title,
@@ -300,7 +302,7 @@ toAttrs({
             this.setAttrs=slides[pos];
 
          }else{
-
+		 
             pos=0;
             this.setAttrs=slides[pos];
 
@@ -308,7 +310,9 @@ toAttrs({
 
        } 
     }
+}
 })
+
  </script>
 
 </textarea>
