@@ -17,9 +17,15 @@
         <script src="/script/inter.js"></script>
         <title>Renderização condicional</title>
         <style>
-                     .CodeMirror {
+.CodeMirror {
     border: 1px solid #eee;
     height: auto;
+  }
+
+  img{
+
+      width: 20vw;
+      height: 20vh;
   }
         </style>
     </head>
@@ -75,12 +81,13 @@
                 <h1>Renderização condicional</h1>
                  <div class="warning">
                      <p>Essa matéria pressupõe que tenhas conhecimento
-                         sobre referência no Inter.
+                         sobre referência, gerenciador de atributos no Inter e de pelo
+                         menos conhecimento básico em CSS.
                      </p>
                  </div>
                  <p>
                      No Inter para renderizar condicionalmente elementos HTML, nós usamos
-                     os seguintes atributos nativos do Inter.
+                     os seguintes atributos nativos do Inter:
                  </p>
 
                   <h3 id="atributo-_if">Atributo _if</h3> 
@@ -92,68 +99,66 @@
 
 <div id="alvo1">
 
-    <h5 _if="profMiguel">
-      O professor Miguel é o melhor!
-    </h5>
-
-    <p>Professor: { prof } </p>
-
-    <button onclick="alternar()">Alternar</button>
+    <div>
+        <h5 _if="viveNamesmaCidade">Essa pessoa vive na mesma cidade que você  </h5>
+        <img {...imagem}>
+        <button onclick="anterior()"  _if="temAnterior">Anterior</button>
+        <button onclick="proximo()"  _if="temProximo">Próximo</button>
+    </div>
 
 </div>
 <script>
 
-  const ref1=Ref({
-      in:"alvo1",
-      data:{
-         prof:"João" 
-      }
-  });
+const imagens=[{urlDaImagem:"/images/Anny.jpg",
+ condicional:{viveNamesmaCidade:true, temAnterior:false, temProximo:true}},...];
 
-  const _if1=renderIf({
-      in:"alvo1",
-      data:{
-          profMiguel:false,
-      }
-  });
+let pos=0;
 
-  ref1.observe((ref, valor)=>{
-
-    if(ref=="prof"){
-
-        _if1.profMiguel=valor=="Miguel";
-
+const { imagem }=toAttrs({
+    in:"alvo1",
+    data:{
+        imagem:{
+            src:imagens[0].urlDaImagem,
+            alt:"Essa é uma pessoa"
+        }
     }
+});
 
-  })
+const _if=renderIf({
+    in:"alvo1",
+    data:imagens[0].condicional
+});
 
-  function alternar(){
+function trocarImagem(){
 
-    if(ref1.prof=="João"){
+    imagem.src=imagens[pos].urlDaImagem;
+    _if.setConds=imagens[pos].condicional;
 
-        ref1.prof="Miguel";
+}
 
-    }else{
+function anterior(){
 
-        ref1.prof="João";
+    pos--;
+    trocarImagem();
+    
+}
 
-    } 
+function proximo(){
 
-  }
+    pos++;
+    trocarImagem();
+}
 
 </script>
 </textarea>
 <div class="demo">
     <div id="alvo1">
-
-        <h5 _if="profMiguel">
-            O professor Miguel é o melhor!
-        </h5>
-    
-        <p>Professor: { prof } </p>
-    
-        <button onclick="alternar()">Alternar</button>
-        
+        <div>
+            <h5 _if="viveNamesmaCidade">Essa pessoa vive na mesma cidade que você  </h5>
+            <img {...imagem}>
+            <button onclick="anterior()"  _if="temAnterior">Anterior</button>
+            <button onclick="proximo()"  _if="temProximo">Próximo</button>
+        </div>    
     </div>
     <div class="space"></div>
 </div>
@@ -164,10 +169,10 @@
     o valor da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento
     pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>
     deve ser um objecto, em que as suas propriedades vão indicar as propriedades condicionais e os valores dessas
-    propriedades devem ser valores booleanos(true/false).
+    propriedades devem ser valores booleanos(true/false). A propriedade <span class="hl">setConds</span> será explicada ao longo dessa matéria.
 </p>
 <p>
-    A função renderIf retorna um objecto reativo, que vai nos permitir alterar os valores das propriedades condicionais, e esse tipo de objecto
+    A função <span class="hl">renderIf</span> retorna um objecto reativo, que vai nos permitir alterar os valores das propriedades condicionais, e esse tipo de objecto
     no Inter chamamos de reator.
 </p>
 <h3 id="atributo-_else">Atributo _else</h3>
@@ -183,51 +188,40 @@
 <textarea id="Editor2">
 
 <div id="alvo2">
- 
- <p>O Armando é: <strong _if="adulto">um adulto</strong>
-
-    <strong _else>uma criancinha</strong>
-
-</p>
-
-<button onclick="toggle()">Alternar</button>
+    <div>
+        <h4 _if="pessoa" style="color: green;">É uma pessoa</h4>
+        <h4 _else style="color: red;">Não é uma pessoa</h4>
+        <div>
+            <img src="/images/inter.png" alt="Logo do Inter">
+            <button onclick="_if2.pessoa=false">Verificar essa imagem</button>
+            <img src="/images/Ramon.jpg" alt="Uma pessoa">
+            <button onclick="_if2.pessoa=true">Verificar essa imagem</button>
+        </div>
+    </div>
 </div>
 <script>
 
-   const _if2=renderIf({
-       in:"alvo2",
-       data:{
-           adulto:true
-       }
-   })
-
-   function toggle(){
-
-    if(_if2.adulto){
-
-        _if2.adulto=false;
-
-    }else{
-
-        _if2.adulto=true;
-
+const _if2=renderIf({
+    in:"alvo2",
+    data:{
+        pessoa:false
     }
+})
 
-   }
-   
 </script>
 
 </textarea>
 <div class="demo">
-    <div id="alvo2">
- 
-        <p>O Armando é: <strong _if="adulto">um adulto</strong>
-       
-           <strong _else>uma criancinha</strong>
-       
-       </p>
-       
-       <button onclick="toggle()">Alternar</button>
+    <div id="alvo2"><div>
+        <h4 _if="pessoa" style="color: green;">É uma pessoa</h4>
+        <h4 _else style="color: red;">Não é uma pessoa</h4>
+        <div>
+            <img src="/images/inter.png" alt="Logo do Inter">
+            <button onclick="_if2.pessoa=false">Verificar essa imagem</button>
+            <img src="/images/Ramon.jpg" alt="Uma pessoa">
+            <button onclick="_if2.pessoa=true">Verificar essa imagem</button>
+        </div>
+    </div>
        </div>
        <div class="space"></div>
 </div>
@@ -285,15 +279,9 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
     
 <div id="alvo4">
 
- <p>Geremias está  <span _if="casado">
-     casado.
- </span>
-
- <span _else>
-     solteirão!
- </span>
-
+ <p>Geremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
  <button onclick="alternarEstado()">Clica para { estado } </button>
+
 </div>
 
 <script>
@@ -312,11 +300,11 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
       }
   });
 
-  _if4.observe((prop, valor)=>{
+  _if4.observe((prop, estaCasado)=>{
 
     if(prop=="casado"){
 
-        ref2.estado=valor ? "ficar solteiro" : "casar"
+        ref2.estado=estaCasado ? "ficar solteiro" : "casar"
 
     }
 
@@ -359,11 +347,6 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
     serão os novos valores para as respectivas propriedades.
 </p>
 <div class="warning">
-    <p>Não foi dada uma demonstração propositalmente, eu acho que a explicação foi o suficiente.
-        
-    </p>
-</div>
-<div class="warning">
 <p>
     Um elemento não pode ter mais de um atributo condicional(<span class="hl">_if</span>, <span class="hl">_else</span>, <span class="hl">_ifNot</span>).
     Essa matéria te explicou tudo sobre a renderização condicional.
@@ -397,66 +380,64 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 
       }
 
-      const ref1=Ref({
-      in:"alvo1",
-      data:{
-         prof:"João" 
-      }
-  });
+      const imagens=[{urlDaImagem:"/images/Anny.jpg",
+ condicional:{viveNamesmaCidade:true, temAnterior:false, temProximo:true}},
+ {urlDaImagem:"/images/Ramon.jpg",
+ condicional:{viveNamesmaCidade:false, temAnterior:true, temProximo:true}},
+ {urlDaImagem:"/images/Orlando.jpg",
+ condicional:{viveNamesmaCidade:true, temAnterior:true, temProximo:true}},
+ {urlDaImagem:"/images/luna.jpg",
+ condicional:{viveNamesmaCidade:false, temAnterior:true, temProximo:false}}
 
-  const _if1=renderIf({
-      in:"alvo1",
-      data:{
-          profMiguel:false,
-      }
-  });
+];
 
-  ref1.observe((ref, valor)=>{
+let pos=0;
 
-    if(ref=="prof"){
-
-        _if1.profMiguel=valor=="Miguel";
-
+const { imagem }=toAttrs({
+    in:"alvo1",
+    data:{
+        imagem:{
+            src:imagens[0].urlDaImagem,
+            alt:"Essa é uma pessoa"
+        }
     }
+});
 
-  })
+const _if=renderIf({
+    in:"alvo1",
+    data:imagens[0].condicional
+});
 
-  function alternar(){
+ function trocarImagem(){
 
-    if(ref1.prof=="João"){
+    imagem.src=imagens[pos].urlDaImagem;
+    _if.setConds=imagens[pos].condicional;
 
-        ref1.prof="Miguel";
 
-    }else{
+ }
 
-        ref1.prof="João";
+function anterior(){
 
-    } 
+    pos--;
+    trocarImagem();
 
-  }
+}
 
-  const _if2=renderIf({
-       in:"alvo2",
-       data:{
-           adulto:true
-       }
-   })
+function proximo(){
 
-   function toggle(){
+    pos++;
+    trocarImagem();
 
-    if(_if2.adulto){
-
-        _if2.adulto=false;
-
-    }else{
-
-        _if2.adulto=true;
-
+}
+  
+const _if2=renderIf({
+    in:"alvo2",
+    data:{
+        pessoa:false
     }
+})
 
-   }
-   
-   const _if3=renderIf({
+const _if3=renderIf({
       in:"alvo3",
       data:{
           amigo:false
