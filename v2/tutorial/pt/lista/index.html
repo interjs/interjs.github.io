@@ -123,7 +123,9 @@
                     </li>
 
                     <li>
-                        <span class="hl">text</span> - O valor dessa propriedade vai indicar o texto do elemento criado.
+                        <span class="hl">text</span> - O valor dessa propriedade vai indicar o texto do elemento criado. Se o valor
+                        for <span class="hl">null</span> ou <span class="hl">undefined</span> o texto não será criado, e se o valor for uma função, ela será
+                        invocada e o valor retornado pela função vai representar o texto do elemento.
                     </li>
 					<li>
 					<span class="hl">renderIf</span> - Essa propriedade apenas aceita valores booleanos(true/false), como
@@ -140,18 +142,18 @@
                     <li>
                         <span class="hl">events</span> - Deve ser um objecto, e as propriedades do referido objecto
                         serão os eventos que o elemento escutará, e os valores das propriedades devem ser funções que
-                        serão executadas quando os eventos ocorrerem, e o nome do evento deve ser oficial do DOM.
+                        serão invocadas quando os eventos ocorrerem, e o nome do evento deve ser oficial do DOM.
                     </li>
 
                     <li>
                         <span class="hl">styles</span> - Deve ser um objecto, e as propriedades do referido objecto
                         serão os nomes dos estilos que serão aplicados no elemento e os valores serão os valores dos respectivos estilos. Se o valor
-                        for uma função, a função será executada e o valor retornado pela função será o valor do estilo.
+                        for uma função, a função será invocada e o valor retornado pela função será o valor do estilo.
                         Se o valor for <span class="hl">null</span> ou <span class="hl">undefined</span>
                         o estilo não será criado, e o nome do estilo deve ser oficial do CSS.
                     </li>
                     <li>
-                        <span class="hl">children</span> - Deve ser uma array de objectos que aceitam as mesmas
+                        <span class="hl">children</span> - Deve ser uma Array de objectos que aceitam as mesmas
                         propriedades que o objecto da função <span class="hl">template</span>
                         e os elementos produzidos na referida Array serão os filhos do elemento que estamos a nos referir.
                     </li>
@@ -184,7 +186,7 @@ const dados=[
 
             return template({
                     tag:"div", children:[{
-                        tag:"h2", text:usuario.nome
+                        tag:"h4", text:usuario.nome
                     },{
                         tag:"div", children:[{
                         tag:"p", text:`O ${usuario.nome} é casado.`, renderIf:usuario.casado
@@ -212,7 +214,7 @@ const dados=[
                 <p>
                     Dentro do metódo <span class="hl">do</span>,
                     a palavra-chave <span class="hl">this</span>, indica
-                    o reator da lista, e a referida função deve retornar
+                    o reator da lista, e o referido método deve retornar
 					a função <span class="hl">template</span>.
                 </p>
 
@@ -394,8 +396,9 @@ const reator3=renderList({
             tag:"h4", text:amigo.nome
         }]
     })
+ 
+  }
 
-    }
 })
 
 function adicionar3Amigos(button){
@@ -561,7 +564,7 @@ function adicionar3Amigos(button){
     Nós usamos essa propriedade para deletar as propriedades do objecto e reagir à essa alteração, ou seja,
     ela é uma propriedade reativa como as que já foram mencionadas, quando nós usarmos essa propriedade
     para deletar as propriedades do objecto, o Inter vai se aperceber e vai atualizar a interface para refletir as novas
-    informações. Essa propriedade só aceita uma Array como o seu valor, e os items da referida Array devem ser strings
+    informações. Essa propriedade só aceita uma Array como o seu valor, e os itens da referida Array devem ser strings
 	que devem indicar os nomes das propriedades que serão deletadas.
 </p>
 
@@ -611,7 +614,7 @@ function adicionar3Amigos(button){
 
             return template({
                     tag:"div", children:[{
-                        tag:"h2", text:usuario.nome
+                        tag:"h4", text:usuario.nome
                     },{
                         tag:"div", children:[{
                         tag:"p", text:`O ${usuario.nome} é casado.`, renderIf:usuario.casado
