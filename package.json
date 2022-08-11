@@ -11,5 +11,9 @@
   "codemirror":"5.0.0",
   "fontawesome":"5.14.0"
     
+  },
+  "devDependencies":{
+  "node":">=14.18.0"
   }
+  
   }
