@@ -102,7 +102,7 @@
 
   <script>
 
-   const _reator=Ref({
+   const _reator = Ref({
        in:"alvo1",
        data:{
            mensagem:"Aprendiz"
@@ -126,7 +126,7 @@
                 <p>Lá na tag script, você vê a função Ref não é? Essa função é usada
                     para analisar o template alvo em busca de referências, e ela deve receber apenas um objecto como o seu argumento,
                      o valor  da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento pai onde os elementos com
-                    as referências se encontram, no nosso exemplo, o elemento pai é a div não é? E por que que nós estamos chamando ele de elemento
+                    as referências se encontram, no nosso exemplo, o elemento pai é a div não é? E por que nós estamos chamando ele de elemento
                     pai? Ele tem um filho, que é o elemento <span class="hl">p</span>, e no texto desse elemento tem uma referência chamada <span class="hl">mensagem</span>.
                      O <span class="hl">data</span> é um objecto em que as suas propriedades serão os nomes das referências
                     e os seus valores, serão obviamente os textos que vão substituir as referências com os referidos nomes.
@@ -135,7 +135,7 @@
                 <p>
                     Nós usamos a referência quando quisermos que uma determinada parte da nossa interface seja dinámica, então,
                     geralmente é esperado que a referência mude de valor, e é para isso que existe o <span class="hl">reator</span>.
-                    A função Ref retorna um objecto reativo com as mesmas propriedades do objecto data, nós usamos esse objecto quando
+                    A função Ref retorna um objecto <span class="hl">reativo</span> com as mesmas propriedades que o objecto <span class="hl">data</span>, nós usamos esse objecto quando
                     pretendermos mudar os valores das referências, agora nessa página abra o console do navegador
                     e digite: _reator.mensagem="Inter é incrível"; ou qualquer outro valor, verás a interface ser atualizada para refletir o novo valor da referência.
                 </p>
@@ -150,14 +150,14 @@
 
 <script>
 
-const reator2=Ref({
+const reator2 = Ref({
     in:"alvo2",
     data:{
         contador:0
     }
 })
 
-setInterval(()=>reator2.contador++, 1000)
+setInterval(()=> reator2.contador++, 1000)
 
 </script>
 
@@ -187,7 +187,7 @@ setInterval(()=>reator2.contador++, 1000)
 
  <script>
 
-  const retorno=reator.nomeDaReferencia;
+  const retorno = reator.nomeDaReferencia;
 
 </script>
                 </textarea>
@@ -207,25 +207,27 @@ setInterval(()=>reator2.contador++, 1000)
 
 <div id="alvo3">
 
-    <p title="São {hora} horas">
+    <p title="São { hora } horas">
         Oi, passe o mouse sobre mim para veres o meu título dinámico.
     </p>
 
 </div>
 
 <script>
-    const reator3=Ref({
+
+    const reator3 = Ref({
         in:"alvo3",
         data:{
             hora(){
 
-                const data=new Date();
+                const data = new Date();
 
                 return data.getHours();
 
             }
         }
     })
+
 </script>
       
 </textarea>
@@ -279,7 +281,7 @@ setInterval(()=>reator2.contador++, 1000)
 
 <script>
 
-  const reator4=Ref({
+  const reator4 = Ref({
     in:"alvo4",
     data:{
         avo:"Bernardo",
@@ -293,9 +295,9 @@ setInterval(()=>reator2.contador++, 1000)
 
 reator4.observe((ref, valorAtual)=>{
 
- if(ref=="avo"){
+ if(ref == "avo"){
 
-    reator4.neto=()=>`William ${valorAtual}`
+    reator4.neto = `William ${valorAtual}`;
 
  }
 
@@ -322,6 +324,9 @@ reator4.observe((ref, valorAtual)=>{
                 <h3>
                     A propriedade setRefs
                 </h3>
+                <div class="warning">
+                    <p>Você não deve usar uma referência com o mesmo nome que essa propriedade. SetRefs é uma propriedade reservada.</p>
+                </div>
 
                 <p>O nome já diz tudo, mas enfim, ela serve para definir os valores de múltiplas referências de uma
                     forma bem elegante e menos cansativa, essa propriedade apenas aceita um objecto como o seu
@@ -335,7 +340,7 @@ reator4.observe((ref, valorAtual)=>{
 
     <p>{ nome } é { qualidade }</p>
     <div>
-        <img src={imagem} title="Foto de {nome}" alt="Foto de {nome}">
+        <img src={imagem} title="Foto de { nome }" alt="Foto de { nome }">
     </div>
     <button onclick="toggle()">Ver { outro }</button>
 
@@ -343,38 +348,39 @@ reator4.observe((ref, valorAtual)=>{
 
 <script>
 
-const primeiro={
+const primeiro = {
     nome:"Orlando",
     outro:"Luna",
     imagem:"/images/orlando.jpg",
     qualidade:"amigável"
 }
 
-const segundo={
+const segundo = {
     nome:"Luna",
     outro:"Orlando",
     imagem:"/images/luna.jpg",
     qualidade:"conselheira"
 }
 
-const reator5=Ref({
+const reator5 = Ref({
     in:"alvo5",
     data:primeiro
 })
 
 function toggle(){
 
-    if(reator5.nome=="Orlando"){
+    if(reator5.nome == "Orlando"){
 
-        reator5.setRefs=segundo;
+        reator5.setRefs = segundo;
 
     }else{
 
-        reator5.setRefs=primeiro;
+        reator5.setRefs = primeiro;
 
     }
 
 }
+
 </script>
 
 </textarea>

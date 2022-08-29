@@ -109,12 +109,12 @@
 </div>
 <script>
 
-const imagens=[{urlDaImagem:"/images/Anny.jpg",
- condicional:{viveNamesmaCidade:true, temAnterior:false, temProximo:true}},...];
+const imagens = [{urlDaImagem:"/images/Anny.jpg",
+ condicional: {viveNamesmaCidade:true, temAnterior:false, temProximo:true} },...];
 
-let pos=0;
+let pos = 0;
 
-const { imagem }=toAttrs({
+const { imagem } = toAttrs({
     in:"alvo1",
     data:{
         imagem:{
@@ -124,26 +124,26 @@ const { imagem }=toAttrs({
     }
 });
 
-const _if=renderIf({
+const _if = renderIf({
     in:"alvo1",
     data:imagens[0].condicional
 });
 
-function trocarImagem(){
+  function trocarImagem(){
 
-    imagem.src=imagens[pos].urlDaImagem;
-    _if.setConds=imagens[pos].condicional;
+    imagem.src = imagens[pos].urlDaImagem;
+    _if.setConds = imagens[pos].condicional;
 
 }
 
-function anterior(){
+  function anterior(){
 
     pos--;
     trocarImagem();
     
 }
 
-function proximo(){
+  function proximo(){
 
     pos++;
     trocarImagem();
@@ -193,15 +193,15 @@ function proximo(){
         <h4 _else style="color: red;">Não é uma pessoa</h4>
         <div>
             <img src="/images/Inter.png" alt="Logo do Inter">
-            <button onclick="_if2.pessoa=false">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = false">Verificar essa imagem</button>
             <img src="/images/Ramon.jpg" alt="Uma pessoa">
-            <button onclick="_if2.pessoa=true">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = true">Verificar essa imagem</button>
         </div>
     </div>
 </div>
 <script>
 
-const _if2=renderIf({
+const _if2 = renderIf({
     in:"alvo2",
     data:{
         pessoa:false
@@ -217,9 +217,9 @@ const _if2=renderIf({
         <h4 _else style="color: red;">Não é uma pessoa</h4>
         <div>
             <img src="/images/Inter.png" alt="Logo do Inter">
-            <button onclick="_if2.pessoa=false">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = false">Verificar essa imagem</button>
             <img src="/images/Ramon.jpg" alt="Uma pessoa">
-            <button onclick="_if2.pessoa=true">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = true">Verificar essa imagem</button>
         </div>
     </div>
        </div>
@@ -244,7 +244,7 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 
 <script>
 
-  const _if3=renderIf({
+  const _if3 = renderIf({
       in:"alvo3",
       data:{
           amigo:false
@@ -280,20 +280,20 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <div id="alvo4">
 
  <p>Geremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
- <button onclick="alternarEstado()">Clica para { estado } </button>
+ <button onclick="_if4.casado=!_if4.casado">Clica para { estado } </button>
 
 </div>
 
 <script>
   
-  const _if4=renderIf({
+  const _if4 = renderIf({
       in:"alvo4",
       data:{
          casado:true 
       }
   });
 
-  const ref2=Ref({
+  const ref2 = Ref({
       in:"alvo4",
       data:{
           estado:"ficar solteiro"
@@ -302,26 +302,13 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 
   _if4.observe((prop, estaCasado)=>{
 
-    if(prop=="casado"){
+    if(prop == "casado"){
 
-        ref2.estado=estaCasado ? "ficar solteiro" : "casar"
+        ref2.estado = estaCasado ? "ficar solteiro" : "casar"
 
     }
 
   })
-
-  function alternarEstado(){
-
-    if(_if4.casado){
-
-        _if4.casado=false;
-    }else{
-
-        _if4.casado=true;
-
-    }
-
-  }
   
 </script>
 
@@ -334,7 +321,7 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
         <span _else>
             solteirão!
         </span>
-        <button onclick="alternarEstado()">Clica para { estado } </button>
+        <button onclick="_if4.casado=!_if4.casado">Clica para { estado } </button>
        </div>
     <div class="space"></div>
 </div>
@@ -468,18 +455,6 @@ const _if3=renderIf({
 
   })
 
-  function alternarEstado(){
-
-    if(_if4.casado){
-
-        _if4.casado=false;
-    }else{
-
-        _if4.casado=true;
-
-    }
-
-  }
   
        </script>
     </body>

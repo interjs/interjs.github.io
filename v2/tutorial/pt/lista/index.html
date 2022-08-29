@@ -169,7 +169,7 @@
 
  <script>
 
-const dados=[
+const pessoas = [
     {nome:"Piter", idade:24, casado:false},
     {nome:"Bob", idade:19, casado:false},
     {nome:"Armando", idade:42, casado:true}
@@ -179,23 +179,23 @@ const dados=[
 
     renderList({
         in:"lista1",
-        each:dados,
-        do(usuario){
+        each:pessoas,
+        do(pessoa){
 
-            reator=this;
+            reator = this;
 
             return template({
                     tag:"div", children:[{
-                        tag:"h4", text:usuario.nome
+                        tag:"h4", text:pessoa.nome
                     },{
                         tag:"div", children:[{
-                        tag:"p", text:`O ${usuario.nome} é casado.`, renderIf:usuario.casado
+                        tag:"p", text:`O ${pessoa.nome} é casado.`, renderIf:pessoa.casado
                         },{
-                          tag:"p", text:`O ${usuario.nome} tem ${usuario.idade} anos`
+                          tag:"p", text:`O ${pessoa.nome} tem ${pessoa.idade} anos`
                         }]
                     },{
-                        tag:"button", text:"Casou", attrs:{disabled:usuario.casado},
-                        events:{onclick:()=>usuario.casado=true}
+                        tag:"button", text:"Casou", attrs:{disabled:pessoa.casado},
+                        events:{onclick: ()=> pessoa.casado = true}
                     }]
             })
 
@@ -227,7 +227,7 @@ const dados=[
 
 <ul class="items">
 
-    <li>O primeiro argumento será o item atual da iteração.</li>
+    <li>O primeiro argumento será o item atual na iteração.</li>
     <li>O segundo argumento será a posição do item atual na Array.</li>
     <li>O terceiro argumento será o reator da lista.</li>
 
@@ -238,7 +238,7 @@ const dados=[
 </p>
 
 <ul class="items">
-    <li>O primeiro argumento será o item atual da iteração.</li>
+    <li>O primeiro argumento será o item atual na iteração.</li>
     <li>O segundo argumento será o reator da lista.</li>
 </ul>
 
@@ -248,13 +248,59 @@ const dados=[
 
 <ul class="items">
 
-    <li>O primeiro argumento será o nome da propriedade atual da iteração.</li>
-    <li>O segundo argumento será a o valor da propriedade.</li>
+    <li>O primeiro argumento será o nome da propriedade atual na iteração.</li>
+    <li>O segundo argumento será o valor da propriedade.</li>
     <li>O terceiro argumento será o reator da lista.</li>
 
 </ul>
 
-<p>Se o valor for um número(Number), a função vai receber apenas um
+<textarea id="Editor2">
+
+ <div>
+
+<h4>Cartão de Programador(a)</h4>
+<ul id="cartao"></ul>
+
+</div>
+
+<script>
+
+const dados = {
+    Nome:"Paulo Neto",
+    De:"Angola/Huambo",
+    Domina:"HTML, CSS, Javascript, PHP, C++, MYSQL",
+    Fala:"Português, Espanhol e Inglês",
+    Trabalha:"Sim",
+    Tem:"15 anos de experiência",
+    Foco:"Backend"
+}
+
+const cartao = renderList({
+    in:"cartao",
+    each:dados,
+    do(propriedade, valor){
+
+        return template({
+            tag:"li", text:`${propriedade} : ${valor}.`
+        })
+
+    }
+})
+
+    </script>
+
+</textarea>
+<div class="demo">
+    
+    <div>
+
+        <h4>Cartão de Programador(a)</h4>
+        <ul id="cartao"></ul>
+        <div class="space"></div>          
+        </div>
+</div>
+<p>Use o objecto <span class="hl">cartao</span> para modificar a lista.</p>
+<p>Se o valor da opção <span class="hl">each</span> for um número(Number), a função vai receber apenas um
     argumento, que será o número atual da iteração.
 </p>
 
@@ -291,7 +337,7 @@ o reator da lista.</p>
 </p>
 
 
-<textarea id="Editor2">
+<textarea id="Editor3">
 
 <div>
 
@@ -302,23 +348,22 @@ o reator da lista.</p>
 </div>
 <script>
 
-const animais=["Cão","Gato","Lobo"],
-      frutas=["Maçã", "Laranja", "Banana"];
- let  lista="animais",
-      reator2;
+const animais = ["Cão","Gato","Lobo"],
+      frutas = ["Maçã", "Laranja", "Banana"];
+ let  lista = "animais",  reator2;
 
       renderList({
        in:"lista2",
        each:animais,
        do(item){
 
-        reator2=this;
+        reator2 = this;
 
         return template({
                 tag:"div", children:[{
                     tag:"h5", text:item, 
                 },{
-                    tag:"p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
+                   tag:"p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
                 }]
       
             })
@@ -330,15 +375,15 @@ const animais=["Cão","Gato","Lobo"],
  
 function alternar(){
 
-    if(lista=="animais"){
+    if(lista == "animais"){
 
-     lista="frutas";
-     reator2.otherArray=frutas;
+     lista = "frutas";
+     reator2.otherArray = frutas;
 
     }else{
 
-        lista="animais";
-        reator2.otherArray=animais;
+        lista = "animais";
+        reator2.otherArray = animais;
 
     }
 
@@ -368,7 +413,7 @@ function alternar(){
     será necessário te dizer que o Inter vai atualizar a interface para refletir as novas informações não é?
 </p>
 
-<textarea id="Editor3">
+<textarea id="Editor4">
 
 <div>
 
@@ -380,13 +425,13 @@ function alternar(){
 
 <script>
 
-const amigos=[
+const amigos = [
     {nome:"Bob"},
     {nome:"Érica"},
     {nome:"Marta"}
 ];
 
-const reator3=renderList({
+const reator3 = renderList({
     in:"amigos",
     each:[{nome:"Emília"}],
     do(amigo){
@@ -435,7 +480,7 @@ function adicionar3Amigos(button){
     
 </p>
 
-<textarea id="Editor4">
+<textarea id="Editor5">
     
 <ol id="lista4"></ol>
 
@@ -456,23 +501,23 @@ function adicionar3Amigos(button){
 
  function numeroOrdinal(numero){
 
-    if(numero==1){
+    if(numero == 1){
 
         return "primeiro";
 
-    }if(numero==2){
+    } if(numero == 2){
 
         return "segundo";
 
-    }if(numero==3){
+    } if(numero == 3){
 
         return "terceiro";
 
-    }if(numero==4){
+    } if(numero == 4){
 
         return "quarto"
 
-    }if(numero==5){
+    } if(numero == 5){
 
         return "quinto";
 
@@ -500,13 +545,13 @@ function adicionar3Amigos(button){
     dessa propriedade deve ser um objecto em que as suas propriedades serão os nomes das propriedades que pretendermos atualizar,
     e os valores serão os novos valores das respectivas propriedades.
 </p>
-<textarea id="Editor5">
+<textarea id="Editor6">
     
 <div id="lista5"></div>
 
 <script>
 
- const jogadores=[{
+ const jogadores = [{
      nome:"Anderson", respeito:0, nivel:1
  },{
      nome:"William", respeito:10, nivel:11
@@ -527,7 +572,7 @@ function adicionar3Amigos(button){
                  tag:"p", text:`Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
                 }]
             },{
-                tag:"button", text:"Outro nível", events:{onclick:()=>outronivel(jogador)}
+                tag:"button", text:"Outro nível", events:{onclick: ()=> outronivel(jogador)}
             }]
         })
 
@@ -536,7 +581,7 @@ function adicionar3Amigos(button){
 
  function outronivel(jogador){
 
-    jogador.setProps={
+    jogador.setProps = {
         nivel:jogador.nivel+1,
         respeito:jogador.respeito+1
     }
@@ -590,14 +635,15 @@ function adicionar3Amigos(button){
       }
 
 
-      for(let i=1; i<6; i++){
+      for(let i=1; i<7; i++){
 
         
       CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
 
       }
 
-      const dados=[
+     
+const pessoas = [
     {nome:"Piter", idade:24, casado:false},
     {nome:"Bob", idade:19, casado:false},
     {nome:"Armando", idade:42, casado:true}
@@ -607,28 +653,53 @@ function adicionar3Amigos(button){
 
     renderList({
         in:"lista1",
-        each:dados,
-        do(usuario){
+        each:pessoas,
+        do(pessoa){
 
-            reator=this;
+            reator = this;
 
             return template({
                     tag:"div", children:[{
-                        tag:"h4", text:usuario.nome
+                        tag:"h4", text:pessoa.nome
                     },{
                         tag:"div", children:[{
-                        tag:"p", text:`O ${usuario.nome} é casado.`, renderIf:usuario.casado
+                        tag:"p", text:`O ${pessoa.nome} é casado.`, renderIf:pessoa.casado
                         },{
-                          tag:"p", text:`O ${usuario.nome} tem ${usuario.idade} anos`
+                          tag:"p", text:`O ${pessoa.nome} tem ${pessoa.idade} anos`
                         }]
                     },{
-                        tag:"button", text:"Casou", attrs:{disabled:usuario.casado},
-                        events:{onclick:()=>usuario.casado=true}
+                        tag:"button", text:"Casou", attrs:{disabled:pessoa.casado},
+                        events:{onclick: ()=> pessoa.casado = true}
                     }]
             })
 
         }
     })
+
+
+    
+    const dados = {
+         Nome:"Paulo Neto",
+         De: "Angola/Huambo",
+         Domina:"HTML, CSS, Javascript, PHP, C++, MYSQL",
+         Fala:"Português, Espanhol e Inglês",
+         Trabalha:"Sim",
+         Tem:"15 anos de experiência",
+         Foco:"Backend"
+     }
+
+     const cartao = renderList({
+         in:"cartao",
+         each:dados,
+         do(propriedade, valor){
+
+            return template({
+                tag:"li", text:`${propriedade} : ${valor}.`
+            })
+
+         }
+     })
+
 
     const animais=["Cão","Gato","Lobo"],
       frutas=["Maçã", "Laranja", "Banana"];

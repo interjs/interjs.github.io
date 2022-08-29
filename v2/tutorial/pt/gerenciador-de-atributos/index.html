@@ -132,7 +132,7 @@
 </div>
 <script>
 
-const { imagem }=toAttrs({
+const { imagem } = toAttrs({
     in:"alvo1",
     data:{
         imagem:{
@@ -199,11 +199,11 @@ const { imagem }=toAttrs({
                     
              // Deleta o atributo class.
 
-             this.class=null
+             this.class = null
 
              }else{
 
-             this.class="corAzul"
+             this.class = "corAzul"
 
                     
             }
@@ -254,7 +254,7 @@ criado.
 <h3>Propriedade setAttrs</h3>
 <p>
     Ela será uma propriedade do objecto gerenciador, ela é usada
-    para atualizar os valores de múltiplos atributos de uma única vez.
+    para atualizar os valores de múltiplos atributos.
     Ela recebe apenas um objecto como o seu valor, e as propriedades
     do referido objecto devem indicar os nomes dos atributos cujo os seus  valores serão
     atualizados e os valores serão os valores dos respectivos atributos.
@@ -262,12 +262,14 @@ criado.
 <textarea id="Editor4">
     
 <div id="alvo3">
+
     <img {...slide}>
+
 </div>
 
  <script>
 
-const slides=[
+const slides = [
 {
   src:"/images/luna.jpg",
   alt:"Foto de Luna",
@@ -284,7 +286,7 @@ const slides=[
 }
 ]
 
-let pos=0;
+let pos = 0;
 
 
 toAttrs({
@@ -296,15 +298,15 @@ toAttrs({
        title:slides[0].title,
        onclick(){
 
-         if(pos<2){
+         if(pos < 2){
 
             pos++;
-            this.setAttrs=slides[pos];
+            this.setAttrs = slides[pos];
 
          }else{
 		 
-            pos=0;
-            this.setAttrs=slides[pos];
+            pos = 0;
+            this.setAttrs = slides[pos];
 
          }
 

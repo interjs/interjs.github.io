@@ -211,9 +211,9 @@
 </div>
 <script>
 
-const usuarios=["./user1.json", "./user2.json", "./user3.json"];
+const usuarios = ["./user1.json", "./user2.json", "./user3.json"];
 
-const ref=Ref({
+const ref = Ref({
     in:"ajax1",
     data:{
         nome:"...",
@@ -235,7 +235,7 @@ renderList({
                 tag:"span", text:`Usuário ${i+1}`
             },{
                 tag:"button", text:"Carregar info", events:{
-                    onclick:()=>carregarInfo(usuario)
+                    onclick: ()=> carregarInfo(usuario)
                 }
             }]
         })
@@ -245,14 +245,14 @@ renderList({
 
 function carregarInfo(caminho){
 
-    const ajax1=new Backend();
+    const ajax1 = new Backend();
 
     ajax1.request({
         type:"get",
         path:caminho
     }).okay(({ data })=>{
 
-        ref.setRefs=data;
+        ref.setRefs = data;
 
     })
 
