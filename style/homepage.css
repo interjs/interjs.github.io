@@ -26,6 +26,12 @@ header{
     box-shadow: 1px 1px 2px black;
     
 }
+
+.hl{
+	
+	color:var(--offcolor)
+}
+
 #main{
     display: flex;
 background-color: black;
