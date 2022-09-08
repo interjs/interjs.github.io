@@ -169,7 +169,7 @@
 
  <script>
 
-const pessoas = [
+const homens = [
     {nome:"Piter", idade:24, casado:false},
     {nome:"Bob", idade:19, casado:false},
     {nome:"Armando", idade:42, casado:true}
@@ -179,23 +179,23 @@ const pessoas = [
 
     renderList({
         in:"lista1",
-        each:pessoas,
-        do(pessoa){
+        each:homens,
+        do(homem){
 
             reator = this;
 
             return template({
                     tag:"div", children:[{
-                        tag:"h4", text:pessoa.nome
+                        tag:"h4", text:homem.nome
                     },{
                         tag:"div", children:[{
-                        tag:"p", text:`O ${pessoa.nome} é casado.`, renderIf:pessoa.casado
+                        tag:"p", text:`O ${homem.nome} é casado.`, renderIf:homem.casado
                         },{
-                          tag:"p", text:`O ${pessoa.nome} tem ${pessoa.idade} anos`
+                          tag:"p", text:`O ${homem.nome} tem ${homem.idade} anos`
                         }]
                     },{
-                        tag:"button", text:"Casou", attrs:{disabled:pessoa.casado},
-                        events:{onclick: ()=> pessoa.casado = true}
+                        tag:"button", text:"Casou", attrs:{disabled:homem.casado},
+                        events:{onclick: ()=> homem.casado = true}
                     }]
             })
 
@@ -643,7 +643,7 @@ function adicionar3Amigos(button){
       }
 
      
-const pessoas = [
+const homens = [
     {nome:"Piter", idade:24, casado:false},
     {nome:"Bob", idade:19, casado:false},
     {nome:"Armando", idade:42, casado:true}
@@ -653,29 +653,28 @@ const pessoas = [
 
     renderList({
         in:"lista1",
-        each:pessoas,
-        do(pessoa){
+        each:homens,
+        do(homem){
 
             reator = this;
 
             return template({
                     tag:"div", children:[{
-                        tag:"h4", text:pessoa.nome
+                        tag:"h4", text:homem.nome
                     },{
                         tag:"div", children:[{
-                        tag:"p", text:`O ${pessoa.nome} é casado.`, renderIf:pessoa.casado
+                        tag:"p", text:`O ${homem.nome} é casado.`, renderIf:homem.casado
                         },{
-                          tag:"p", text:`O ${pessoa.nome} tem ${pessoa.idade} anos`
+                          tag:"p", text:`O ${homem.nome} tem ${homem.idade} anos`
                         }]
                     },{
-                        tag:"button", text:"Casou", attrs:{disabled:pessoa.casado},
-                        events:{onclick: ()=> pessoa.casado = true}
+                        tag:"button", text:"Casou", attrs:{disabled:homem.casado},
+                        events:{onclick: ()=> homem.casado = true}
                     }]
             })
 
         }
     })
-
 
     
     const dados = {
