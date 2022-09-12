@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/style/all.css">
         <link rel="shortcut icon" href="/images/Inter.png">
         <script src="/script/all.js"></script>
+        <script src="/script/inter.js"></script>
         <title>NOT FOUND - 404</title>
         
     </head>
@@ -61,13 +62,23 @@
 </nav>            </aside>
           
         <article>
-            <div>
+<div id="404">
 <h1>Página não encontrada - 404</h1>
-<p>Infelizmente a página que você tentou acessar não foi encontrada.</p>
+<p>Infelizmente não foi encontrada nenhuma página em <span class="hl">{ path }</span>, certifique-se que o endereço esteja correcto.</p>
 
 
 </div>
 </article>
 </div>
+<script>
+
+  Ref({
+    in: "404",
+    data: {
+        path: window.location.pathname
+    }
+  })
+
+</script>
 </body>
 </html>
