@@ -133,12 +133,12 @@
 <script>
 
 const { imagem } = toAttrs({
-    in:"alvo1",
-    data:{
-        imagem:{
-           src:"/images/orlando.jpg",
-           alt:"Foto de Orlando",
-           title:"Foto de Orlando"
+    in: "alvo1",
+    data: {
+        imagem: {
+           src: "/images/orlando.jpg",
+           alt: "Foto de Orlando",
+           title: "Foto de Orlando"
         }
     }
 })
@@ -189,10 +189,10 @@ const { imagem } = toAttrs({
   <script>
     
   toAttrs({
-    in:"alvo2",
-     data:{
-         cor:{
-            class:"corAzul",
+    in: "alvo2",
+     data: {
+         cor: {
+            class: "corAzul",
             onclick(){
 
             if(this.class){
@@ -239,11 +239,11 @@ criado.
 <script>
 
   toAttrs({
-      in:"id",
-      data:{
-          gerenciador:{
-              title:null, // O atributo title não será criado.
-              class:"class"
+      in: "id",
+      data: {
+          gerenciador: {
+              title: null, // O atributo title não será criado.
+              class: "class"
           }
       }
   })
@@ -271,18 +271,18 @@ criado.
 
 const slides = [
 {
-  src:"/images/luna.jpg",
-  alt:"Foto de Luna",
-  title:"Slide 1"
+  src: "/images/luna.jpg",
+  alt: "Foto de Luna",
+  title: "Slide 1"
 },
 {
-   src:"/images/Inter.png",
-   alt:"Foto de Inter",
-   title:"Slide 2"
+   src: "/images/Inter.png",
+   alt: "Foto de Inter",
+   title: "Slide 2"
 },{
-   src:"/images/Ramon.jpg",
-   alt:"Foto de Ramon",
-   title:"Slide 3"
+   src: "/images/Ramon.jpg",
+   alt: "Foto de Ramon",
+   title: "Slide 3"
 }
 ]
 
@@ -290,12 +290,12 @@ let pos = 0;
 
 
 toAttrs({
-    in:"alvo3",
-    data:{
-      slide:{ 
-       src:slides[0].src,
-       alt:slides[0].alt,
-       title:slides[0].title,
+    in: "alvo3",
+    data: {
+      slide: { 
+       src: slides[0].src,
+       alt: slides[0].alt,
+       title: slides[0].title,
        onclick(){
 
          if(pos < 2){

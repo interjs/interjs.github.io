@@ -170,32 +170,32 @@
  <script>
 
 const homens = [
-    {nome:"Piter", idade:24, casado:false},
-    {nome:"Bob", idade:19, casado:false},
-    {nome:"Armando", idade:42, casado:true}
+    {nome: "Piter", idade: 24, casado: false},
+    {nome: "Bob", idade: 19, casado: false},
+    {nome: "Armando", idade: 42, casado: true}
     ];
 
     let reator;
 
     renderList({
-        in:"lista1",
-        each:homens,
+        in: "lista1",
+        each: homens,
         do(homem){
 
             reator = this;
 
             return template({
-                    tag:"div", children:[{
-                        tag:"h4", text:homem.nome
+                    tag: "div", children: [{
+                        tag: "h4", text: homem.nome
                     },{
-                        tag:"div", children:[{
-                        tag:"p", text:`O ${homem.nome} é casado.`, renderIf:homem.casado
+                        tag: "div", children: [{
+                        tag: "p", text: `O ${homem.nome} é casado.`, renderIf: homem.casado
                         },{
-                          tag:"p", text:`O ${homem.nome} tem ${homem.idade} anos`
+                          tag: "p", text: `O ${homem.nome} tem ${homem.idade} anos`
                         }]
                     },{
-                        tag:"button", text:"Casou", attrs:{disabled:homem.casado},
-                        events:{onclick: ()=> homem.casado = true}
+                        tag: "button", text: "Casou", attrs: {disabled: homem.casado},
+                        events: {onclick: () => homem.casado = true}
                     }]
             })
 
@@ -266,22 +266,22 @@ const homens = [
 <script>
 
 const dados = {
-    Nome:"Paulo Neto",
-    De:"Angola/Huambo",
-    Domina:"HTML, CSS, Javascript, PHP, C++, MYSQL",
-    Fala:"Português, Espanhol e Inglês",
-    Trabalha:"Sim",
-    Tem:"15 anos de experiência",
-    Foco:"Backend"
+    Nome: "Paulo Neto",
+    De: "Angola/Huambo",
+    Domina: "HTML, CSS, Javascript, PHP, C++, MYSQL",
+    Fala: "Português, Espanhol e Inglês",
+    Trabalha: "Sim",
+    Tem: "15 anos de experiência",
+    Foco: "Backend"
 }
 
 const cartao = renderList({
-    in:"cartao",
-    each:dados,
+    in: "cartao",
+    each: dados,
     do(propriedade, valor){
 
         return template({
-            tag:"li", text:`${propriedade} : ${valor}.`
+            tag: "li", text: `${propriedade} : ${valor}.`
         })
 
     }
@@ -348,22 +348,22 @@ o reator da lista.</p>
 </div>
 <script>
 
-const animais = ["Cão","Gato","Lobo"],
+const animais = ["Cão", "Gato", "Lobo"],
       frutas = ["Maçã", "Laranja", "Banana"];
  let  lista = "animais",  reator2;
 
       renderList({
-       in:"lista2",
-       each:animais,
+       in: "lista2",
+       each: animais,
        do(item){
 
         reator2 = this;
 
         return template({
-                tag:"div", children:[{
-                    tag:"h5", text:item, 
+                tag: "div", children: [{
+                    tag: "h5", text: item, 
                 },{
-                   tag:"p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
+                   tag: "p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
                 }]
       
             })
@@ -426,19 +426,19 @@ function alternar(){
 <script>
 
 const amigos = [
-    {nome:"Bob"},
-    {nome:"Érica"},
-    {nome:"Marta"}
+    {nome: "Bob"},
+    {nome: "Érica"},
+    {nome: "Marta"}
 ];
 
 const reator3 = renderList({
-    in:"amigos",
-    each:[{nome:"Emília"}],
+    in: "amigos",
+    each: [{nome:"Emília"}],
     do(amigo){
 
     return template({
-        tag:"div", children:[{
-            tag:"h4", text:amigo.nome
+        tag: "div", children: [{
+            tag: "h4", text: amigo.nome
         }]
     })
  
@@ -487,12 +487,12 @@ function adicionar3Amigos(button){
 <script>
 
  renderList({
-     in:"lista4",
-     each:5,
+     in: "lista4",
+     each: 5,
      do(numero){
 
         return template({
-            tag:"li", text:`Esse é o ${numeroOrdinal(numero+1)} item da lista`
+            tag: "li", text: `Esse é o ${numeroOrdinal(numero+1)} item da lista`
         })
 
      }
@@ -552,27 +552,27 @@ function adicionar3Amigos(button){
 <script>
 
  const jogadores = [{
-     nome:"Anderson", respeito:0, nivel:1
+     nome: "Anderson", respeito: 0, nivel: 1
  },{
-     nome:"William", respeito:10, nivel:11
+     nome: "William", respeito: 10, nivel: 11
  },{
-     nome:"Emília", respeito:3, nivel:4
+     nome: "Emília", respeito: 3, nivel: 4
  }]
 
  renderList({
-     in:"lista5",
-     each:jogadores,
+     in: "lista5",
+     each: jogadores,
      do(jogador){
 
         return template({
-            tag:"div", children:[{
-                tag:"h4", text:`Jogador: ${jogador.nome}`
+            tag: "div", children: [{
+                tag: "h4", text: `Jogador: ${jogador.nome}`
             },{
-                tag:"div", children:[{
-                 tag:"p", text:`Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
+                tag: "div", children: [{
+                 tag: "p", text: `Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
                 }]
             },{
-                tag:"button", text:"Outro nível", events:{onclick: ()=> outronivel(jogador)}
+                tag: "button", text: "Outro nível", events: {onclick: () => outronivel(jogador)}
             }]
         })
 
@@ -582,8 +582,8 @@ function adicionar3Amigos(button){
  function outronivel(jogador){
 
     jogador.setProps = {
-        nivel:jogador.nivel+1,
-        respeito:jogador.respeito+1
+        nivel: jogador.nivel+1,
+        respeito: jogador.respeito+1
     }
 
  }

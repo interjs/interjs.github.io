@@ -214,28 +214,28 @@
 const usuarios = ["./user1.json", "./user2.json", "./user3.json"];
 
 const ref = Ref({
-    in:"ajax1",
-    data:{
-        nome:"...",
-        idade:"...",
-        pais:"...",
-        ec:"...",
-        nf:"...",
-        imagem:"/images/Inter.png"
+    in: "ajax1",
+    data: {
+        nome: "...",
+        idade: "...",
+        pais: "...",
+        ec: "...",
+        nf: "...",
+        imagem: "/images/Inter.png"
     }
 })
 
 renderList({
-    in:"lista-de-usuarios",
-    each:usuarios,
+    in: "lista-de-usuarios",
+    each: usuarios,
     do(usuario, i){
 
         return template({
-            tag:"li", children:[{
-                tag:"span", text:`Usuário ${i+1}`
+            tag: "li", children: [{
+                tag: "span", text: `Usuário ${i+1}`
             },{
-                tag:"button", text:"Carregar info", events:{
-                    onclick: ()=> carregarInfo(usuario)
+                tag: "button", text: "Carregar info", events: {
+                    onclick: () => carregarInfo(usuario)
                 }
             }]
         })
@@ -247,10 +247,10 @@ function carregarInfo(caminho){
 
     const ajax1 = new Backend();
 
-    ajax1.request({
-        type:"get",
-        path:caminho
-    }).okay(({ data })=>{
+    ajax1.request({ 
+        type: "get",
+        path: caminho
+    }).okay(({ data }) => {
 
         ref.setRefs = data;
 
@@ -314,6 +314,130 @@ function carregarInfo(caminho){
     até aqui e entendeste tudo, então parabéns, você agora pode programar com o Inter numa boa! Passa
     lá no repositório do Inter no <a href="https://github.com/interjs/inter">Github</a> e deixe uma estrela, dessa forma estarás ajudando na repercussão do Inter.
 </p>
+
+<textarea id="Editor2">
+
+<div id="app">
+<h4> Descubra os repositórios de um Usuário no Github</h4>
+    <div>
+        <input {...searchInput}>
+        <button {...searchButton}> { buttonStatus  } </button>
+    </div>
+    <p>
+        Usuário : { userName  },
+        Número de repositório : { repoLength  },
+        <strong> { errorMessage }  </strong> 
+    </p>
+    <div id="repoList"></div>
+</div>
+
+<script>
+
+ const { searchInput, searchButton  } = toAttrs({
+    in: "app",
+    data: {
+        searchInput: { type: "text", value: "", placeholder: "Digite o usuário" },
+        searchButton: { disabled: null, onclick: 2   }
+    }
+ })
+
+ const refs = Ref({
+    in: "app",
+    data: {
+        userName: "",
+        repoLength: 0,
+        buttonStatus: "Buscar",
+        errorMessage: ""
+    }
+ })
+
+  const listReactor = renderList({
+    in: "repoList",
+    each: [],
+    do({ name, description, forks}){
+
+        const aAttrs = {
+            target: "_blank",
+            href: `https://github.com/${searchInput.value}/${name}`
+        }
+
+        return template({
+            tag: "div", children: [{
+                tag: "h2", text: `Nome do repo: ${ name }`
+            },{
+                tag: "p", text: description, renderIf: description !== undefined
+            },{
+                tag: "p", text: forks > 0 ? `Forks: ${ forks }` : "Sem forks"
+            },{
+                tag: "a", attrs: aAttrs, children: [{
+                    tag: "button", text: "Visitar"
+                }]
+            }]
+        })
+
+    }
+  })
+
+  function search(){
+
+    refs.buttonStatus = "Buscando";
+    searchButton.disabled = true;
+    
+    const ajax2 = new Backend();
+
+    const requestOptions = {
+        type: "get",
+        path: `https://api.github.com/users/${ searchInput.value }/repos`
+    }
+
+    ajax2.request(requestOptions).response(okay, error);
+
+  }
+
+  function okay({ data  }){
+
+    listReactor.otherArray = data;
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: searchInput.value,
+        repoLength: data.length,
+        errorMessage: ""
+    };
+
+    cleanInputAndUnableTheButton();
+
+  }
+
+  function error({ status, data  }){
+
+    listReactor.otherArray = [];
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: "",
+        repoLength: 0,
+        errorMessage(){
+
+          return (
+            status == 404 ? `Usuário não encontrado` : data
+          )  
+
+        }
+    };
+
+    cleanInputAndUnableTheButton();
+
+  }
+
+  function cleanInputAndUnableTheButton(){
+
+     searchInput.value = "";
+     searchButton.disabled = null;
+
+  }
+
+</script>
+
+</textarea>
                 <div class="Space"></div>
             </div>
         </article>
@@ -333,7 +457,7 @@ function carregarInfo(caminho){
       }
 
 
-      for(let i=1; i<2; i++){
+      for(let i=1; i<3; i++){
 
         
       CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);

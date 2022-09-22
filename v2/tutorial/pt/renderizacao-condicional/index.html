@@ -92,7 +92,7 @@
 
                   <h3 id="atributo-_if">Atributo _if</h3> 
                  <p>O valor desse atributo deve ser o nome de uma das propriedades do objecto
-                     data(da função renderIf()), e se o valor da referida propriedade for verdadeiro o elemento será renderizado, caso o contrário o elemento
+                     data(da função renderIf()), e se o valor da referida propriedade for <span class="hl">true</span>, o elemento será renderizado, caso o contrário(se for <span class="hl">false</span>), o elemento
                      não será renderizado.
                  </p>
 <textarea id="Editor1">
@@ -109,24 +109,24 @@
 </div>
 <script>
 
-const imagens = [{urlDaImagem:"/images/Anny.jpg",
- condicional: {viveNamesmaCidade:true, temAnterior:false, temProximo:true} },...];
+const imagens = [{ urlDaImagem: "/images/Anny.jpg",
+ condicional: { viveNamesmaCidade: true, temAnterior: false, temProximo: true} },...];
 
 let pos = 0;
 
 const { imagem } = toAttrs({
-    in:"alvo1",
-    data:{
-        imagem:{
-            src:imagens[0].urlDaImagem,
-            alt:"Essa é uma pessoa"
+    in: "alvo1",
+    data: {
+        imagem: {
+            src: imagens[0].urlDaImagem,
+            alt: "Essa é uma pessoa"
         }
     }
 });
 
 const _if = renderIf({
-    in:"alvo1",
-    data:imagens[0].condicional
+    in: "alvo1",
+    data: imagens[0].condicional
 });
 
   function trocarImagem(){
@@ -202,9 +202,9 @@ const _if = renderIf({
 <script>
 
 const _if2 = renderIf({
-    in:"alvo2",
-    data:{
-        pessoa:false
+    in: "alvo2",
+    data: {
+        pessoa: false
     }
 })
 
@@ -245,9 +245,9 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <script>
 
   const _if3 = renderIf({
-      in:"alvo3",
-      data:{
-          amigo:false
+      in: "alvo3",
+      data: {
+          amigo: false
       }
   })
 
@@ -287,20 +287,20 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <script>
   
   const _if4 = renderIf({
-      in:"alvo4",
-      data:{
-         casado:true 
+      in: "alvo4",
+      data: {
+         casado: true 
       }
   });
 
   const ref2 = Ref({
-      in:"alvo4",
-      data:{
-          estado:"ficar solteiro"
+      in: "alvo4",
+      data: {
+          estado: "ficar solteiro"
       }
   });
 
-  _if4.observe((prop, estaCasado)=>{
+  _if4.observe((prop, estaCasado) => {
 
     if(prop == "casado"){
 

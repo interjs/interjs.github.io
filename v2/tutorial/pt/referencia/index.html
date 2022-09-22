@@ -103,9 +103,9 @@
   <script>
 
    const _reator = Ref({
-       in:"alvo1",
-       data:{
-           mensagem:"Aprendiz"
+       in: "alvo1",
+       data: {
+           mensagem: "Aprendiz"
        }
    })
 
@@ -151,13 +151,13 @@
 <script>
 
 const reator2 = Ref({
-    in:"alvo2",
-    data:{
-        contador:0
+    in: "alvo2",
+    data: {
+        contador: 0
     }
 })
 
-setInterval(()=> reator2.contador++, 1000)
+setInterval(() => reator2.contador++, 1000)
 
 </script>
 
@@ -216,8 +216,8 @@ setInterval(()=> reator2.contador++, 1000)
 <script>
 
     const reator3 = Ref({
-        in:"alvo3",
-        data:{
+        in: "alvo3",
+        data: {
             hora(){
 
                 const data = new Date();
@@ -282,9 +282,9 @@ setInterval(()=> reator2.contador++, 1000)
 <script>
 
   const reator4 = Ref({
-    in:"alvo4",
-    data:{
-        avo:"Bernardo",
+    in: "alvo4",
+    data: {
+        avo: "Bernardo",
         neto(){
 
             return `William ${this.avo}`
@@ -293,7 +293,7 @@ setInterval(()=> reator2.contador++, 1000)
     }
 })
 
-reator4.observe((ref, valorAtual)=>{
+reator4.observe((ref, valorAtual) => {
 
  if(ref == "avo"){
 
@@ -349,22 +349,22 @@ reator4.observe((ref, valorAtual)=>{
 <script>
 
 const primeiro = {
-    nome:"Orlando",
-    outro:"Luna",
-    imagem:"/images/orlando.jpg",
-    qualidade:"amigável"
+    nome: "Orlando",
+    outro: "Luna",
+    imagem: "/images/orlando.jpg",
+    qualidade: "amigável"
 }
 
 const segundo = {
-    nome:"Luna",
-    outro:"Orlando",
-    imagem:"/images/luna.jpg",
-    qualidade:"conselheira"
+    nome: "Luna",
+    outro: "Orlando",
+    imagem: "/images/luna.jpg",
+    qualidade: "conselheira"
 }
 
 const reator5 = Ref({
-    in:"alvo5",
-    data:primeiro
+    in: "alvo5",
+    data: primeiro
 })
 
 function toggle(){
