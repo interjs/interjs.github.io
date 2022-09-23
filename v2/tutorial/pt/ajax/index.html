@@ -320,31 +320,32 @@ function carregarInfo(caminho){
 <div id="app">
 <h4> Descubra os repositórios de um Usuário no Github</h4>
     <div>
-        <input {...searchInput}>
-        <button {...searchButton}> { buttonStatus  } </button>
+        <input {...searchinput}>
+        <button {...searchbutton}> { buttonStatus  } </button>
     </div>
     <p>
         Usuário : { userName  },
         Número de repositório : { repoLength  },
-        <strong> { errorMessage }  </strong> 
+        
     </p>
+	<p style="color: red;"> { errorMessage }  </p> 
     <div id="repoList"></div>
 </div>
 
 <script>
 
- const { searchInput, searchButton  } = toAttrs({
+ const { searchinput, searchbutton  } = toAttrs({
     in: "app",
     data: {
-        searchInput: { type: "text", value: "", placeholder: "Digite o usuário" },
-        searchButton: { disabled: null, onclick: 2   }
+        searchinput: { type: "text", value: "", placeholder: "Digite o usuário" },
+        searchbutton: { disabled: null, onclick: search }
     }
  })
 
  const refs = Ref({
     in: "app",
     data: {
-        userName: "",
+        userName: "sem usuário",
         repoLength: 0,
         buttonStatus: "Buscar",
         errorMessage: ""
@@ -354,11 +355,11 @@ function carregarInfo(caminho){
   const listReactor = renderList({
     in: "repoList",
     each: [],
-    do({ name, description, forks}){
+    do({ name, description, full_name, forks}){
 
         const aAttrs = {
             target: "_blank",
-            href: `https://github.com/${searchInput.value}/${name}`
+            href: `https://github.com/${full_name}`
         }
 
         return template({
@@ -381,13 +382,13 @@ function carregarInfo(caminho){
   function search(){
 
     refs.buttonStatus = "Buscando";
-    searchButton.disabled = true;
+    searchbutton.disabled = true;
     
     const ajax2 = new Backend();
 
     const requestOptions = {
         type: "get",
-        path: `https://api.github.com/users/${ searchInput.value }/repos`
+        path: `https://api.github.com/users/${searchinput.value}/repos`
     }
 
     ajax2.request(requestOptions).response(okay, error);
@@ -399,7 +400,7 @@ function carregarInfo(caminho){
     listReactor.otherArray = data;
     refs.setRefs = {
         buttonStatus: "Buscar",
-        userName: searchInput.value,
+        userName: searchinput.value,
         repoLength: data.length,
         errorMessage: ""
     };
@@ -413,7 +414,7 @@ function carregarInfo(caminho){
     listReactor.otherArray = [];
     refs.setRefs = {
         buttonStatus: "Buscar",
-        userName: "",
+        userName: "sem usuário",
         repoLength: 0,
         errorMessage(){
 
@@ -430,14 +431,31 @@ function carregarInfo(caminho){
 
   function cleanInputAndUnableTheButton(){
 
-     searchInput.value = "";
-     searchButton.disabled = null;
+     searchinput.value = "";
+     searchbutton.disabled = null;
 
   }
 
 </script>
 
 </textarea>
+<div class="demo">
+<div id="app">
+<h4> Descubra os repositórios de um Usuário no Github</h4>
+<div>
+    <input {...searchinput}>
+    <button {...searchbutton}> { buttonStatus  } </button>
+</div>
+<p>
+    Usuário : { userName  },
+    Número de repositório : { repoLength  },
+    
+</p>
+<p style="color: red;"> { errorMessage }  </p> 
+<div id="repoList"></div>
+</div>
+<div class="Space"></div>
+</div>
                 <div class="Space"></div>
             </div>
         </article>
@@ -510,6 +528,112 @@ function carregarInfo(caminho){
     })
 
 }
+
+
+const { searchinput, searchbutton  } = toAttrs({
+    in: "app",
+    data: {
+        searchinput: { type: "text", value: "", placeholder: "Digite o usuário" },
+        searchbutton: { disabled: null, onclick: search }
+    }
+ })
+
+ const refs = Ref({
+    in: "app",
+    data: {
+        userName: "sem usuário",
+        repoLength: 0,
+        buttonStatus: "Buscar",
+        errorMessage: ""
+    }
+ })
+
+  const listReactor = renderList({
+    in: "repoList",
+    each: [],
+    do({ name, description,  forks, full_name}){
+
+        const aAttrs = {
+            target: "_blank",
+            href: `https://github.com/${full_name}`
+        }
+
+        return template({
+            tag: "div", children: [{
+                tag: "h2", text: `Nome do repo: ${ name }`
+            },{
+                tag: "p", text: description, renderIf: description !== undefined
+            },{
+                tag: "p", text: forks > 0 ? `Forks: ${ forks }` : "Sem forks"
+            },{
+                tag: "a", attrs: aAttrs, children: [{
+                    tag: "button", text: "Visitar"
+                }]
+            }]
+        })
+
+    }
+  })
+
+  function search(){
+
+    refs.buttonStatus = "Buscando";
+    searchbutton.disabled = true;
+    
+    const ajax2 = new Backend();
+
+    const requestOptions = {
+        type: "get",
+        path: `https://api.github.com/users/${searchinput.value}/repos`
+    }
+
+    ajax2.request(requestOptions).response(okay, error);
+
+  }
+
+  function okay({ data  }){
+console.log(data[0])
+    listReactor.otherArray = data;
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: searchinput.value,
+        repoLength: data.length,
+        errorMessage: ""
+    };
+
+    
+
+    cleanInputAndUnableTheButton();
+
+  }
+
+  function error({ status, data  }){
+
+    listReactor.otherArray = [];
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: "sem usuário",
+        repoLength: 0,
+        errorMessage(){
+
+          return (
+            status == 404 ? `Usuário não encontrado` : data
+          )  
+
+        }
+    };
+
+    cleanInputAndUnableTheButton();
+
+  }
+
+  function cleanInputAndUnableTheButton(){
+
+     searchinput.value = "";
+     searchbutton.disabled = null;
+
+  }
+
 
        </script>
     </body>
