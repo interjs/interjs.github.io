@@ -296,13 +296,13 @@ function carregarInfo(caminho){
         enquanto a requisição estiver a ser feita, e a função que deve ser invocada quando o evento ocorrer
         será invocada com um argumento, que será um objecto com duas propriedades. A propriedade
         <span class="hl">progress</span> vai indicar o progresso(de 0 à 100) da requisição, principalmente
-        em requisições do tipo <span class="hl">POST</span> e <span class="hl">PUT</span>, e o método
+        quando os dados que estiverem a ser enviados ou recebidos forem muito pesados e o método
         <span class="hl">abort</span> quando for invocado vai abortar/cancelar a requisição e o evento
         <span class="hl">onabort</span> será acionado.
     </li>
     <li>
         <span class="hl">ontimeout</span> - Esse evento vai ser acionado quando o tempo de requisição ultrapassar
-        o estabelecido(pelo navegador ou pelo programador com a propriedade <span class="hl">timeout</span>).
+        o estabelecido(pelo programador, com a propriedade <span class="hl">timeout</span>).
     </li>
     <li>
         <span class="hl">onabort</span> - Esse evento será acionado quando a requisição for cancelada com o método <span class="hl">abort</span>.
@@ -327,7 +327,7 @@ function carregarInfo(caminho){
     </div>
     <p>
         Usuário : { userName  },
-        Número de repositório : { repoLength  },
+        Número de repositórios : { repoLength  },
         
     </p>
 	<p style="color: red;"> { errorMessage }  </p> 
@@ -450,7 +450,7 @@ function carregarInfo(caminho){
 </div>
 <p>
     Usuário : { userName  },
-    Número de repositório : { repoLength  },
+    Número de repositórios : { repoLength  },
     
 </p>
 <p style="color: red;"> { errorMessage }  </p> 
