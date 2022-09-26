@@ -73,7 +73,7 @@
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
                     
-                    
+                    <li><a href="/v2/tutorial/pt/reator">Reator</a></li>
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
                     </li>
@@ -84,23 +84,22 @@
         
         <article>
             <div>
-                <h1><a href="#reator" id="reator" classs="hash">Reator</a></h1>
-                <p>O termo <span class="hl">Reator</span> no <span class="hl">Inter</span>, é 
-                  usado para significar um objecto, Map, Set, Array que quando os seus dados forem alterados, o Inter reagirá às alterações feitas,
+                <h1><a href="#reator" id="reator" class="hash">Reator</a></h1>
+                <p>O <span class="hl">reator</span> no <span class="hl">Inter</span>, é 
+                   um <span class="hl">objecto</span>, <span class="hl">Map</span>, 
+                  <span class="hl">Set</span> ou <span class="hl">Array</span> que quando os seus dados forem alterados, o Inter reagirá às alterações feitas,
                 refletindo os novos dados na Interface.
                 </p>
 
   <textarea id="Editor1">
 
-    <div id="relogio">
-    <strong> { hora } : { minuto } : { segundo }  </strong>
-    </div>
+<div id="relogio">
+<p> { hora } : { minuto } : { segundo }  </p>
+</div>
 
-    <script>
+<script>
 
-   const date = new Date();
-
-   const refs = Ref({
+const refs = Ref({
     in: "relogio",
     data: {
         hora: 0,
@@ -109,20 +108,30 @@
     }
    })
 
-   setInterval( () => {
+   setInterval(() => {
+
+    const date = new Date();
+
     refs.setRefs = {
         hora: date.getHours(),
         minuto: date.getMinutes(),
         segundo: date.getMinutes(),
     }
 
-   }, 1000 )
+   }, 1000)
    
-    </script>
+</script>
 
   </textarea>
 
-  <p>Se você está a ler essa matéria, você provavelmente já sabe conceitos do Inter, como a <a href="">referência</a>,
+<div class="demo">
+
+    <div id="relogio">
+        <p> { hora } : { minuto } : { segundo }  </p>
+    </div>    
+</div>
+
+  <p>Se você estiver a ler essa matéria, você provavelmente conhece conceitos do Inter, como a <a href="/v2/tutorial/pt/referencia">referência</a>,
 a função <span class="hl">Ref</span> retorna um objecto com as mesmas propriedades que o objecto <span class="hl">data</span>,
 e nós devemos usar o referido objecto para atualizar os valores das referências, e na função <span class="hl">setInterval</span>,
 nós atualizamos os valores das três referências que existem no exemplo, e o Inter vai reagir à essas alterações atualizando a interface, então,
@@ -130,8 +139,9 @@ isso significa que o objecto retornada pela função <span class="hl">Ref</span>
 </p>
 
 <textarea>
-<div id="todo-app">
- <div id="lista-de-todo" _if="temTodo"></div>
+
+<div class="demo">
+ <div id="lista-de-todo"></div>
 </div>
 
 <script>
@@ -139,16 +149,16 @@ isso significa que o objecto retornada pela função <span class="hl">Ref</span>
 const todos = [
     { texto: "Cozinhar", feito: false },
     { texto: "Estudar", feito: true },
-    { text: "Passear", feito: false },
-    { text: "Ouvir música", feito: false  }
+    { texto: "Passear", feito: false },
+    { texto: "Ouvir música", feito: false  }
 ]
 
 const reatorDaLista = renderList({
     in: "lista-de-todo",
-    each: [],
+    each: todos,
     do(todo, i){
 
-        const styles =  { textDecoration: todo.feito ? "through-line" : null  };
+        const styles =  { textDecoration: todo.feito ? "line-through" : null  };
         const done = {  onclick: () => todo.feito = true };
         const Delete = { onclick: () => this.splice(i, 1)  };
 
@@ -168,6 +178,27 @@ const reatorDaLista = renderList({
 </script>
 
 </textarea>
+<div class="demo">
+    <div>
+        <div id="lista-de-todo"></div>
+       </div>
+       <div class="space"></div>
+</div>
+<p>
+    No exemplo anterior, a função <span class="hl">renderList</span> retorna uma Array reativa(reator), e nós usamos essa Array 
+    para modificar a lista, se por exemplo deletarmos um item da Array(em qualquer posição), o elemento na
+    interface que representa o item também será deletado, o primeiro item da Array, é representado pelo
+    primeiro elemento da lista, o segundo item da Array, é representado pelo segundo elemento da lista...
+</p>
+<p>Você sabia que, cada elemento na lista pode ter o seu próprio reator? Usando o mesmo exemplo(o anterior),
+    a lista é baseada é uma Array de objectos não é? E esses objectos são reativos, quando eles forem alterados, a interface também será alterada,
+    o primeiro objecto da Array é o reator do primeiro elemento da lista...
+
+</p>
+
+<p>
+    Essa matéria te explicou tudo sobre reator no Inter
+</p>
 
 </div>
         </article>
@@ -189,17 +220,68 @@ const reatorDaLista = renderList({
         theme:"dracula"  
       }
 
-    const textareas = Array.from(document.getElementsByTagName("textarea"));
+    const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
 
-      for (let index = 0; index < textareas.length; index++) {
+      for (let index = 0; index < textAreas.length; index++) {
 
-        const textArea = textareas[index];
+        const textArea = textAreas[index];
 
-        CodeMirror.fromTextArea(textarea, editorOptions);
+        CodeMirror.fromTextArea(textArea, editorOptions);
 
 }
 
+
+
+const refs = Ref({
+    in: "relogio",
+    data: {
+        hora: 0,
+        minuto: 0,
+        segundo: 0
+    }
+   })
+
+   setInterval(() => {
+    const date = new Date();
+
+    refs.setRefs = {
+        hora: date.getHours(),
+        minuto: date.getMinutes(),
+        segundo: date.getSeconds(),
+    }
+
+   }, 1000 )
+   
+
+   const todos = [
+    { texto: "Cozinhar", feito: false },
+    { texto: "Estudar", feito: true },
+    { texto: "Passear", feito: false },
+    { texto: "Ouvir música", feito: false  }
+]
+
+const reatorDaLista = renderList({
+    in: "lista-de-todo",
+    each: todos,
+    do(todo, i){
+
+        const styles =  { textDecoration: todo.feito ? "line-through" : null  };
+        const done = {  onclick: () => todo.feito = true };
+        const Delete = { onclick: () => this.splice(i, 1)  };
+
+        return template({
+            tag:"div", children: [{
+                tag:"h5", text: todo.texto, styles: styles
+            },{
+                tag:"button", text:"Completar", renderIf: !todo.feito, events: done
+            },{
+                tag: "button", text: "Deletar", renderIf: todo.feito, events: Delete
+            }]
+        })
+
+    }
+})
 
 
 

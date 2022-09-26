@@ -69,7 +69,9 @@
                     <li>
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
-                    
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
                     
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -79,7 +81,7 @@
         </aside>
         <article>
             <div>
-                <h1>Referência</h1>
+                <h1><a href="#referencia" id="referencia" class="hash">Referência</a></h1>
 <div class="warning">
 <p>
     Essa e outras matérias nesse tutorial
@@ -175,7 +177,7 @@ setInterval(() => reator2.contador++, 1000)
                     que estamos definindo um valor para a referência <span class="hl">contador</span>, então a interface vai ser atualizada para refletir o novo valor.
                 </p>
 
-                <h3>Ler o valor de uma referência</h3>
+                <h3><a href="#ler-o-valor-de-uma-referencia" id="ler-o-valor-de-uma-referencia" class="hash">Ler o valor de uma referência</a> </h3>
 
                 <p>
                     Nós não podemos apenas definir o valor de uma referência, mas nós também podemos ler o valor de uma referência, fazendo da seguinte forma:
@@ -192,10 +194,10 @@ setInterval(() => reator2.contador++, 1000)
 </script>
                 </textarea>
 
-                <p>E a variável retorno vai armazenar o valor da referência.</p>
+                <p>E a variável <span class="hl">retorno</span> vai armazenar o valor da referência.</p>
 
                 <h3>
-                    Referência em atributos
+                    <a href="#referencia-em-atributos" id="referencia-em-atributos" class="hash">Referência em atributos</a>
                 </h3>
 
                 <p>Mas deixa eu te contar um secredo, você sabia que a referência pode ser usada também em atributos HTML?
@@ -250,7 +252,7 @@ setInterval(() => reator2.contador++, 1000)
                 </p>
 
                 <h3>
-                    O método observe
+                    <a href="#o-metodo-observe" id="o-metodo-observe" class="hash">O método observe</a>
                 </h3>
                 <p>
                     Eu acredito que você já tenha uma ideia para que esse método
@@ -323,7 +325,7 @@ reator4.observe((ref, valorAtual) => {
                 </p>
 
                 <h3>
-                    A propriedade setRefs
+                    <a href="#a-propriedade-setrefs" id="a-propriedade-setrefs" class="hash"> A propriedade setRefs</a>
                 </h3>
                 <div class="warning">
                     <p>Você não deve usar uma referência com o mesmo nome que essa propriedade. SetRefs é uma propriedade reservada.</p>
@@ -418,18 +420,23 @@ function toggle(){
                        mode: "vbscript"}]
       };
 
-      for(let i=1; i<7; i++){
-
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), {
+      const editorOptions={
         mode: mixedMode,
         readOnly:true,
         lineNumbers:true,
-        theme:"dracula",
-        
-      });
-
+        theme:"dracula"  
       }
+
+    const textAreas = Array.from(document.getElementsByTagName("textarea"));
+
+
+      for (let index = 0; index < textAreas.length; index++) {
+
+        const textArea = textAreas[index];
+
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
 
       const _reator=Ref({

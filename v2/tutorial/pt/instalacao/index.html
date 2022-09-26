@@ -66,7 +66,9 @@
                         <li>
                             <a href="/v2/tutorial/pt/lista">Lista</a>
                         </li>
-                        
+                        <li>
+                            <a href="/v2/tutorial/pt/reator">Reator</a>
+                        </li>
                         
                         <li>
                             <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -77,15 +79,15 @@
           
         <article>
 <div>
-    <h1>Instalação</h1>
+    <h1><a href="#instalacao" id="instalacao" class="hash"> Instalação</a></h1>
     
     <p>
-        Para instalar o Inter não é necessário fazer mil configurações,
+        Para instalar o Inter, não é necessário fazer mil configurações,
         basta importar o Inter a partir do CDN(jsDelivr) ou baixar ele e usar directamente a partir
-        da tua máquina.
+        da sua máquina.
     </p>
 
-    <h3>CDN</h3>
+    <h3><a href="#cdn" id="cdn" class="hash">CDN</a></h3>
     <textarea id="Editor1">
 
     <!--Instala a última versão do Inter-->
@@ -98,7 +100,7 @@
 
     </script>
     </textarea>
-    <h3>Localmente</h3>
+    <h3><a href="#localmente" id="localmente" class="hash">Localmente</a></h3>
     <p>
         Queres usar o Inter directamente em sua máquina? É super simples, baixa
         ele clicando em <a href="https://github.com/interjs/inter/releases/download/v2.0.10/inter.min.js" title="Vai baixar a versão 2.0.10(A última versão)">Baixar - v2.0.10</a>, e agora é só importar ele em uma tag script.
@@ -137,13 +139,15 @@
 
       }
 
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<3; i++){
+for (let index = 0; index < textAreas.length; index++) {
 
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+      const textArea = textAreas[index];
 
-      }
+     CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
 </script>
 </body>

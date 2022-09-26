@@ -66,7 +66,9 @@
                         <li>
                             <a href="/v2/tutorial/pt/lista">Lista</a>
                         </li>
-                        
+                        <li>
+                            <a href="/v2/tutorial/pt/reator">Reator</a>
+                        </li>
                         
                         <li>
                             <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -77,11 +79,11 @@
           
         <article>
             <div>
-                <h1>Lista</h1>
+                <h1><a href="#lista" id="lista" class="hash">Lista</a></h1>
 
                 <p>Para renderizar uma lista, nós usamos 
                     a função nativa do Inter, chamada <span class="hl">renderList</span>, como as outras
-                    funções ela apenas recebe um objecto como o seu argumento e o referido
+                    funções, ela apenas recebe um objecto como o seu argumento e o referido
                     objecto deve ter as seguintes propriedades:
                 </p>
 
@@ -98,17 +100,19 @@
                     </li>
                     <li>
                         <span class="hl">do</span>  - Deve ser um método que será invocado pela quantidade de dados. Para
-                        mais info vai até a parte que fala sobre a <a href="#Opcaodo">opção do</a> nessa matéria.
+                        mais info vai até a parte que fala sobre a <a href="#opcao-do" class="hash">opção do</a> nessa matéria.
                     </li>
                     
                 </ul>
 
                 <h3>
+                   <a href="#a-funcao-template" id="a-funcao-template" class="hash">
                     A função template
+                   </a>
                 </h3>
 
                 <p>
-                    O template da nossa lista deve ser expresso com a função template,
+                    O template da nossa lista deve ser expresso com a função <span class="hl">template</span>,
                     essa função recebe apenas um objecto como o seu argumento e referido objecto
                     aceita as seguintes propriedades:
                 </p>
@@ -209,12 +213,12 @@ const homens = [
     <div id="lista1"></div>   
     <div class="space"></div>
 </div>
-<h3 id="Opcaodo">Opção do</h3>
+<h3 id="opcao-do"><a href="#opcao-do" id="opcao-do" class="hash"> Opção do</a> </h3>
 <div class="warning">
                 <p>
                     Dentro do metódo <span class="hl">do</span>,
                     a palavra-chave <span class="hl">this</span>, indica
-                    o reator da lista, e o referido método deve retornar
+                    o <a href="/v2/tutorial/pt/reator">reator</a> da lista, e o referido método deve retornar
 					a função <span class="hl">template</span>.
                 </p>
 
@@ -222,7 +226,7 @@ const homens = [
 
 <p>
     O número de argumentos que esse método recebe, depende do valor da opção <span class="hl">each</span>.
-    Se o valor for uma Array, essa função vai receber três argumentos.
+    Se o valor for uma <span class="hl">Array</span>, essa função vai receber três argumentos.
 </p>
 
 <ul class="items">
@@ -234,7 +238,7 @@ const homens = [
 </ul>
 
 <p>
-    Se o valor for Set, a função vai receber dois argumentos:
+    Se o valor for <span class="hl">Set</span>, a função vai receber dois argumentos:
 </p>
 
 <ul class="items">
@@ -243,7 +247,7 @@ const homens = [
 </ul>
 
 <p>
-    Se o valor for objecto ou Map a função vai receber três argumentos.
+    Se o valor for <span class="hl">objecto</span> ou <span class="hl">Map</span> a função vai receber três argumentos.
 </p>
 
 <ul class="items">
@@ -305,10 +309,10 @@ const cartao = renderList({
 </p>
 
 
-<h3>O reator da lista</h3>
+<h3><a href="#o-reator-da-lista" id="o-reator-da-lista" class="hash"> O reator da lista</a></h3>
 <div class="greenlight">
 <p>A função <span class="hl">renderList</span> também retorna
-o reator da lista.</p>
+o <a href="/v2/tutorial/pt/reator"> reator</a> da lista.</p>
 </div>
 
 <p>
@@ -316,7 +320,8 @@ o reator da lista.</p>
     se aperceber e atualizar a lista para refletir as novas informações.
 </p>
 <p>
-    Se o valor da opção <span class="hl">each</span> for Array, Objecto, Map ou Set, se você usar um método
+    Se o valor da opção <span class="hl">each</span> for  <span class="hl">Array</span>, <span class="hl">objecto</span>,
+    <span class="hl">Map</span> ou <span class="hl">Set</span>, se você usar um método
     que modifica os dados em que a lista for baseada, o Inter vai reagir à essa alteração. Volte para o primeiro exemplo
     nessa matéria, abra o console e tenta fazer o seguinte: reator[0].nome="Jonatan", você
     vai ver que a parte da interface que usa aquele valor será atualizada, ou ainda podes
@@ -325,11 +330,11 @@ o reator da lista.</p>
 </p>
 
 <p>
-    Quando o reator for uma Array, como no primeiro exemplo, a referida Array terá
+    Quando o <a href="/v2/tutorial/pt/reator">reator</a> for uma Array, como no primeiro exemplo, a referida Array terá
     algumas propriedades reativas específicas do Inter, elas são:
 </p>
 
-<h3 id="#reatorotherArray">OtherArray</h3>
+<h3><a href="#otherArray" id="otherArray" class="hash">OtherArray</a></h3>
 
 <p>Essa é uma propriedade reativa, só de definição, é usada quando
     quisermos definir uma outra Array onde a listagem será baseada,
@@ -402,7 +407,7 @@ function alternar(){
         </div>
 <div class="space"></div>          
 </div>
-<h3>AddItems</h3>
+<h3><a href="#addItems" id="addItems" class="hash">AddItems</a></h3>
 <p>
     Esse método é usado para acrescentar uma certa quantidade de dados na Array reatora. 
     Ele aceita dois argumentos, o primeiro argumento deve ser uma Array, e os itens daquela Array
@@ -470,7 +475,7 @@ function adicionar3Amigos(button){
         <div class="space"></div>
 </div>
 
-<h2>Se a opção each for número</h2>
+<h2><a href="#se-a-opcao-each-for-numero" id="se-a-opcao-each-for-numero" class="hash"> Se a opção each for número</a></h2>
 
 <p>
     A opção <span class="hl">each</span> pode receber um número como o seu valor, 
@@ -539,7 +544,7 @@ function adicionar3Amigos(button){
 </p>
 
 <h3>
-    setProps
+    <a href="#setProps" id="setProps" class="hash"> setProps</a>
 </h3>
 <p>Essa propriedade será útil quando quisermos atualizar mais de uma propriedade do objecto, e o valor
     dessa propriedade deve ser um objecto em que as suas propriedades serão os nomes das propriedades que pretendermos atualizar,
@@ -595,15 +600,87 @@ function adicionar3Amigos(button){
     <div id="lista5"></div>
     <div class="space"></div>
 </div>
-<h3>defineProps</h3>
+<h3><a href="#defineProps" id="defineProps" class="hash"> defineProps</a></h3>
 <p>
-    Essa propriedade é similar à <span class="hl">setProps</span>,
+    Essa propriedade é similar à <a href="#setProps">setProps</a>,
     a diferença é que nós usamos a referida propriedade para adicionar propriedades
     reativas no objecto.
 </p>
 
+<textarea>
+
+<div>
+  <h5>Lista de trabalhadores</h5>  
+  <div id="trabalhadores"></div>
+</div>
+
+<script>
+
+const trabalhadores = [
+    {nome: "António", aposentado: true},
+    {nome: "Angelina"},
+    {nome: "Paulo"}
+]
+
+renderList({
+    in: "trabalhadores",
+    each: trabalhadores,
+    do(trabalhador){
+
+        const { nome, aposentado } = trabalhador;
+        const eventos = {
+             onclick(){
+            //Adiciona a propriedade aposentado
+            trabalhador.defineProps = { aposentado: true  }        
+        }  
+    }
+
+    const pText = `${nome} já está a curtir a aposentadoria.`,
+          bText = `Aposentar ${nome}`;
+
+        return template({
+            tag: "div", children: [{
+                tag: "h5", text: nome
+            },{
+                tag: "p", text: pText, renderIf: estaAposentado(trabalhador)
+            },{
+                tag: "button", text: bText, renderIf: !estaAposentado(trabalhador), events: eventos
+            }]
+        })
+
+    }
+})
+
+function estaAposentado({ aposentado }){
+
+    return aposentado == true;
+
+
+}
+
+</script>
+
+</textarea>
+
+<div class="demo">
+    
+<div>
+    <h5>Lista de trabalhadores</h5>  
+    <div id="trabalhadores"></div>
+  </div>
+  <div class="space"></div>
+</div>
+
+<p>No exemplo anterior, a lista foi baseada em uma Array de objectos, e você provavelmente
+    notou que os dois últimos objectos não têm a propriedade <span class="hl">aposentado</span>,
+    se nós adicionarmos ela directamente nos referidos objectos, ela não será reativa, ou seja, quando ela
+    for alterada a interface não será atualizada, então, nós usamos a propriedade só de definição nativa
+    do Inter, que é a <span class="hl">defineProps</span>, assim o Inter consegue monitorar as alterações que forem
+    feitas nessa propriedade.
+</p>
+
 <h3>
-    deleteProps
+    <a href="#deleteProps" id="deleteProps" class="hash"> deleteProps</a>
 </h3>
 <p>
     Nós usamos essa propriedade para deletar as propriedades do objecto e reagir à essa alteração, ou seja,
@@ -634,11 +711,14 @@ function adicionar3Amigos(button){
 
       }
 
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<7; i++){
 
+      for(let index = 0; index < textAreas.length; index++){
+
+        const textArea = textAreas[index];
         
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+      CodeMirror.fromTextArea(textArea, editorOptions);
 
       }
 
@@ -848,6 +928,48 @@ renderList({
     }
 
  }
+
+ const trabalhadores = [
+    {nome: "António", aposentado: true},
+    {nome: "Angelina"},
+    {nome: "Paulo"}
+]
+
+renderList({
+    in: "trabalhadores",
+    each: trabalhadores,
+    do(trabalhador){
+
+        const { nome, aposentado } = trabalhador;
+        const eventos = {
+             onclick(){
+             trabalhador.defineProps = { aposentado: true };
+        }  
+    }
+
+    const pText = `${nome} já está a curtir a aposentadoria.`,
+          bText = `Aposentar ${nome}`;
+
+        return template({
+            tag: "div", children: [{
+                tag: "h5", text: nome
+            },{
+                tag: "p", text: pText, renderIf: estaAposentado(trabalhador)
+            },{
+                tag: "button", text: bText, renderIf: !estaAposentado(trabalhador), events: eventos
+            }]
+        })
+
+    }
+})
+
+function estaAposentado({ aposentado }){
+
+    return  aposentado == true;
+
+
+}
+
 
 
 </script>

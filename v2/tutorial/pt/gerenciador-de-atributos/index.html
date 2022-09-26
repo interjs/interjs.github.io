@@ -76,6 +76,9 @@
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
                     
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
                     
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -87,7 +90,7 @@
         
         <article>
             <div>
-                <h1>Gerenciador de atributos</h1>
+                <h1><a href="#gerenciador-de-atributos" id="gerenciador-de-atributos" class="hash"> Gerenciador de atributos</a></h1>
                 <div class="warning">
                     <p>Essa matéria pressupõe que você tenha pelo menos
                         conhecimentos básicos em CSS.
@@ -154,7 +157,7 @@ const { imagem } = toAttrs({
         <div class="space"></div>
 </div>
 
-<h3>Objecto gerenciador</h3>
+<h3><a href="#objecto-gerenciador" id="objecto-gerenciador" class="hash">Objecto gerenciador</a></h3>
 <p>
     A função <span class="hl">toAttrs</span>
      retorna um objecto com as mesmas propriedades que o objecto <span class="hl">data</span>. 
@@ -251,7 +254,7 @@ criado.
 </script>
 </textarea>
 
-<h3>Propriedade setAttrs</h3>
+<h3><a href="#propriedade-setAttrs" id="propriedade-setAttrs" class="hash">Propriedade setAttrs</a></h3>
 <p>
     Ela será uma propriedade do objecto gerenciador, ela é usada
     para atualizar os valores de múltiplos atributos.
@@ -345,13 +348,15 @@ toAttrs({
         theme:"dracula"  
       }
 
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<5; i++){
+      for(let index = 0; index < textAreas.length; index++){
 
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+         const textArea = textAreas[index];
 
-      }
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
 const {imagem}=toAttrs({
     in:"alvo1",

@@ -73,7 +73,7 @@
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
                     
-                    
+                    <li><a href="/v2/tutorial/pt/reator">Reator</a></li>
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
                     </li>
@@ -84,7 +84,7 @@
         
         <article>
             <div>
-                <h1>Ajax</h1>
+                <h1><a href="#ajax" id="ajax" class="hash">Ajax</a></h1>
                  <div class="warning">
                      <p>Essa matéria pressupõe que você tenha noção
                          sobre a comunicação com o servidor.
@@ -285,7 +285,7 @@ function carregarInfo(caminho){
 </div>
 <div class="space"></div>
 </div>
-<h3>Os eventos no Ajax</h3>
+<h3><a href="#os-eventos-no-ajax" id="os-eventos-no-ajax" class="hash">Os eventos no Ajax</a></h3>
 <p>
     Nós podemos definir os escutadores de eventos em uma requisição feita com o Ajax,
     e esses escutadores devem ser declarados como propriedades do objecto <span class="hl">events</span>, os eventos são:
@@ -320,7 +320,7 @@ function carregarInfo(caminho){
 <textarea id="Editor2">
 
 <div id="app">
-<h4> Descubra os repositórios de um Usuário no Github</h4>
+<h4> Descubra os repositórios de um usuário do Github</h4>
     <div>
         <input {...searchinput}>
         <button {...searchbutton}> { buttonStatus  } </button>
@@ -443,7 +443,7 @@ function carregarInfo(caminho){
 </textarea>
 <div class="demo">
 <div id="app">
-<h4> Descubra os repositórios de um Usuário no Github</h4>
+<h4> Descubra os repositórios de um usuário do Github</h4>
 <div>
     <input {...searchinput}>
     <button {...searchbutton}> { buttonStatus  } </button>
@@ -476,13 +476,15 @@ function carregarInfo(caminho){
         theme:"dracula"  
       }
 
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<3; i++){
+      for (let index = 0; index < textAreas.length; index++) {
 
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+            const textArea = textAreas[index];
 
-      }
+           CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
       const usuarios=["./user1.json", "./user2.json", "./user3.json"];
 
