@@ -7,13 +7,13 @@
   "repository": "github:interjs/interjs.github",
   "homepage": "https://interjs.github.io",
   "dependencies":{
-  "inter": ">=2.0.0",
+  "inter": "^2.0.0",
   "codemirror": "5.0.0",
   "fontawesome": "5.14.0"
     
   },
   "devDependencies": {
-  "node": ">=14.18.0"
+  "node": "^14.18.0"
   }
   
   }
