@@ -327,7 +327,7 @@ function carregarInfo(caminho){
     </div>
     <p>
         Usuário : { userName  },
-        Número de repositórios : { repoLength  },
+        Número de repositórios : { repoLength  }.
         
     </p>
 	<p style="color: red;"> { errorMessage }  </p> 
@@ -407,7 +407,7 @@ function carregarInfo(caminho){
         errorMessage: ""
     };
 
-    cleanInputAndUnableTheButton();
+    clearInputAndEnableTheButton();
 
   }
 
@@ -418,7 +418,7 @@ function carregarInfo(caminho){
         buttonStatus: "Buscar",
         userName: "sem usuário",
         repoLength: 0,
-        errorMessage(){
+        errorMessage() {
 
           return (
             status == 404 ? `Usuário não encontrado` : data
@@ -427,11 +427,11 @@ function carregarInfo(caminho){
         }
     };
 
-    cleanInputAndUnableTheButton();
+    clearInputAndEnableTheButton();
 
   }
 
-  function cleanInputAndUnableTheButton(){
+  function clearInputAndEnableTheButton(){
 
      searchinput.value = "";
      searchbutton.disabled = null;
@@ -450,7 +450,7 @@ function carregarInfo(caminho){
 </div>
 <p>
     Usuário : { userName  },
-    Número de repositórios : { repoLength  },
+    Número de repositórios : { repoLength  }.
     
 </p>
 <p style="color: red;"> { errorMessage }  </p> 
@@ -553,7 +553,7 @@ const { searchinput, searchbutton  } = toAttrs({
   const listReactor = renderList({
     in: "repoList",
     each: [],
-    do({ name, description,  forks, full_name}){
+    do({ name, description,  forks, full_name}) {
 
         const aAttrs = {
             target: "_blank",
@@ -577,7 +577,7 @@ const { searchinput, searchbutton  } = toAttrs({
     }
   })
 
-  function search(){
+  function search() {
 
     refs.buttonStatus = "Buscando";
     searchbutton.disabled = true;
@@ -594,7 +594,6 @@ const { searchinput, searchbutton  } = toAttrs({
   }
 
   function okay({ data  }){
-console.log(data[0])
     listReactor.otherArray = data;
     refs.setRefs = {
         buttonStatus: "Buscar",
@@ -605,7 +604,7 @@ console.log(data[0])
 
     
 
-    cleanInputAndUnableTheButton();
+    clearInputAndEnableTheButton();
 
   }
 
@@ -625,11 +624,11 @@ console.log(data[0])
         }
     };
 
-    cleanInputAndUnableTheButton();
+    clearInputAndEnableTheButton();
 
   }
 
-  function cleanInputAndUnableTheButton(){
+  function clearInputAndEnableTheButton(){
 
      searchinput.value = "";
      searchbutton.disabled = null;
