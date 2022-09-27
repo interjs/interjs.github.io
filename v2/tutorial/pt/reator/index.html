@@ -115,7 +115,7 @@ const refs = Ref({
     refs.setRefs = {
         hora: date.getHours(),
         minuto: date.getMinutes(),
-        segundo: date.getMinutes(),
+        segundo: date.getSeconds(),
     }
 
    }, 1000)
@@ -163,10 +163,10 @@ const reatorDaLista = renderList({
         const Delete = { onclick: () => this.splice(i, 1)  };
 
         return template({
-            tag:"div", children: [{
-                tag:"h5", text: todo.texto, styles: styles
+            tag: "div", children: [{
+                tag: "h5", text: todo.texto, styles: styles
             },{
-                tag:"button", text:"Completar", renderIf: !todo.feito, events: done
+                tag: "button", text: "Completar", renderIf: !todo.feito, events: done
             },{
                 tag: "button", text: "Deletar", renderIf: todo.feito, events: Delete
             }]
@@ -197,7 +197,7 @@ const reatorDaLista = renderList({
 </p>
 
 <p>
-    Essa matéria te explicou tudo sobre reator no Inter
+    Essa matéria te explicou tudo sobre reator no Inter.
 </p>
 
 </div>
