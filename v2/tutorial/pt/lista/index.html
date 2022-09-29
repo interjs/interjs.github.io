@@ -96,11 +96,12 @@
                     </li>
                     <li>
                        <span class="hl">each</span>  - Representa os dados em que a lista será baseada, o valor dessa propriedade pode
-					   ser Array, Objecto, Set, Map ou Número. 
+					   ser uma <span class="hl">Array</span> , um <span class="hl">objecto</span>, <span class="hl">Set</span>,
+                       <span class="hl">Map</span> ou um <span class="hl">número</span>. 
                     </li>
                     <li>
-                        <span class="hl">do</span>  - Deve ser um método que será invocado pela quantidade de dados. Para
-                        mais info vai até a parte que fala sobre a <a href="#opcao-do" class="hash">opção do</a> nessa matéria.
+                        <span class="hl">do</span>  - Deve ser um método, e ele será invocado pela quantidade de dados. Para
+                        mais info vai até à parte que fala sobre a <a href="#opcao-do" class="hash">opção do</a> nessa matéria.
                     </li>
                     
                 </ul>
@@ -113,7 +114,7 @@
 
                 <p>
                     O template da nossa lista deve ser expresso com a função <span class="hl">template</span>,
-                    essa função recebe apenas um objecto como o seu argumento e referido objecto
+                    essa função recebe apenas um objecto como o seu argumento e o referido objecto
                     aceita as seguintes propriedades:
                 </p>
 
@@ -238,7 +239,7 @@ const homens = [
 </ul>
 
 <p>
-    Se o valor for <span class="hl">Set</span>, a função vai receber dois argumentos:
+    Se o valor for <span class="hl">Set</span>, a função vai receber dois argumentos.
 </p>
 
 <ul class="items">
@@ -260,7 +261,7 @@ const homens = [
 
 <textarea id="Editor2">
 
- <div>
+<div>
 
 <h4>Cartão de Programador(a)</h4>
 <ul id="cartao"></ul>
@@ -368,7 +369,7 @@ const animais = ["Cão", "Gato", "Lobo"],
                 tag: "div", children: [{
                     tag: "h5", text: item, 
                 },{
-                   tag: "p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
+                   tag: "p", text: identificarItem(item)
                 }]
       
             })
@@ -379,19 +380,31 @@ const animais = ["Cão", "Gato", "Lobo"],
 
  
 function alternar(){
-
     if(lista == "animais"){
-
      lista = "frutas";
      reator2.otherArray = frutas;
 
-    }else{
-
+    } else {
         lista = "animais";
         reator2.otherArray = animais;
 
     }
 
+}
+
+function identificarItem(item){
+    let text;
+
+     if(lista == "animais"){
+        text =  `${item} é um animal`
+
+     } else {
+        text = `${item} é uma fruta`
+
+     }
+
+     return text;
+    
 }
 
 </script>
@@ -453,7 +466,7 @@ const reator3 = renderList({
 
 function adicionar3Amigos(button){
 
-   //Adiciona no princípio da lista.
+    //Adiciona no princípio da lista.
     reator3.addItems(amigos, 0);
     button.setAttribute("disabled", true);
 
@@ -479,9 +492,9 @@ function adicionar3Amigos(button){
 
 <p>
     A opção <span class="hl">each</span> pode receber um número como o seu valor, 
-    e o método <span class="hl">do</span> será executado contando de 0 até o referido número menos 1. Por exemplo
-    se a opção <span class="hl">each</span> for igual a 3, quer dizer que terá 3 itens na lista, e o método
-    <span class="hl">do</span> será executado com apenas 1 argumento, e referido argumento vai indicar o número atual(de 0 até o número anterior do valor da opção each).
+    e o método <span class="hl">do</span> será executado contando de 0 até o referido número menos 1. O método
+    <span class="hl">do</span> será executado com apenas 1 argumento, e referido argumento vai indicar o número atual(de 0 até o número anterior do valor da opção each)
+    na iteração.
     
 </p>
 
@@ -779,46 +792,57 @@ const homens = [
          }
      })
 
-
-    const animais=["Cão","Gato","Lobo"],
-      frutas=["Maçã", "Laranja", "Banana"];
-
-let  lista="animais",
-     reator2;
+     const animais = ["Cão", "Gato", "Lobo"],
+      frutas = ["Maçã", "Laranja", "Banana"];
+ let  lista = "animais",  reator2;
 
       renderList({
-       in:"lista2",
-       each:animais,
+       in: "lista2",
+       each: animais,
        do(item){
 
-        reator2=this;
+        reator2 = this;
 
         return template({
-                tag:"div", children:[{
-                    tag:"h4", text:item
+                tag: "div", children: [{
+                    tag: "h5", text: item, 
                 },{
-                    tag:"p", text:lista=="animais" ? `${item} é um animal` : `${item} é uma fruta`
+                   tag: "p", text: identificarItem(item)
                 }]
-        })
+      
+            })
 
        }
       })
 
+
+ 
 function alternar(){
+    if(lista == "animais"){
+     lista = "frutas";
+     reator2.otherArray = frutas;
 
-if(lista=="animais"){
+    } else {
+        lista = "animais";
+        reator2.otherArray = animais;
 
-
-lista="frutas";
-reator2.otherArray=frutas
-
-}else{
-
-    lista="animais"
-    reator2.otherArray=animais;
+    }
 
 }
 
+function identificarItem(item){
+    let text;
+
+     if(lista == "animais"){
+        text =  `${item} é um animal`
+
+     } else {
+        text = `${item} é uma fruta`
+
+     }
+
+     return text;
+    
 }
 
 
