@@ -113,18 +113,18 @@
                      </li>
                  </ul>
 
-                 <p>Para definir o gerenciador de atributos em um elemento
+                 <p>Para definir o gerenciador de atributos em um elemento,
                      nós usamos a seguinte sintaxe: {...nomedogerenciador}
                  </p>
                  <p>A sintaxe acima mencionada deve ser o único atributo do elemento alvo,
                      e para analisar o template em busca de gerenciadores, nós usamos a função
-                     <span class="hl">toAttrs</span> e a referida função
-                     aceita apenas um objecto como o seu argumento, e o objecto deve ter a propriedade <span class="hl">in</span>
-                     que vai indicar o valor do atributo id do elemento pai onde os elementos com os gerenciadores se encontram e 
-                      a propriedade <span class="hl">data</span> que deve ser um objecto em que as suas propriedades 
-                     vão indicar os nomes dos gerenciadores e os valores dessas propriedades devem ser um objecto em que
+                    <span class="hl">toAttrs</span>, e a referida função
+                     aceita apenas um objecto como o seu argumento, e o objecto deve ter a propriedade <span class="hl">in</span>,
+                     que vai indicar o valor do atributo id do elemento pai onde os elementos com os gerenciadores se encontram, e 
+                      a propriedade <span class="hl">data</span>, que deve ser um objecto, em que as suas propriedades 
+                     vão indicar os nomes dos gerenciadores, e os valores dessas propriedades devem ser um objecto em que
                      as suas propriedades vão indicar os nomes dos atributos/eventos que serão definidos no elemento onde o gerenciador for
-                     encontrado, e os valores serão os valores dos respectivos atributos/eventos.
+                     encontrado, e os valores, serão os valores dos respectivos atributos/eventos.
                  </p>
 <textarea id="Editor1">
 
@@ -161,18 +161,18 @@ const { imagem } = toAttrs({
 <p>
     A função <span class="hl">toAttrs</span>
      retorna um objecto com as mesmas propriedades que o objecto <span class="hl">data</span>. 
-    No exemplo anterior nós desestruturamos
+    No exemplo anterior, nós desestruturamos
     o referido objecto para extrair o objecto gerenciador <span class="hl">imagem</span>.
-    Se você abrir agora nessa página o console do navegador e modificar
-    uma das propriedades do objecto <span class="hl">imagem</span>
+    Se você abrir agora nessa página o console do navegador e modificar o valor de
+    uma das propriedades do objecto <span class="hl">imagem</span>,
     vais notar que a interface será atualizada para refletir o novo valor. E quando
     a propriedade for o nome de um evento do DOM, por exemplo o <span class="hl">onclick</span>,
     a palavra-chave <span class="hl">this</span> dentro da função que será invocada quando o referido
-    evento ocorrer vai indicar o objecto gerenciador.
+    evento ocorrer, vai indicar o objecto gerenciador.
 </p>
 <p>
-    Para deletar um atributo com o gerenciador basta definirmos o valor
-    <span class="hl">null</span> na propriedade que representa o atributo que pretendermos deletar.
+    Para deletar um atributo com o gerenciador, basta definirmos 
+    <span class="hl">null</span> como o valor da propriedade que representa o atributo que pretendermos deletar.
 </p>
 <textarea id="Editor2">
 
@@ -230,9 +230,9 @@ const { imagem } = toAttrs({
 </div>
 <p>
 O nome do gerenciador deve estar sempre em letras minúsculas, e um gerenciador
-apenas controla um elemento, se tentares definir um gerenciador para mais de um elemento
+apenas controla um elemento, se tentares definir um gerenciador para mais de um elemento,
 o primeiro elemento é o que será controlado. E se você não quiser ainda usar um atributo, basta definir
-o <span class="hl">null</span> como o valor da propriedade que representa o referido atributo, e ele não será
+<span class="hl">null</span> como o valor da propriedade que representa o referido atributo, e ele não será
 criado.
 
 </p>
@@ -260,7 +260,7 @@ criado.
     para atualizar os valores de múltiplos atributos.
     Ela recebe apenas um objecto como o seu valor, e as propriedades
     do referido objecto devem indicar os nomes dos atributos cujo os seus  valores serão
-    atualizados e os valores serão os valores dos respectivos atributos.
+    atualizados, e os valores, serão os novos valores para os respectivos atributos.
 </p>
 <textarea id="Editor4">
     

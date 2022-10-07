@@ -89,8 +89,8 @@
 </p>
 </div>
                 <p>Referência no Inter, é um aparelho
-                    encaracolhado {}, e nesse aparelho encaracolhado deve ter o nome de uma propriedade
-                    do objecto <span class="hl">data</span> e ele será substituído pelo valor dessa propriedade, calma aí,
+                    encaracolhado {}, e nesse aparelho encaracolhado, deve ter o nome de uma propriedade
+                    do objecto <span class="hl">data</span>, e ele será substituído pelo valor dessa propriedade, calma aí,
                     vê um exemplo:
                 </p>
 
@@ -123,19 +123,19 @@
   <span class="space"></span>
                 </div>
 
-                <p>Lá na tag script, você vê a função Ref não é? Essa função é usada
+                <p>Lá na tag script, você vê a função <span class="hl">Ref</span> não é? Essa função é usada
                     para analisar o template alvo em busca de referências, e ela deve receber apenas um objecto como o seu argumento,
-                     o valor  da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento pai onde os elementos com
+                     o valor  da propriedade <span class="hl">in</span>, indica o valor do atributo id do elemento pai onde os elementos com
                     as referências se encontram, no nosso exemplo, o elemento pai é a div não é? E por que nós estamos chamando ele de elemento
                     pai? Ele tem um filho, que é o elemento <span class="hl">p</span>, e no texto desse elemento tem uma referência chamada <span class="hl">mensagem</span>.
-                     O <span class="hl">data</span> é um objecto em que as suas propriedades serão os nomes das referências
+                     O valor da propriedade <span class="hl">data</span>, deve ser um objecto, em que as suas propriedades serão os nomes das referências,
                     e os seus valores, serão obviamente os textos que vão substituir as referências com os referidos nomes.
                 </p>
 
                 <p>
                     Nós usamos a referência quando quisermos que uma determinada parte da nossa interface seja dinámica, então,
                     geralmente é esperado que a referência mude de valor, e é para isso que existe o <span class="hl">reator</span>.
-                    A função Ref retorna um objecto <span class="hl">reativo</span> com as mesmas propriedades que o objecto <span class="hl">data</span>, nós usamos esse objecto quando
+                    A função <span class="hl">Ref</span> retorna um objecto <span class="hl">reativo</span> com as mesmas propriedades que o objecto <span class="hl">data</span>, nós usamos esse objecto quando
                     pretendermos mudar os valores das referências, agora nessa página abra o console do navegador
                     e digite: _reator.mensagem="Inter é incrível"; ou qualquer outro valor, verás a interface ser atualizada para refletir o novo valor da referência.
                 </p>
@@ -168,7 +168,7 @@ setInterval(() => reator2.contador++, 1000)
     </div>
 <span class="space"></span>
 </div>
-                <p>A parte da função Ref você já sabe o que está acontecendo, a novidade está
+                <p>A parte da função <span class="hl">Ref</span> você já sabe o que está acontecendo, a novidade está
                     no <span class="hl">setInterval</span>, você notou que estamos incrementando o valor do <span class="hl">contador</span> em cada 1 segundo não é? Isso significa
                     que estamos definindo um valor para a referência <span class="hl">contador</span>, então a interface vai ser atualizada para refletir o novo valor.
                 </p>

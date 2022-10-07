@@ -82,7 +82,7 @@
                 <h1><a href="#lista" id="lista" class="hash">Lista</a></h1>
 
                 <p>Para renderizar uma lista, nós usamos 
-                    a função nativa do Inter, chamada <span class="hl">renderList</span>, como as outras
+                    a função nativa do Inter chamada <span class="hl">renderList</span>, como as outras
                     funções, ela apenas recebe um objecto como o seu argumento e o referido
                     objecto deve ter as seguintes propriedades:
                 </p>
@@ -129,18 +129,18 @@
 
                     <li>
                         <span class="hl">text</span> - O valor dessa propriedade vai indicar o texto do elemento criado. Se o valor
-                        for <span class="hl">null</span> ou <span class="hl">undefined</span> o texto não será criado, e se o valor for uma função, ela será
+                        for <span class="hl">null</span> ou <span class="hl">undefined</span>, o texto não será criado, e se o valor for uma função, ela será
                         invocada e o valor retornado pela função vai representar o texto do elemento.
                     </li>
 					<li>
 					<span class="hl">renderIf</span> - Essa propriedade apenas aceita valores booleanos(true/false), como
-					o nome o descreve, ela serve para renderizar condicionalmente o elemento, se o valor da referida propriedade for
-					true o elemento será renderizado, se for false o elemento não será renderizado.
+					o nome a descreve, ela serve para renderizar condicionalmente o elemento, se o valor da referida propriedade for
+					<span class="hl">true</span>, o elemento será renderizado, se for <span class="hl">false</span>, o elemento não será renderizado.
 					</li>
                     <li>
                         <span class="hl">attrs</span> - Deve ser um objecto, e as propriedades do referido objecto
                         serão os atributos do elemento e os valores das propriedades serão os  valores
-                        dos respectivos atributos. Se o valor for uma função a função será invocada e o valor
+                        dos respectivos atributos. Se o valor for uma função, a função será invocada e o valor
                         retornado pela função será o valor do atributo. Se o valor for <span class="hl">null</span>
                         <span class="hl">undefined</span>, ou <span class="hl">false</span> o atributo não será criado.
                     </li>
@@ -152,15 +152,15 @@
 
                     <li>
                         <span class="hl">styles</span> - Deve ser um objecto, e as propriedades do referido objecto
-                        serão os nomes dos estilos que serão aplicados no elemento e os valores serão os valores dos respectivos estilos. Se o valor
+                        serão os nomes dos estilos que serão aplicados no elemento, e os valores, serão os valores dos respectivos estilos. Se o valor
                         for uma função, a função será invocada e o valor retornado pela função será o valor do estilo.
-                        Se o valor for <span class="hl">null</span> ou <span class="hl">undefined</span>
+                        Se o valor for <span class="hl">null</span> ou <span class="hl">undefined</span>,
                         o estilo não será criado, e o nome do estilo deve ser oficial do CSS.
                     </li>
                     <li>
                         <span class="hl">children</span> - Deve ser uma Array de objectos que aceitam as mesmas
-                        propriedades que o objecto da função <span class="hl">template</span>
-                        e os elementos produzidos na referida Array serão os filhos do elemento que estamos a nos referir.
+                        propriedades que o objecto da função <span class="hl">template</span>,
+                        e os elementos produzidos na referida Array, serão os filhos do elemento que estamos a nos referir.
                     </li>
 
                 </ul>
@@ -560,8 +560,8 @@ function adicionar3Amigos(button){
     <a href="#setProps" id="setProps" class="hash"> setProps</a>
 </h3>
 <p>Essa propriedade será útil quando quisermos atualizar mais de uma propriedade do objecto, e o valor
-    dessa propriedade deve ser um objecto em que as suas propriedades serão os nomes das propriedades que pretendermos atualizar,
-    e os valores serão os novos valores das respectivas propriedades.
+    dessa propriedade deve ser um objecto, em que as suas propriedades serão os nomes das propriedades que pretendermos atualizar,
+    e os valores, serão os novos valores para as respectivas propriedades.
 </p>
 <textarea id="Editor6">
     
