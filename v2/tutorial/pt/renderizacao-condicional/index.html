@@ -109,10 +109,11 @@
     </div>
 
 </div>
+
 <script>
 
 const imagens = [{ urlDaImagem: "/images/Anny.jpg",
- condicional: { viveNamesmaCidade: true, temAnterior: false, temProximo: true} },...];
+ condicional: { viveNamesmaCidade: true, temAnterior: false, temProximo: true } },...];
 
 let pos = 0;
 
@@ -124,12 +125,12 @@ const { imagem } = toAttrs({
             alt: "Essa é uma pessoa"
         }
     }
-});
+})
 
 const _if = renderIf({
     in: "alvo1",
     data: imagens[0].condicional
-});
+})
 
   function trocarImagem(){
 
@@ -167,8 +168,8 @@ const _if = renderIf({
 
 <p>
     Nós usamos a função <span class="hl">renderIf</span> para analisar o template em busca dos elementos que serão renderizados
-    condicionalmente, e a referida função aceita apenas um objecto como o seu argumento,
-    o valor da propriedade <span class="hl">in</span>, indica o valor do atributo id do elemento
+    condicionalmente, e a referida função aceita apenas um objecto como o seu argumento.
+    O valor da propriedade <span class="hl">in</span>, indica o valor do atributo id do elemento
     pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>,
     deve ser um objecto, em que as suas propriedades vão indicar as propriedades condicionais e os valores dessas
     propriedades devem ser valores booleanos(true/false). A propriedade <span class="hl">setConds</span> será explicada ao longo dessa matéria.
@@ -201,6 +202,7 @@ const _if = renderIf({
         </div>
     </div>
 </div>
+
 <script>
 
 const _if2 = renderIf({
@@ -237,11 +239,9 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <textarea id="Editor3">
 
 <div id="alvo3">
-
-<p _ifNot="amigo">
+  <p _ifNot="amigo">
     Você é mesmo amigo do Interjs?
 </p>
-
 </div>
 
 <script>
@@ -280,10 +280,8 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <textarea id="Editor4">
     
 <div id="alvo4">
-
  <p>Geremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
  <button onclick="_if4.casado=!_if4.casado">Clica para { estado } </button>
-
 </div>
 
 <script>

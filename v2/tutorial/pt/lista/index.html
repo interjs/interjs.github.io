@@ -175,37 +175,36 @@
  <script>
 
 const homens = [
-    {nome: "Piter", idade: 24, casado: false},
-    {nome: "Bob", idade: 19, casado: false},
-    {nome: "Armando", idade: 42, casado: true}
+    { nome: "Piter", idade: 24, casado: false },
+    { nome: "Bob", idade: 19, casado: false },
+    { nome: "Armando", idade: 42, casado: true }
     ];
+ 
+ const reator = renderList({
+    in: "lista1",
+    each: homens,
+    do(homem){
 
-    let reator;
+        const { nome, casado, idade } = homem;
+        const buttonAttrs = { disabled: casado };
+        const buttonEvents = { onclick: () => homem.casado = true  };
 
-    renderList({
-        in: "lista1",
-        each: homens,
-        do(homem){
+        return template({
+            tag: "div", children: [{
+                tag: "h4", text: nome
+            },{
+                tag: "div", children: [{
+                    tag: "p", text: `O ${nome} é casado`, renderIf: casado
+                },{
+                    tag: "p", text: `O ${nome} está com ${idade} anos`
+                }]
+            },{
+                tag: "button", text: "Casar", attrs: buttonAttrs, events: buttonEvents
+            }]
+        })
 
-            reator = this;
-
-            return template({
-                    tag: "div", children: [{
-                        tag: "h4", text: homem.nome
-                    },{
-                        tag: "div", children: [{
-                        tag: "p", text: `O ${homem.nome} é casado.`, renderIf: homem.casado
-                        },{
-                          tag: "p", text: `O ${homem.nome} tem ${homem.idade} anos`
-                        }]
-                    },{
-                        tag: "button", text: "Casou", attrs: {disabled: homem.casado},
-                        events: {onclick: () => homem.casado = true}
-                    }]
-            })
-
-        }
-    })
+    }
+ })
 
 </script>
 
@@ -219,7 +218,9 @@ const homens = [
                 <p>
                     Dentro do metódo <span class="hl">do</span>,
                     a palavra-chave <span class="hl">this</span>, indica
-                    o <a href="/v2/tutorial/pt/reator">reator</a> da lista, e o referido método deve retornar
+                    o <a href="/v2/tutorial/pt/reator">reator</a> da lista e 
+                    a função <span class="hl">renderList</span> também retorna
+                    o <a href="/v2/tutorial/pt/reator">reator</a> da lista. O referido método deve retornar
 					a função <span class="hl">template</span>.
                 </p>
 
@@ -248,7 +249,7 @@ const homens = [
 </ul>
 
 <p>
-    Se o valor for <span class="hl">objecto</span> ou <span class="hl">Map</span> a função vai receber três argumentos.
+    Se o valor for <span class="hl">objecto</span> ou <span class="hl">Map</span>, a função vai receber três argumentos.
 </p>
 
 <ul class="items">
@@ -262,12 +263,9 @@ const homens = [
 <textarea id="Editor2">
 
 <div>
-
-<h4>Cartão de Programador(a)</h4>
-<ul id="cartao"></ul>
-
+    <h4>Cartão de Programador(a)</h4>
+    <ul id="cartao"></ul>
 </div>
-
 <script>
 
 const dados = {
@@ -311,10 +309,7 @@ const cartao = renderList({
 
 
 <h3><a href="#o-reator-da-lista" id="o-reator-da-lista" class="hash"> O reator da lista</a></h3>
-<div class="greenlight">
-<p>A função <span class="hl">renderList</span> também retorna
-o <a href="/v2/tutorial/pt/reator"> reator</a> da lista.</p>
-</div>
+
 
 <p>
     O Inter é reativo por padrão, então, quando você alterar os dados da lista, o Inter vai
@@ -346,37 +341,33 @@ o <a href="/v2/tutorial/pt/reator"> reator</a> da lista.</p>
 <textarea id="Editor3">
 
 <div>
-
-<div id="lista2"></div>
-
-<button onclick="alternar()">Alternar</button>
-
+    <div id="lista2"></div>
+    <button onclick="alternar()">Alternar</button>
 </div>
+<div>
+
 <script>
 
 const animais = ["Cão", "Gato", "Lobo"],
       frutas = ["Maçã", "Laranja", "Banana"];
- let  lista = "animais",  reator2;
+ let  lista = "animais", reator2;
 
-      renderList({
-       in: "lista2",
-       each: animais,
-       do(item){
+ renderList({
+    in: "lista2",
+    each: animais,
+    do(item){
 
         reator2 = this;
 
         return template({
-                tag: "div", children: [{
-                    tag: "h5", text: item, 
-                },{
-                   tag: "p", text: identificarItem(item)
-                }]
-      
-            })
-
-       }
-      })
-
+            tag: "div", children: [{
+                tag: "h4", text: item
+            },{
+                tag: "p", text: identificarItem(item)
+            }]
+        })
+    }
+ })
 
  
 function alternar(){
@@ -434,29 +425,26 @@ function identificarItem(item){
 <textarea id="Editor4">
 
 <div>
-
-<button onclick="adicionar3Amigos(this)">Adicionar 3 amigos</button>
-
-<div id="amigos"></div>
-
+    <button onclick="adicionar3Amigos(this)">Adicionar 3 amigos</button>
+    <div id="amigos"></div>
 </div>
 
 <script>
 
 const amigos = [
-    {nome: "Bob"},
-    {nome: "Érica"},
-    {nome: "Marta"}
+    { nome: "Bob" },
+    { nome: "Érica" },
+    { nome: "Marta" }
 ];
 
 const reator3 = renderList({
     in: "amigos",
-    each: [{nome:"Emília"}],
-    do(amigo){
+    each: [{ nome: "Emília" }],
+    do({ nome }){
 
     return template({
         tag: "div", children: [{
-            tag: "h4", text: amigo.nome
+            tag: "h4", text: nome
         }]
     })
  
@@ -630,9 +618,9 @@ function adicionar3Amigos(button){
 <script>
 
 const trabalhadores = [
-    {nome: "António", aposentado: true},
-    {nome: "Angelina"},
-    {nome: "Paulo"}
+    { nome: "António", aposentado: true },
+    { nome: "Angelina" },
+    { nome: "Paulo" }
 ]
 
 renderList({
@@ -737,38 +725,36 @@ function estaAposentado({ aposentado }){
 
      
 const homens = [
-    {nome:"Piter", idade:24, casado:false},
-    {nome:"Bob", idade:19, casado:false},
-    {nome:"Armando", idade:42, casado:true}
+    { nome: "Piter", idade: 24, casado: false },
+    { nome: "Bob", idade: 19, casado: false },
+    { nome: "Armando", idade: 42, casado: true }
     ];
+ 
+ const reator = renderList({
+    in: "lista1",
+    each: homens,
+    do(homem){
 
-    let reator;
+        const { nome, casado, idade } = homem;
+        const buttonAttrs = { disabled: casado };
+        const buttonEvents = { onclick: () => homem.casado = true  };
 
-    renderList({
-        in:"lista1",
-        each:homens,
-        do(homem){
+        return template({
+            tag: "div", children: [{
+                tag: "h4", text: nome
+            },{
+                tag: "div", children: [{
+                    tag: "p", text: `O ${nome} é casado`, renderIf: casado
+                },{
+                    tag: "p", text: `O ${nome} está com ${idade} anos`
+                }]
+            },{
+                tag: "button", text: "Casar", attrs: buttonAttrs, events: buttonEvents
+            }]
+        })
 
-            reator = this;
-
-            return template({
-                    tag:"div", children:[{
-                        tag:"h4", text:homem.nome
-                    },{
-                        tag:"div", children:[{
-                        tag:"p", text:`O ${homem.nome} é casado.`, renderIf:homem.casado
-                        },{
-                          tag:"p", text:`O ${homem.nome} tem ${homem.idade} anos`
-                        }]
-                    },{
-                        tag:"button", text:"Casou", attrs:{disabled:homem.casado},
-                        events:{onclick: ()=> homem.casado = true}
-                    }]
-            })
-
-        }
-    })
-
+    }
+ })
     
     const dados = {
          Nome:"Paulo Neto",
@@ -796,24 +782,22 @@ const homens = [
       frutas = ["Maçã", "Laranja", "Banana"];
  let  lista = "animais",  reator2;
 
-      renderList({
-       in: "lista2",
-       each: animais,
-       do(item){
+ renderList({
+    in: "lista2",
+    each: animais,
+    do(item){
 
         reator2 = this;
 
         return template({
-                tag: "div", children: [{
-                    tag: "h5", text: item, 
-                },{
-                   tag: "p", text: identificarItem(item)
-                }]
-      
-            })
-
-       }
-      })
+            tag: "div", children: [{
+                tag: "h4", text: item
+            },{
+                tag: "p", text: identificarItem(item)
+            }]
+        })
+    }
+ })
 
 
  
@@ -885,19 +869,19 @@ const jogadores=[{
 
  
 const amigos=[
-    {nome:"Bob"},
-    {nome:"Érica"},
-    {nome:"Marta"}
+    { nome: "Bob" },
+    { nome: "Érica" },
+    { nome: "Marta"}
 ];
 
 const reator3=renderList({
     in:"amigos",
-    each:[{nome:"Emília"}],
-    do(amigo){
+    each:[{ nome: "Emília" }],
+    do({ nome }){
 
     return template({
         tag:"div", children:[{
-            tag:"h4", text:amigo.nome
+            tag:"h4", text: nome
         }]
     })
 
