@@ -176,7 +176,7 @@ const _if = renderIf({
 </p>
 <p>
     A função <span class="hl">renderIf</span> retorna um objecto reativo, que vai nos permitir alterar os valores das propriedades condicionais, e esse tipo de objecto
-    no Inter chamamos de reator.
+    no Inter chamamos de <a href="/v2/tutorial/pt/reator">reator</a>.
 </p>
 <h3><a href="#atributo-_else" id="atributo-_else" class="hash">Atributo _else</a></h3>
 <p>
@@ -246,12 +246,12 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 
 <script>
 
-  const _if3 = renderIf({
-      in: "alvo3",
-      data: {
-          amigo: false
-      }
-  })
+const _if3 = renderIf({
+    in: "alvo3",
+    data: {
+        amigo: false
+    }
+})
 
 </script>
 
@@ -280,27 +280,28 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <textarea id="Editor4">
     
 <div id="alvo4">
- <p>Geremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
- <button onclick="_if4.casado=!_if4.casado">Clica para { estado } </button>
+  <p>Geremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
+  <button onclick="_if4.casado = !_if4.casado">Clica para { estado } </button>
 </div>
 
 <script>
-  
-  const _if4 = renderIf({
-      in: "alvo4",
-      data: {
-         casado: true 
-      }
-  });
 
-  const ref2 = Ref({
-      in: "alvo4",
-      data: {
-          estado: "ficar solteiro"
-      }
-  });
+const _if4 = renderIf({
+    in: "alvo4",
+    data: {
+        casado: true
+    }
+})
 
-  _if4.observe((prop, estaCasado) => {
+const ref2 = Ref({
+    in: "alvo4",
+    data: {
+        estado: "ficar solteiro"
+    }
+})
+
+
+ _if4.observe((prop, estaCasado) => {
 
     if(prop == "casado"){
 
