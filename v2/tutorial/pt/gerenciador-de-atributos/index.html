@@ -175,20 +175,19 @@ const { imagem } = toAttrs({
 </p>
 <textarea id="Editor2">
 
-  <style>
+<style>
 
-      .corAzul{
-          color: rgb(101, 163, 214);
+.corAzul {
+    color: rgb(101, 163, 214);
+}
 
-      }
+</style>
 
-  </style>
+<div id="alvo2">
+  <button {...cor}>Alternar cor</button>  
+</div>
 
-  <div id="alvo2">
-    <button {...cor}>Alternar cor</button>  
-  </div>
-
-  <script>
+<script>
     
   toAttrs({
     in: "alvo2",
@@ -262,60 +261,39 @@ criado.
     atualizados, e os valores, serão os novos valores para os respectivos atributos.
 </p>
 <textarea id="Editor4">
-    
 <div id="alvo3">
     <img {...slide}>
 </div>
 
 <script>
 
-const slides = [
-{
-  src: "/images/luna.jpg",
-  alt: "Foto de Luna",
-  title: "Slide 1"
-},
-{
-   src: "/images/Inter.png",
-   alt: "Foto de Inter",
-   title: "Slide 2"
-},{
-   src: "/images/Ramon.jpg",
-   alt: "Foto de Ramon",
-   title: "Slide 3"
-}
-]
+ const slides = [
+    { src: "/images/luna.jpg", alt: "Foto de Luna", title: "Slide 1" },
+    { src: "/images/Inter.png", alt: "Foto de Inter", title: "Slide 2" },
+    { src: "/images/Ramon.jpg", alt: "Foto de Ramon", title: "Slide 3" }
+ ]
 
-let pos = 0;
+let index = 0;
 
-
-toAttrs({
+const { slide } = toAttrs({
     in: "alvo3",
     data: {
-      slide: { 
-       src: slides[0].src,
-       alt: slides[0].alt,
-       title: slides[0].title,
-       onclick(){
-
-         if(pos < 2){
-
-            pos++;
-            this.setAttrs = slides[pos];
-
-         } else {
-		 
-            pos = 0;
-            this.setAttrs = slides[pos];
-
-         }
-
-       } 
+        slide: {
+            ...slides[0],
+            onclick(){
+                if(index < 2){
+                    index++;
+                    this.setAttrs = slides[index];
+                } else {
+                    index = 0;
+                    this.setAttrs = slides[index];
+                }
+            }
+        }
     }
-}
 })
 
- </script>
+</script>
 
 </textarea>
 <div class="demo">
@@ -367,25 +345,6 @@ const {imagem}=toAttrs({
 })
 
 
-const slides=[
-{
-  src:"/images/luna.jpg",
-  alt:"Foto de Luna",
-  title:"Slide 1"
-},
-{
-   src:"/images/Inter.png",
-   alt:"Foto de Inter",
-   title:"Slide 2"
-},{
-   src:"/images/Ramon.jpg",
-   alt:"Foto de Ramon",
-   title:"Slide 3"
-}
-]
-
-let pos=0;
-
 toAttrs({
     in:"alvo2",
      data:{
@@ -414,30 +373,30 @@ toAttrs({
   
 })
 
+const slides = [
+    { src: "/images/luna.jpg", alt: "Foto de Luna", title: "Slide 1" },
+    { src: "/images/Inter.png", alt: "Foto de Inter", title: "Slide 2" },
+    { src: "/images/Ramon.jpg", alt: "Foto de Ramon", title: "Slide 3" }
+ ]
 
-toAttrs({
-    in:"alvo3",
-    data:{
-      slide:{ 
-       src:slides[0].src,
-       alt:slides[0].alt,
-       title:slides[0].title,
-       onclick(){
+let index = 0;
 
-         if(pos<2){
-
-            pos++;
-            this.setAttrs=slides[pos];
-
-         }else{
-            pos=0;
-            this.setAttrs=slides[pos];
-
-         }
-
-       } 
+const { slide } = toAttrs({
+    in: "alvo3",
+    data: {
+        slide: {
+            ...slides[0],
+            onclick(){
+                if(index < 2){
+                    index++;
+                    this.setAttrs = slides[index];
+                } else {
+                    index = 0;
+                    this.setAttrs = slides[index];
+                }
+            }
+        }
     }
-}
 })
        </script>
     </body>
