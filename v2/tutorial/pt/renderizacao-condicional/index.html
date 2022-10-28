@@ -93,21 +93,19 @@
                  </p>
 
                   <h3><a href="#atributo-_if" id="atributo-_if" class="hash">Atributo _if</a></h3> 
-                 <p>O valor desse atributo deve ser o nome de uma das propriedades do objecto
+                 <p>O valor desse atributo deve ser o nome de uma propriedade do objecto
                      data(da função renderIf()), e se o valor da referida propriedade for <span class="hl">true</span>, o elemento será renderizado, caso o contrário(se for <span class="hl">false</span>), o elemento
                      não será renderizado.
                  </p>
 <textarea id="Editor1">
 
 <div id="alvo1">
-
     <div>
         <h5 _if="viveNamesmaCidade">Essa pessoa vive na mesma cidade que você  </h5>
         <img {...imagem}>
         <button onclick="anterior()"  _if="temAnterior">Anterior</button>
         <button onclick="proximo()"  _if="temProximo">Próximo</button>
     </div>
-
 </div>
 
 <script>
