@@ -93,30 +93,22 @@
 
   <textarea id="Editor1">
 
-<div id="relogio">
-<p> { hora } : { minuto } : { segundo }  </p>
+<div id="exemplo">
+<p> { relogio }  </p>
 </div>
 
 <script>
 
-const refs = Ref({
-    in: "relogio",
-    data: {
-        hora: 0,
-        minuto: 0,
-        segundo: 0
-    }
+const ref = Ref({
+    in: "exemplo",
+    data: { relogio: "0:0:0"  }
    })
 
    setInterval(() => {
 
     const date = new Date();
 
-    refs.setRefs = {
-        hora: date.getHours(),
-        minuto: date.getMinutes(),
-        segundo: date.getSeconds(),
-    }
+    ref.relogio = date.toLocaleTimeString()
 
    }, 1000)
    
@@ -126,15 +118,15 @@ const refs = Ref({
 
 <div class="demo">
 
-    <div id="relogio">
-        <p> { hora } : { minuto } : { segundo }  </p>
+    <div id="exemplo">
+        <p> { relogio }  </p>
     </div>    
 </div>
 
   <p>Se você estiver a ler essa matéria, você provavelmente conhece conceitos do Inter, como a <a href="/v2/tutorial/pt/referencia">referência</a>,
 a função <span class="hl">Ref</span> retorna um objecto com as mesmas propriedades que o objecto <span class="hl">data</span>,
-e nós devemos usar o referido objecto para atualizar os valores das referências, e na função <span class="hl">setInterval</span>,
-nós atualizamos os valores das três referências que existem no exemplo, e o Inter vai reagir à essas alterações atualizando a interface, então,
+e nós devemos usar o referido objecto para atualizar os valores da referências, e na função <span class="hl">setInterval</span>,
+nós atualizamos o valor da referência que existe no exemplo, e o Inter vai reagir à essa alteração atualizando a interface, então,
 isso significa que o objecto retornada pela função <span class="hl">Ref</span> é um <span class="hl">reator</span>, reator das referências.
 </p>
 
@@ -231,27 +223,20 @@ const reatorDaLista = renderList({
 
 }
 
-
-
-const refs = Ref({
-    in: "relogio",
-    data: {
-        hora: 0,
-        minuto: 0,
-        segundo: 0
-    }
+const ref = Ref({
+    in: "exemplo",
+    data: { relogio: "0:0:0"  }
    })
 
    setInterval(() => {
+
     const date = new Date();
 
-    refs.setRefs = {
-        hora: date.getHours(),
-        minuto: date.getMinutes(),
-        segundo: date.getSeconds(),
-    }
+    ref.relogio = date.toLocaleTimeString()
 
-   }, 1000 )
+   }, 1000)
+
+
    
 
    const todos = [
