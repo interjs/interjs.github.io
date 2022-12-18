@@ -692,8 +692,106 @@ function estaAposentado({ aposentado }){
 	que devem indicar os nomes das propriedades que serão deletadas.
 </p>
 
-<p>Essa matéria te explicou tudo sobre lista no Inter.</p>
-                <div class="space"></div>
+<p>Essa matéria te explicou tudo sobre lista no Inter. Agora dê uma olhada no exemplo abaixo.</p>
+
+<textarea>
+<div id="app">
+    <h4 _if="temTarefas">Tens { numeroDeTarefas } tarefas agendadas.</h4>
+    <div>
+        <p _if="temValorNoInput">Vais adicionar "{ texto }"</p>
+        <input 
+         type="text"
+         placeholder="Digite a tarefa" 
+         value={texto}
+         oninput="ref.texto = this.value"
+         >  
+         <button onclick="adicionarTarefa()" _if="temValorNoInput">Adicionar</button>
+    </div>
+    <div id="lista-de-tarefas"></div>
+</div>
+
+<script>
+
+const ref = Ref({
+    in: "app",
+    data: { numeroDeTarefas: 0, texto: ""  }
+})
+
+const _if = renderIf({
+    in: "app",
+    data: { temTarefas: false, temValorNoInput: false   }
+})
+
+ref.observe((nome, valor) => {
+    if(nome == "texto") _if.temValorNoInput = valor.trim().length > 0;
+    if(nome == "numeroDeTarefas") _if.temTarefas = valor > 0;
+})
+
+const reatorDaLista = renderList({
+    in: "lista-de-tarefas",
+    each: [],
+    do(tarefa, i){
+
+    const inputAttrs = { type: "text", value: tarefa.titulo, placeholder: "Edite" };
+    const inputEvents = { oninput: (e) => tarefa.titulo = e.target.value  };
+    const editar = { onclick: () => tarefa.editar = true };
+    const deletar = { onclick: () => { this.splice(i, 1); ref.numeroDeTarefas = this.length } };
+    const salvar = { onclick: () => tarefa.editar = false  };
+
+        return template({
+            tag: "div", children: [{
+                tag: "h4", text: `Tens que: ${tarefa.titulo}`
+            },{
+                tag: "div", renderIf: !tarefa.editar , children: [{
+                    tag: "button", text: "Deletar", events: deletar
+                },{
+                    tag: "button", text: "Editar", events: editar
+                }]
+            },{
+                tag: "div", renderIf: tarefa.editar, children: [{
+                    tag: "input", attrs: inputAttrs, events: inputEvents
+                },{
+                    tag: "button", text: "Salvar", events: salvar
+                }]
+            }]
+        })
+
+    }
+})
+
+function adicionarTarefa(){
+    const tarefa = { titulo: ref.texto, editar: false  };
+    reatorDaLista.unshift(tarefa);
+    ref.setRefs = {
+        numeroDeTarefas: ref.numeroDeTarefas+1 },
+        texto: ""
+     }
+
+
+}
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="app">
+        <h4 _if="temTarefas">Tens { numeroDeTarefas } tarefas agendadas.</h4>
+        <div>
+            <p _if="temValorNoInput">Vais adicionar "{ texto }"</p>
+            <input 
+             type="text"
+             placeholder="Digite a tarefa" 
+             value={texto}
+             oninput="ref.texto = this.value"
+             >  
+             <button onclick="adicionarTarefa()" _if="temValorNoInput">Adicionar</button>
+        </div>
+        <div id="lista-de-tarefas"></div>
+		<div class="space"></div>
+    </div>
+       
+</div>
+
+                <div class="Space"></div>
             </div>
         </article>
        </div>
@@ -975,6 +1073,65 @@ renderList({
 function estaAposentado({ aposentado }){
 
     return  aposentado == true;
+
+
+}
+
+
+const ref = Ref({
+    in: "app",
+    data: { numeroDeTarefas: 0, texto: ""  }
+})
+
+const _if = renderIf({
+    in: "app",
+    data: { temTarefas: false, temValorNoInput: false   }
+})
+
+ref.observe((nome, valor) => {
+    if(nome == "texto") _if.temValorNoInput = valor.trim().length > 0;
+    if(nome == "numeroDeTarefas") _if.temTarefas = valor > 0;
+})
+
+const reatorDaLista = renderList({
+    in: "lista-de-tarefas",
+    each: [],
+    do(tarefa, i){
+
+    const inputAttrs = { type: "text", value: tarefa.titulo, placeholder: "Edite" };
+    const inputEvents = { oninput: (e) => tarefa.titulo = e.target.value  };
+    const editar = { onclick: () => tarefa.editar = true };
+    const deletar = { onclick: () => { this.splice(i, 1); ref.numeroDeTarefas = this.length } };
+    const salvar = { onclick: () => tarefa.editar = false  };
+
+        return template({
+            tag: "div", children: [{
+                tag: "h4", text: `Tens que: ${tarefa.titulo}`
+            },{
+                tag: "div", renderIf: !tarefa.editar , children: [{
+                    tag: "button", text: "Deletar", events: deletar
+                },{
+                    tag: "button", text: "Editar", events: editar
+                }]
+            },{
+                tag: "div", renderIf: tarefa.editar, children: [{
+                    tag: "input", attrs: inputAttrs, events: inputEvents
+                },{
+                    tag: "button", text: "Salvar", events: salvar
+                }]
+            }]
+        })
+
+    }
+})
+
+function adicionarTarefa(){
+    const tarefa = { titulo: ref.texto, editar: false  };
+    reatorDaLista.unshift(tarefa);
+    ref.setRefs = {
+        numeroDeTarefas: ref.numeroDeTarefas+1,
+        texto: ""
+     }
 
 
 }
