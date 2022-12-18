@@ -733,7 +733,7 @@ const reatorDaLista = renderList({
     do(tarefa, i){
 
     const inputAttrs = { type: "text", value: tarefa.titulo, placeholder: "Edite" };
-    const inputEvents = { oninput: (e) => tarefa.titulo = e.target.value  };
+    const inputEvents = { oninput: (e) => tarefa.titulo = e.target.value };
     const editar = { onclick: () => tarefa.editar = true };
     const deletar = { onclick: () => { this.splice(i, 1); ref.numeroDeTarefas = this.length } };
     const salvar = { onclick: () => tarefa.editar = false  };
@@ -763,7 +763,7 @@ function adicionarTarefa(){
     const tarefa = { titulo: ref.texto, editar: false  };
     reatorDaLista.unshift(tarefa);
     ref.setRefs = {
-        numeroDeTarefas: ref.numeroDeTarefas+1 },
+        numeroDeTarefas: ref.numeroDeTarefas+1,
         texto: ""
      }
 
