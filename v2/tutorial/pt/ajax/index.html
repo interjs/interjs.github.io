@@ -175,7 +175,7 @@
                 pelo servidor.
             </li>
             <li>
-                <span class="hl">headers</span> - Antes da versão <span class="hl">2.1.0</span> essa era uma propriedade só de leitura que retornava os cabeçalhos enviados pelo servidor em uma <span class="hl">string</span>.
+                <span class="hl">headers</span> - Antes da versão <span class="hl">2.1.0</span>, essa era uma propriedade só de leitura que retornava os cabeçalhos enviados pelo servidor em uma <span class="hl">string</span>.
                 Agora, o valor dessa propriedade é um objecto, em que as suas propriedades representam os nomes dos cabeçalhos enviados pelo servidor, e os valores das propriedades
                  representam os valores dos cabeçalhos.
             </li>
@@ -396,7 +396,7 @@ function carregarInfo(caminho){
 
   function okay({ data  }){
 
-    listReactor.otherArray = data;
+    listReactor.setEach = data;
     refs.setRefs = {
         buttonStatus: "Buscar",
         userName: searchinput.value,
@@ -410,7 +410,7 @@ function carregarInfo(caminho){
 
   function error({ status, data  }){
 
-    listReactor.otherArray = [];
+    listReactor.setEach = [];
     refs.setRefs = {
         buttonStatus: "Buscar",
         userName: "sem usuário",
@@ -593,7 +593,7 @@ const { searchinput, searchbutton  } = toAttrs({
   }
 
   function okay({ data  }){
-    listReactor.otherArray = data;
+    listReactor.setEach = data;
     refs.setRefs = {
         buttonStatus: "Buscar",
         userName: searchinput.value,
@@ -609,7 +609,7 @@ const { searchinput, searchbutton  } = toAttrs({
 
   function error({ status, data  }){
 
-    listReactor.otherArray = [];
+    listReactor.setEach = [];
     refs.setRefs = {
         buttonStatus: "Buscar",
         userName: "sem usuário",
