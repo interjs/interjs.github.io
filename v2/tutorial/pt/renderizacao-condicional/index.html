@@ -97,6 +97,8 @@
                      data(da função renderIf()), e se o valor da referida propriedade for <span class="hl">true</span>, o elemento será renderizado, caso o contrário(se for <span class="hl">false</span>), o elemento
                      não será renderizado.
                  </p>
+
+</textarea>
 <textarea id="Editor1">
 
 <div id="alvo1">
@@ -110,8 +112,9 @@
 
 <script>
 
-const imagens = [{ urlDaImagem: "/images/Anny.jpg",
- condicional: { viveNamesmaCidade: true, temAnterior: false, temProximo: true } },...];
+const imagens = [
+    { urlDaImagem: "/images/Anny.jpg", condicional:
+    { viveNamesmaCidade: true, temAnterior: false, temProximo: true } },...];
 
 let pos = 0;
 
@@ -170,20 +173,166 @@ const _if = renderIf({
     O valor da propriedade <span class="hl">in</span>, indica o valor do atributo id do elemento
     pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>,
     deve ser um objecto, em que as suas propriedades vão indicar as propriedades condicionais e os valores dessas
-    propriedades devem ser valores booleanos(true/false). A propriedade <span class="hl">setConds</span> será explicada ao longo dessa matéria.
+    propriedades devem ser valores booleano(true/false). A propriedade <span class="hl">setConds</span> será explicada ao longo dessa matéria.
 </p>
 <p>
     A função <span class="hl">renderIf</span> retorna um objecto reativo, que vai nos permitir alterar os valores das propriedades condicionais, e esse tipo de objecto
     no Inter chamamos de <a href="/v2/tutorial/pt/reator">reator</a>.
 </p>
+<h3><a href="#atributo-_elseIf" id="atributo-_elseIf" class="hash">Atributo _elseIf</a></h3>
+<div class="warning">
+    <p>Esse atributo faz parte do Inter desde a versão <a href="">2.1.0</a>.</p>
+</div>
+<p>
+  O elemento com esse atributo condicional deve aparecer inicialmente depois de um elemento
+  com o atributo condicional <a href="#atributo_if">_if</a>. O atributo <span class="hl">_elseIf</span>
+  aceita um valor, e o referido valor deve indicar o nome de uma propriedade condicional, e se o valor
+  da referida propriedade for <span class="hl">true</span> o elemento será renderizado, e o elemento com o
+  atributo <span class="hl">_if</span> não será renderizado, assim como os outros elementos com o atributo <span class="hl">_elseIf</span>.
+
+</p>
+<textarea>
+
+<div id="else-if">
+    <h4>Você já pode trabalhar?</h4>
+    <input type="number" value={idade} oninput="ref.idade = this.value">
+    <p>Valor no input é { idade }</p>
+    <div>
+        <p _if="inputEstaVazio">
+         Digite a tua idade no campo.
+        </p>
+        <p _elseIf="temEntre0A15">
+            { idade } anos ainda é muito pouco!
+        </p>
+        <p _elseIf="temEntre16A18">
+         { idade } anos é aceitável.
+        </p>
+        <p _elseIf="temEntre19A54">
+          { idade } anos é uma idade para trabalhar mesmo!
+        </p>
+        <p _elseIf="idadeMaiorQue54">
+         Hmmm, com { idade } anos você já tinha que estar a curtir a aposentadoria!!!
+     </p>
+    </div>
+</div>
+
+<script>
+
+const ref = Ref({
+    in: "else-if",
+    data: { idade: "" }
+})
+   
+const reator = renderIf({
+    in: "else-if",
+    data: {
+        inputEstaVazio: true,
+        temEntre0A15: false,
+        temEntre16A18: false,
+        temEntre19A54: false,
+        idadeMaiorQue54: false
+    }
+})
+
+ref.observe((nome, valor) => {
+    if(nome == "idade"){
+     reator.setConds = {
+        inputEstaVazio: valor.trim().length == 0,
+        temEntre0A15: valor > 0 && valor < 16,
+        temEntre16A18: valor > 15 && valor < 19,
+        temEntre19A54: valor > 18 && valor < 55,
+        idadeMaiorQue54: valor > 54
+     }
+    }
+
+})
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="else-if">
+        <h4>Você já pode trabalhar?</h4>
+        <input type="number" value={idade} oninput="ref.idade = this.value">
+        <p>Valor no input é { idade }</p>
+        <div>
+            <p _if="inputEstaVazio">
+             Digite a tua idade no campo.
+            </p>
+            <p _elseIf="temEntre0A15">
+                { idade } anos ainda é muito pouco!
+            </p>
+            <p _elseIf="temEntre16A18">
+             { idade } anos é aceitável.
+            </p>
+            <p _elseIf="temEntre19A54">
+              { idade } anos é uma idade para trabalhar mesmo!
+            </p>
+            <p _elseIf="idadeMaiorQue54">
+             Hmmm, com { idade } anos você já tinha que estar a curtir a aposentadoria!!!
+         </p>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<p>Se o valor da propriedade condicional, <span class="hl">inputEstaVazio</span>
+for <span class="hl">true</span>, o elemento com o atributo <span class="hl">_if</span>
+será renderizado, e os outros elementos não serão renderizados, e quando por exemplo o valor
+da propriedade <span class="hl">temEntre16A18</span> for <span class="hl">true</span>,
+o elemento com o atributo _elseIf em que o seu valor for o nome da referida propriedade, será
+renderizado, o elemento com o atributo condicional _if não será renderizado, assim como os outros
+elementos com o atributo <span class="hl">_elseIf</span>.
+</p>
+
+<p>Você vê o agrupamento dos elementos com os atributos condicional 
+    <span class="hl">_if</span> e <span class="hl">_elseIf</span> ? No Inter,
+    esse agrupamento é chamado de <span class="hl">agrupamento condicional</span>. No agrupamento
+    condicional quando uma propriedade condicional tiver o valor <span class="hl">true</span>, 
+    automaticamente as outras propriedades que estiverem a ser usadas
+    no agrupamento terão o valor <span class="hl">false</span> resultando
+    na remoção dos elementos que usam as referidas propriedades.
+</p>
+
+<p>Não é recomendado fazer o seguinte:</p>
+
+<textarea>
+
+<div id="exemplo">
+    <h3 _if="casado">Nelson casou!</h3>
+    <div>
+        <p _if="casado">
+            Ele é casado
+        </p>
+        <p _elseIf="solteiro">
+            Ele está solteiro
+        </p>
+    </div>
+</div>
+
+</textarea>
+
+<p>Porque quando o valor da propriedade <span class="hl">solteiro</span>
+for true, automaticamente o Inter vai definir o valor da propriedade 
+<span class="hl">casado</span> para <span class="hl">false</span>, porque a
+propriedade casado está a ser usada em um agrupamento condicional,
+sendo assim, o primeiro elemento com o atributo _if no exemplo será removido "prematuramente". A lição
+é que, não use as propriedades condicionais usadas no agrupamento condicional mais de uma vez.
+</p>
+
 <h3><a href="#atributo-_else" id="atributo-_else" class="hash">Atributo _else</a></h3>
 <p>
     O elemento com o atributo <span class="hl">_else</span> deve aparecer depois de
-    um elemento com o atributo <span class="hl">_if</span>, se o elemento
-    com o atributo <span class="hl">_if</span> não for renderizado, o elemento
-    com o atributo <span class="hl">_else</span> será renderizado. E o referido atributo
-    não espera nenhum valor.
+    um elemento com o atributo <span class="hl">_if</span> ou depois de um elemento
+    com atributo <span class="hl">elseIf</span>.
 </p>
+
+<p>Se o elemento com o atributo _else for usado depois de um elemento com o atributo
+    _if, se o elemento com o atributo _if não for renderizado, o elemento com o atributo _else será renderizado.</p>
+ <p>
+    Se o elemento com o atributo _else for usado no final de um agrupamento condicional(depois de um elemento com o atributo _elseIf),
+    ele(o elemento) será renderizado se o valor de todas as propriedades usadas no agrupamento condicional forem
+     <spa class="hl">false</span>.
+ </p>   
 
 
 <textarea id="Editor2">
@@ -334,7 +483,7 @@ const ref2 = Ref({
 </p>
 <div class="warning">
 <p>
-    Um elemento não pode ter mais de um atributo condicional(<span class="hl">_if</span>, <span class="hl">_else</span>, <span class="hl">_ifNot</span>).
+    Um elemento não pode ter mais de um atributo condicional(<span class="hl">_if</span>, <span class="hl">_elseIf</span> ,<span class="hl">_else</span>, <span class="hl">_ifNot</span>).
     
 
 </p>
@@ -440,6 +589,37 @@ const _if3=renderIf({
          casado:true 
       }
   });
+
+  const ref = Ref({
+    in: "else-if",
+    data: { idade: "" }
+})
+
+
+  const reator = renderIf({
+    in: "else-if",
+    data: {
+        inputEstaVazio: true,
+        temEntre0A15: false,
+        temEntre16A18: false,
+        temEntre19A54: false,
+        idadeMaiorQue54: false
+    }
+})
+
+
+ref.observe((nome, valor) => {
+    if(nome == "idade"){
+     reator.setConds = {
+        inputEstaVazio: valor.trim().length == 0,
+        temEntre0A15: valor > 0 && valor < 16,
+        temEntre16A18: valor > 15 && valor < 19,
+        temEntre19A54: valor > 18 && valor < 55,
+        idadeMaiorQue54: valor > 54
+     }
+    }
+
+})
 
   const ref2=Ref({
       in:"alvo4",

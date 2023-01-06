@@ -204,10 +204,8 @@ setInterval(() => reator2.contador++, 1000)
                 <textarea id="Editor4">
 
 <div id="alvo3">
- <p title="São { hora } horas">
-        Oi, passe o mouse sobre mim para veres o meu título dinámico.
- </p>
-
+    <p>O valor no input é : " { valorNoInput } "</p>
+    <input type="text" value={valorNoInput} oninput="reator3.valorNoInput = this.value" >
 </div>
 
 <script>
@@ -215,12 +213,7 @@ setInterval(() => reator2.contador++, 1000)
 const reator3 = Ref({
     in: "alvo3",
     data: {
-        hora(){
-
-            const date = new Date();
-
-            return date.getHours();
-        }
+        valorNoInput: "Interjs"
     }
 })
 
@@ -231,23 +224,20 @@ const reator3 = Ref({
 
     <div id="alvo3">
 
-        <p title="São {hora} horas">
-            Oi, passe o mouse sobre mim para veres o meu título dinámico.
-        </p>
-    
+        <p>O valor no input é : " { valorNoInput } "</p>
+        <input type="text" value={valorNoInput} oninput="reator3.valorNoInput = this.value" >
     </div>
     <span class="space"></span>
 </div>
 
-                <p>
-                    Você notou o valor da referência hora? É mesmo isso! As referências podem
-                    ter funções como os seus valores, essas funções serão invocadas e os valores retornados pelas
-                    funções serão os valores das referências.
-                </p>
-
                 <h3>
                     <a href="#o-metodo-observe" id="o-metodo-observe" class="hash">O método observe</a>
                 </h3>
+                <div class="warning">
+                    <p><span class="hl">observe</span> é uma propriedade reservada, você não pode
+                    criar uma referência com o referido nome.
+                    </p>
+                </div>
                 <p>
                     Eu acredito que você já tenha uma ideia para que esse método
                     serve! Mas vamos lá, ele será um método do objecto reator,
@@ -448,13 +438,7 @@ setInterval(()=>reator2.contador++, 1000)
 const reator3=Ref({
         in:"alvo3",
         data:{
-            hora(){
-
-                const date=new Date();
-
-                return date.getHours();
-
-            }
+            valorNoInput: "Interjs"
         }
     })
 

@@ -175,7 +175,9 @@
                 pelo servidor.
             </li>
             <li>
-                <span class="hl">headers</span> - É uma propriedade só de leitura que retorna os cabeçalhos enviados pelo servidor.
+                <span class="hl">headers</span> - Antes da versão <span class="hl">2.1.0</span> essa era uma propriedade só de leitura que retornava os cabeçalhos enviados pelo servidor em uma <span class="hl">string</span>.
+                Agora, o valor dessa propriedade é um objecto, em que as suas propriedades representam os nomes dos cabeçalhos enviados pelo servidor, e os valores das propriedades
+                 representam os valores dos cabeçalhos.
             </li>
             <li>
                 <span class="hl">isObj</span> - É um método que serve para verificar se a resposta enviada pelo servidor foi um objecto <span class="hl">JSON</span>, se for, vai
@@ -363,7 +365,7 @@ function carregarInfo(caminho){
             tag: "div", children: [{
                 tag: "h2", text: `Nome do repo: ${ name }`
             },{
-                tag: "p", text: description, renderIf: description !== undefined
+                tag: "p", text: description, renderIf: description
             },{
                 tag: "p", text: forks > 0 ? `Forks: ${ forks }` : "Sem forks"
             },{
@@ -561,7 +563,7 @@ const { searchinput, searchbutton  } = toAttrs({
             tag: "div", children: [{
                 tag: "h2", text: `Nome do repo: ${ name }`
             },{
-                tag: "p", text: description, renderIf: description !== undefined
+                tag: "p", text: description, renderIf: description
             },{
                 tag: "p", text: forks > 0 ? `Forks: ${ forks }` : "Sem forks"
             },{

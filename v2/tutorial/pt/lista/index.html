@@ -24,7 +24,20 @@
     border: 1px solid #eee;
     height: auto;
   }
+img {
+    width: 30vw;
+    height: 30vh;
+}
 
+#lingsDeProgramacao {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#lingsDeProgramacao > div {
+    margin-left: 3%;
+    margin-top: 3%;
+}
         </style>
         
         <div class="main">
@@ -133,9 +146,11 @@
                         invocada e o valor retornado pela função vai representar o texto do elemento.
                     </li>
 					<li>
-					<span class="hl">renderIf</span> - Essa propriedade apenas aceita valores booleanos(true/false), como
-					o nome a descreve, ela serve para renderizar condicionalmente o elemento, se o valor da referida propriedade for
-					<span class="hl">true</span>, o elemento será renderizado, se for <span class="hl">false</span>, o elemento não será renderizado.
+					<span class="hl">renderIf</span> - Essa propriedade antes da versão <span class="hl">2.1.0</span>
+                    aceitava apenas valores booleano, mas agora se o valor da referida propriedade for
+                    <span class="hl">null</span>, <span class="hl">undefined</span>, <span class="hl">false</span>,
+                        <span class="hl">0</span> ou uma <span class="hl">string</span> vázia, o elemento não
+                        será renderizado, caso o contrário(se for qualquer valor menos os citados), o elemento será renderizado.
 					</li>
                     <li>
                         <span class="hl">attrs</span> - Deve ser um objecto, e as propriedades do referido objecto
@@ -326,77 +341,62 @@ const cartao = renderList({
 </p>
 
 <p>
-    Quando o <a href="/v2/tutorial/pt/reator">reator</a> for uma Array, como no primeiro exemplo, a referida Array terá
-    algumas propriedades reativas específicas do Inter, elas são:
+    E o reator da lista tem as seguintes propriedades:
 </p>
 
-<h3><a href="#otherArray" id="otherArray" class="hash">OtherArray</a></h3>
+<h3><a href="#setEach" id="otherArray" class="hash">SetEach</a></h3>
+<div class="warning">
+    <p>A propriedade <span class="hl">otherArray</span> foi depreciada desde a versão <span class="hl">2.1.0</span>, ela será
+    removida na versão 2.2.0, use a propriedade <span class="hl">setEach</span>.</p>
+</div>
 
 <p>Essa é uma propriedade reativa, só de definição, é usada quando
-    quisermos definir uma outra Array onde a listagem será baseada,
-    obviamente que o valor da referida propriedade deve ser uma Array.
+    quisermos definir outros dados em que listagem será baseada. Quando usamos a referida propriedade é como se estivéssemos a redefinir o valor da opção <span class="hl">each</span>.
 </p>
 
 
 <textarea id="Editor3">
 
 <div>
+    <h3>Lista dos teus amigos</h3>
     <div id="lista2"></div>
-    <button onclick="alternar()">Alternar</button>
+    <button onclick="lista2.setEach = amigos1">Pag 1</button>
+    <button onclick="lista.setEach = amigos2">Pag 2</button>
 </div>
 <div>
 
 <script>
 
-const animais = ["Cão", "Gato", "Lobo"],
-      frutas = ["Maçã", "Laranja", "Banana"];
- let  lista = "animais", reator2;
+const amigos1 = [
+    { nome: "Anny", imagem: "/images/Anny.jpg", amigosEmComum: 0 },
+    { nome: "Orlando", imagem: "/images/orlando.jpg", amigosEmComum: 7 }
+];
+const amigos2 = [
+    { nome: "Luna", imagem: "/images/luna.jpg", amigosEmComum: 2 },
+    {nome: "Ramon", imagem: "/images/Ramon.jpg", amigosEmComum: 0 }
+];
 
- renderList({
+const lista2 = renderList({
     in: "lista2",
-    each: animais,
-    do(item){
+    each: amigos1,
+    do(amigo){
 
-        reator2 = this;
+    const imgAttrs = { src: amigo.imagem, alt: "Imagem" };
+    const pText = `${amigo.amigosEmComum} amigos em comum`
 
         return template({
             tag: "div", children: [{
-                tag: "h4", text: item
+                tag: "h4", text: amigo.nome
             },{
-                tag: "p", text: identificarItem(item)
+                tag: "div", children: [{
+                    tag: "img", attrs: imgAttrs
+                }]
+            },{
+                tag: "p", text: pText, renderIf: amigo.amigosEmComum
             }]
         })
     }
- })
-
- 
-function alternar(){
-    if(lista == "animais"){
-     lista = "frutas";
-     reator2.otherArray = frutas;
-
-    } else {
-        lista = "animais";
-        reator2.otherArray = animais;
-
-    }
-
-}
-
-function identificarItem(item){
-    let text;
-
-     if(lista == "animais"){
-        text =  `${item} é um animal`
-
-     } else {
-        text = `${item} é uma fruta`
-
-     }
-
-     return text;
-    
-}
+})
 
 </script>
 
@@ -404,14 +404,88 @@ function identificarItem(item){
 </textarea>
 <div class="demo">
     <div>
-        <div id="lista2">
-        
-        </div>
-        <button onclick="alternar()">Alternar</button>
-        </div>
+        <h3>Lista dos teus amigos</h3>
+    <div id="lista2"></div>
+    <button onclick="lista2.setEach = amigos1">Pag 1</button>
+    <button onclick="lista2.setEach = amigos2">Pag 2</button>
+</div>
+    
 <div class="space"></div>          
 </div>
+<h3><a href="#observe" id="observe" class="hash">Método observe</a></h3>
+<div class="warning">
+    <p>Esse método faz parte do Inter desde a versão <span class="hl">2.1.0</span>.</p>
+</div>
+<p>
+    Esse método aceita apenas uma função como o seu argumento, e a referida função será invocada toda
+    vez que os dados forem alterados, e a função será invocada com um argumento, que será o reator da lista.
+    
+</p>
+<textarea>
+
+<div id="metodoObserve">
+    <p>Tem { numeroDeLings } linguagens de programação
+        na lista, e você removeu { removidas }
+    </p>
+    <div id="lingsDeProgramacao"></div>
+
+</div>
+
+<script>
+
+const lingsDeprogamacao = [
+    "Javascript", "Typescript", "C++" , "Go", "Dart", "Rust", "PHP", "Foltran"
+    ];
+    
+let len = lingsDeprogamacao.length;
+
+const ref = Ref({
+    in: "metodoObserve",
+    data: { removidas: 0, numeroDeLings: len }
+})
+
+const listaDeLings = renderList({
+    in: "lingsDeProgramacao",
+    each: lingsDeprogamacao,
+    do(ling, i){
+
+    const buttonEvents = { onclick: () => this.splice(i, 1) }
+
+        return template({
+            tag: "div", children: [{
+                tag: "h4", text: ling
+            },{
+                tag: "button", text: "Deletar", events: buttonEvents
+            }]
+        })
+    }
+})
+
+listaDeLings.observe((reator) => {
+    ref.setRefs = {
+         removidas: reator.length < len ? ref.removidas+1 : ref.removidas,
+         numeroDeLings: reator.length
+    }
+
+    len = reator.length;
+})
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="metodoObserve">
+    <p>Tem { numeroDeLings } linguagens de programação
+        na lista, e você removeu { removidas }
+    </p>
+    <div id="lingsDeProgramacao"></div>
+    <div class="space"></div>
+</div>
+</div>
 <h3><a href="#addItems" id="addItems" class="hash">AddItems</a></h3>
+<div class="warning">
+    <p>Disponível apenas quando o reator for uma Array.</p>
+
+</div>
 <p>
     Esse método é usado para acrescentar uma certa quantidade de dados na Array reatora. 
     Ele aceita dois argumentos, o primeiro argumento deve ser uma Array, e os itens daquela Array
@@ -646,7 +720,7 @@ renderList({
                 tag: "p", text: pText, renderIf: estaAposentado(trabalhador)
             },{
                 tag: "button", text: bText, renderIf: !estaAposentado(trabalhador),
-				events: eventos
+                events: eventos
             }]
         })
 
@@ -704,7 +778,7 @@ function estaAposentado({ aposentado }){
          type="text"
          placeholder="Digite a tarefa" 
          value={texto}
-         oninput="ref.texto = this.value"
+         oninput="ref1.texto = this.value"
          >  
          <button onclick="adicionarTarefa()" _if="temValorNoInput">Adicionar</button>
     </div>
@@ -713,7 +787,7 @@ function estaAposentado({ aposentado }){
 
 <script>
 
-const ref = Ref({
+const ref1 = Ref({
     in: "app",
     data: { numeroDeTarefas: 0, texto: ""  }
 })
@@ -723,7 +797,7 @@ const _if = renderIf({
     data: { temTarefas: false, temValorNoInput: false   }
 })
 
-ref.observe((nome, valor) => {
+ref1.observe((nome, valor) => {
     if(nome == "texto") _if.temValorNoInput = valor.trim().length > 0;
     if(nome == "numeroDeTarefas") _if.temTarefas = valor > 0;
 })
@@ -736,7 +810,7 @@ const reatorDaLista = renderList({
     const inputAttrs = { type: "text", value: tarefa.titulo, placeholder: "Edite" };
     const inputEvents = { oninput: (e) => tarefa.titulo = e.target.value };
     const editar = { onclick: () => tarefa.editar = true };
-    const deletar = { onclick: () => { this.splice(i, 1); ref.numeroDeTarefas = this.length } };
+    const deletar = { onclick: () =>  this.splice(i, 1)  };
     const salvar = { onclick: () => tarefa.editar = false  };
 
         return template({
@@ -760,15 +834,12 @@ const reatorDaLista = renderList({
     }
 })
 
+reatorDaLista.observe((reator) => ref1.numeroDeTarefas = reator.length);
+
 function adicionarTarefa(){
-    const tarefa = { titulo: ref.texto, editar: false  };
+    const tarefa = { titulo: ref1.texto, editar: false  };
     reatorDaLista.unshift(tarefa);
-    ref.setRefs = {
-        numeroDeTarefas: ref.numeroDeTarefas+1,
-        texto: ""
-     }
-
-
+    ref1.texto = "";
 }
 
 </script>
@@ -782,7 +853,7 @@ function adicionarTarefa(){
              type="text"
              placeholder="Digite a tarefa" 
              value={texto}
-             oninput="ref.texto = this.value"
+             oninput="ref1.texto = this.value"
              >  
              <button onclick="adicionarTarefa()" _if="temValorNoInput">Adicionar</button>
         </div>
@@ -878,41 +949,36 @@ const homens = [
          }
      })
 
-     const animais = ["Cão", "Gato", "Lobo"],
-      frutas = ["Maçã", "Laranja", "Banana"];
- let  lista = "animais",  reator2;
+     const amigos1 = [
+    { nome: "Anny", imagem: "/images/Anny.jpg" , amigosEmComum: 0},
+    { nome: "Orlando", imagem: "/images/orlando.jpg", amigosEmComum: 7 }
+];
+const amigos2 = [
+    { nome: "Luna", imagem: "/images/luna.jpg", amigosEmComum: 2 },
+    {nome: "Ramon", imagem: "/images/Ramon.jpg", amigosEmComum: 0}
+];
 
- renderList({
+const lista2 = renderList({
     in: "lista2",
-    each: animais,
-    do(item){
+    each: amigos1,
+    do(amigo){
 
-        reator2 = this;
+    const imgAttrs = { src: amigo.imagem, alt: "Imagem" };
+    const pText = `${amigo.amigosEmComum} amigos em comum`
 
         return template({
             tag: "div", children: [{
-                tag: "h4", text: item
+                tag: "h4", text: amigo.nome
             },{
-                tag: "p", text: identificarItem(item)
+                tag: "div", children: [{
+                    tag: "img", attrs: imgAttrs
+                }]
+            },{
+                tag: "p", text: pText, renderIf: amigo.amigosEmComum
             }]
         })
     }
- })
-
-
- 
-function alternar(){
-    if(lista == "animais"){
-     lista = "frutas";
-     reator2.otherArray = frutas;
-
-    } else {
-        lista = "animais";
-        reator2.otherArray = animais;
-
-    }
-
-}
+})
 
 function identificarItem(item){
     let text;
@@ -1078,8 +1144,44 @@ function estaAposentado({ aposentado }){
 
 }
 
+const lingsDeprogamacao = [
+    "Javascript", "Typescript", "C++" , "Go", "Dart", "Rust", "PHP", "Foltran"
+    ];
+
+let len = lingsDeprogamacao.length;
 
 const ref = Ref({
+    in: "metodoObserve",
+    data: { removidas: 0, numeroDeLings: lingsDeprogamacao.length }
+})
+
+const listaDeLings = renderList({
+    in: "lingsDeProgramacao",
+    each: lingsDeprogamacao,
+    do(ling, i){
+
+    const buttonEvents = { onclick: () => this.splice(i, 1) }
+
+        return template({
+            tag: "div", children: [{
+                tag: "h4", text: ling
+            },{
+                tag: "button", text: "Deletar", events: buttonEvents
+            }]
+        })
+    }
+})
+
+listaDeLings.observe((reator) => {
+    ref.setRefs = {
+         removidas: reator.length < len ? ref.removidas+1 : ref.removidas,
+         numeroDeLings: reator.length
+    }
+
+    len = reator.length;
+})
+
+const ref1 = Ref({
     in: "app",
     data: { numeroDeTarefas: 0, texto: ""  }
 })
@@ -1089,7 +1191,7 @@ const _if = renderIf({
     data: { temTarefas: false, temValorNoInput: false   }
 })
 
-ref.observe((nome, valor) => {
+ref1.observe((nome, valor) => {
     if(nome == "texto") _if.temValorNoInput = valor.trim().length > 0;
     if(nome == "numeroDeTarefas") _if.temTarefas = valor > 0;
 })
@@ -1102,7 +1204,7 @@ const reatorDaLista = renderList({
     const inputAttrs = { type: "text", value: tarefa.titulo, placeholder: "Edite" };
     const inputEvents = { oninput: (e) => tarefa.titulo = e.target.value  };
     const editar = { onclick: () => tarefa.editar = true };
-    const deletar = { onclick: () => { this.splice(i, 1); ref.numeroDeTarefas = this.length } };
+    const deletar = { onclick: () =>  this.splice(i, 1) };
     const salvar = { onclick: () => tarefa.editar = false  };
 
         return template({
@@ -1126,15 +1228,13 @@ const reatorDaLista = renderList({
     }
 })
 
+reatorDaLista.observe((reator) => ref1.numeroDeTarefas = reator.length)
+
 function adicionarTarefa(){
-    const tarefa = { titulo: ref.texto, editar: false  };
+    const tarefa = { titulo: ref1.texto, editar: false  };
     reatorDaLista.unshift(tarefa);
-    ref.setRefs = {
-        numeroDeTarefas: ref.numeroDeTarefas+1,
-        texto: ""
-     }
-
-
+    ref1.texto = "";
+    
 }
 
 
