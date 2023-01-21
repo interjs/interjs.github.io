@@ -344,7 +344,7 @@ const cartao = renderList({
     E o reator da lista tem as seguintes propriedades:
 </p>
 
-<h3><a href="#setEach" id="otherArray" class="hash">SetEach</a></h3>
+<h3><a href="#setEach" id="setEach" class="hash">SetEach</a></h3>
 <div class="warning">
     <p>A propriedade <span class="hl">otherArray</span> foi depreciada desde a versão <span class="hl">2.1.0</span>, ela será
     removida na versão 2.2.0, use a propriedade <span class="hl">setEach</span>.</p>
@@ -550,6 +550,69 @@ function adicionar3Amigos(button){
         <div class="space"></div>
 </div>
 
+
+<h3><a href="#reactor-setProps" id="reactor-setProps" class="hash">SetProps</a></h3>
+<div class="warning">
+<p>Essa propriedade faz parte do Inter desde a versão <span class="hl">2.1.0</span>, e ela
+estará disponível apenas quando o <a href="../reator/">reator</a> for um objecto ou um <span class="hl">Map</span>.
+</p>
+</div>
+
+<p>Como o nome a descreve, essa propriedade é usada quando pretendermos atualizar
+    o valor de várias propriedades. Ela aceita apenas um objecto como o seu valor, e as propriedades
+    do referido objecto devem indicar os nomes das propriedades que os seus valores serão alterados, e os
+    valores, serão os novos valores para as respectivas propriedades.
+</p>
+
+<textarea>
+
+<div>
+    <ul id="info-de-livro"></ul>
+    <button onclick="livro.setProps = livro1" >Livro 1</button>
+    <button onclick="livro.setProps = livro2">Livro 2</button>
+</div>
+
+<script>
+
+const livro1 = {
+    nome: "Os jogadores de xadrez de Marte",
+    autor: "Edgar Rice Burroughs",
+    paginas: 210,
+    publicadoEm: "20/2/1948"
+}
+
+const livro2 = {
+    nome: "Uma princesa de Marte",
+    autor: "Edgar Rice Burroughs",
+    paginas: 140,
+    publicadoEm: "12/8/1934"
+}
+
+const livro = renderList({
+    in: "info-de-livro",
+    each: {},
+    do(prop, valor){
+
+        const liText = `${prop} : ${valor}`;
+
+        return template({ tag: "li", text: liText })
+    }
+})
+
+
+</script>
+</textarea>
+
+<div class="demo">
+    <div>
+        <ul id="info-de-livro"></ul>
+        <button onclick="livro.setProps = livro1" >Livro 1</button>
+        <button onclick="livro.setProps = livro2">Livro 2</button>
+    </div>
+   <div class="space"></div>	
+</div>
+
+
 <h2><a href="#se-a-opcao-each-for-numero" id="se-a-opcao-each-for-numero" class="hash"> Se a opção each for número</a></h2>
 
 <p>
@@ -621,9 +684,11 @@ function adicionar3Amigos(button){
 <h3>
     <a href="#setProps" id="setProps" class="hash"> setProps</a>
 </h3>
-<p>Essa propriedade será útil quando quisermos atualizar mais de uma propriedade do objecto, e o valor
-    dessa propriedade deve ser um objecto, em que as suas propriedades serão os nomes das propriedades que pretendermos atualizar,
-    e os valores, serão os novos valores para as respectivas propriedades.
+<p>Essa propriedade funciona como a <a href="#reactor-setProps">setProps do reator da lista</a>, 
+    mas só que, as propriedades do objecto que estamos a nos referir é que serão atualizadas, ou seja, ela(setProps)
+    é usada para atualizar os valores das proprieades do objecto de uma maneira elegante e performática. A setProps aceita apenas um objecto
+    como o seu valor, e as propriedades do referido objecto devem indicar o nome das propriedades que os seus
+    valores serão alterados, e os valores, serão os novos valores para as respectivas propriedades.
 </p>
 <textarea id="Editor6">
     
@@ -1236,6 +1301,32 @@ function adicionarTarefa(){
     ref1.texto = "";
     
 }
+
+
+const livro1 = {
+    nome: "Os jogadores de xadrez de Marte",
+    autor: "Edgar Rice Burroughs",
+    paginas: 210,
+    publicadoEm: "20/2/1948"
+}
+
+const livro2 = {
+    nome: "Uma princesa de Marte",
+    autor: "Edgar Rice Burroughs",
+    paginas: 140,
+    publicadoEm: "12/8/1934"
+}
+
+const livro = renderList({
+    in: "info-de-livro",
+    each: {},
+    do(prop, valor){
+
+        const liText = `${prop} : ${valor}`;
+
+        return template({ tag: "li", text: liText })
+    }
+})
 
 
 
