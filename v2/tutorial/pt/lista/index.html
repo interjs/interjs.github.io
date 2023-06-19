@@ -709,12 +709,14 @@ const livro = renderList({
      each: jogadores,
      do(jogador){
 
+        const pText = `Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
+
         return template({
             tag: "div", children: [{
                 tag: "h4", text: `Jogador: ${jogador.nome}`
             },{
                 tag: "div", children: [{
-                 tag: "p", text: `Nível: ${jogador.nivel} & Respeito: ${jogador.respeito}`
+                    tag: "p", text: pText
                 }]
             },{
                 tag: "button", text: "Outro nível", events: {onclick: () => outronivel(jogador)}
@@ -782,22 +784,14 @@ renderList({
             tag: "div", children: [{
                 tag: "h5", text: nome
             },{
-                tag: "p", text: pText, renderIf: estaAposentado(trabalhador)
+                tag: "p", text: pText, renderIf: aposentado
             },{
-                tag: "button", text: bText, renderIf: !estaAposentado(trabalhador),
-                events: eventos
+                tag: "button", text: bText, renderIf: aposentado, events: eventos
             }]
         })
 
     }
 })
-
-function estaAposentado({ aposentado }){
-
-    return aposentado == true;
-
-
-}
 
 </script>
 
