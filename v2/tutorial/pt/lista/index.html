@@ -786,7 +786,7 @@ renderList({
             },{
                 tag: "p", text: pText, renderIf: aposentado
             },{
-                tag: "button", text: bText, renderIf: aposentado, events: eventos
+                tag: "button", text: bText, renderIf: !aposentado, events: eventos
             }]
         })
 
@@ -1187,21 +1187,15 @@ renderList({
             tag: "div", children: [{
                 tag: "h5", text: nome
             },{
-                tag: "p", text: pText, renderIf: estaAposentado(trabalhador)
+                tag: "p", text: pText, renderIf: aposentado
             },{
-                tag: "button", text: bText, renderIf: !estaAposentado(trabalhador), events: eventos
+                tag: "button", text: bText, renderIf: !aposentado, events: eventos
             }]
         })
 
     }
 })
 
-function estaAposentado({ aposentado }){
-
-    return  aposentado == true;
-
-
-}
 
 const lingsDeprogamacao = [
     "Javascript", "Typescript", "C++" , "Go", "Dart", "Rust", "PHP", "Foltran"
