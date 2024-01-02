@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+
+        <title>Reference</title>
+        <style>
+            img{
+                width: 40vw;
+                height: 40vh;
+            }
+            .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+        </style>
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+
+            <nav>
+                <ul class="social">
+                    
+                   <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                   <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                   <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                </ul>
+            </nav>
+
+            <nav>
+                <ul class="nav">
+                <li>
+                        <a href="/v2/tutorial/pt/introducao/">
+                            Introdução
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/v2/tutorial/pt/instalacao/">
+                            Instalação
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/referencia">Referência</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/lista">Lista</a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <article>
+            <div>
+                <h1><a href="#referencia" id="referencia" class="hash">Reference</a></h1>
+<div class="warning">
+<p>
+   This article and others from this tutorial assume at least intermediate level in
+   Javascript and HTML.
+</p>
+</div>
+                <p>
+				In Inter's universe, reference are curly-braces {},
+				and inside them, it must have the name of one of the properties of the <span class="hl">data</span> object,
+				and they(the curly-braces) will be replaced by the value of the properties. Let's see one example.
+                </p>
+
+                <textarea id="Editor1">
+
+<div id="target1">
+ <p>Hey, { message }!</p>
+</div>
+
+<script>
+
+const reactor = Ref({
+    in: "target1",
+    data: {
+        message: "new comer!"
+    }
+})
+
+</script>
+
+
+                 </textarea>
+                <div class="demo">
+                    
+  <div id="target1">
+
+    <p>Hey, { message }!</p>
+
+  </div>
+  <span class="space"></span>
+                </div>
+
+                <p>
+				In the script tag from the example, You see the <span class="hl">Ref</span>
+				, don't you? This function is used to parse the target tamplate searching for references, and
+				it must recieve an object as it's argument. The value of the <span class="hl">in</span> property
+				indicates the id's value of the root element, where the reference where found, in our exemple, the root
+				element is the <span class="hl">div</span> element, isn't it? Why are we calling it as the root element?
+				It has one child element, whose name is <span class="hl">p</span>, and in the text of that element, there's a reference
+				named <span class="hl">message</span>. The value of the <span class="hl">data</span> property
+				must be an object, whose its properties will be the names of the references, and their values, will certainily
+				be the texts that will replace the references with the referred names.
+                </p>
+
+                <p>
+				We use reference, when we want to update only a peace of our interface, and often it's expected
+				that the value of the reference changes, and here is where the <a href="#">reactor</a> concept comes.
+				The <span class="hl">Ref</span> function returns a reactive object, with same properties as the <span class="hl">data</span>
+				object, and we use this new object, when we aim to change the values of the references, right now in this page,
+				open up the console in devTool, and type: reactor.messgae = "Inter is awesome!", or any other value, you'll see the interface
+				being updated in real time, to reflect the new value of the <span class="hl">message</span> reference.
+                </p>
+                
+                <textarea id="Editor2">
+
+<div id="target2">
+<p>Counting: { counter }</p>
+</div>
+
+<script>
+
+const reactor2 = Ref({
+    in: "target2",
+    data: {
+        counter: 0
+    }
+})
+
+setInterval(() => reactor2.counter++, 1000)
+
+</script>
+
+ </textarea>
+<div class="demo">
+    <div id="target2">
+
+        <p>Counting: { counter }</p>
+    
+    </div>
+<span class="space"></span>
+</div>
+                <p>
+				We are done with the <span class="hl">Ref</span> function. Let's dive a little bit
+				deep in the code inside the <span class="hl">setInterval</span>, Do you notice
+				that we are increase the value of the <span class="hl">counter</span> reference, right? It means that we are updating the value
+				of that reference, and Inter being reactive must <span class="hl">react</span> to these changes
+				by updating the part of the interface where this reference is being used.
+                </p>
+
+                <h3><a href="#ler-o-valor-de-uma-referencia" id="ler-o-valor-de-uma-referencia" class="hash">Ler o valor de uma referência</a> </h3>
+
+                <p>
+				We can not only <span class="hl">set</span> the value of a reference, but we can also <span class="hl">read</span> the value of a reference, by doing so:
+
+                </p>
+
+                <textarea id="Editor3">
+
+<script>
+
+  const value = reactor.referenceName;
+
+</script>
+                </textarea>
+
+                <p>
+				And the <span class="hl">value</span> variable will store the reference name.</p>
+
+                <h3>
+                    <a href="#referencia-em-atributos" id="referencia-em-atributos" class="hash">Referência em atributos</a>
+                </h3>
+
+                <p>
+				Don't tell anyone, I'll tell you a secret, did you know that reference can also be used in HTML attributes?
+				We can use them to read and set the attributes' values, that's it! We can use reference in any HTML atribute. Let's one example:
+                </p>
+
+                <textarea id="Editor4">
+
+<div id="target3">
+    <p>The input value is : " { inputValue } "</p>
+    <input type="text" value={inputValue} oninput="reactor3.inputValue = this.value" >
+</div>
+
+<script>
+
+const reactor3 = Ref({
+    in: "target3",
+    data: {
+        inputValue: "Interjs"
+    }
+})
+
+</script>
+      
+</textarea>
+<div class="demo">
+
+    <div id="target3">
+
+    <p>The input value is : " { inputValue } "</p>
+    <input type="text" value={inputValue} oninput="reactor3.inputValue = this.value" >
+    </div>
+    <span class="space"></span>
+</div>
+
+                <h3>
+                    <a href="#o-metodo-observe" id="o-metodo-observe" class="hash">O método observe</a>
+                </h3>
+                <div class="warning">
+                    <p><span class="hl">observe</span>
+                      is a reserved property, you can´t use it as reference name.
+                    </p>
+                </div>
+                <p>
+				I believe, that you already got the ideia here! But let's go. It's a method of
+				the reactor object, it recieves a function as its argument, and the referred function will
+				be executed every single time a reference value changes, and it will be executed with 3 parameters.
+                </p>
+
+                <ul class="items">
+                    <li>
+					The first one, will indicate the reference name whose value was changed.
+              
+                    </li>
+                    <li>
+					The second one, will indicate the curent reference value.
+                    </li>
+                    <li>
+					And the last one, will indicate the previous reference's value.
+                    </li>
+                </ul>
+
+                <textarea id="Editor5">
+
+<div id="target4">
+  <p>The Grandpa is : { grandpa }.</p>
+  <p>The grandson is: { grandson }.</p>
+</div>
+
+<script>
+
+const reactor4 = Ref({
+    in: "target4",
+    data: {
+        grandpa: "Dawnton",
+        grandson(){
+
+            return `Henry ${this.grandpa}`
+
+        }
+    }
+})
+
+reactor4.observe((ref, curentValue) => {
+
+ if(ref == "grandpa"){
+
+    reactor4.grandpa = `Henry ${curentValue}`;
+
+ }
+
+})
+
+</script>
+
+</textarea>
+<div class="demo">
+<div id="target4">
+       <p>The Grandpa is : { grandpa }.</p>
+       <p>The grandson is: { grandson }.</p> 
+</div>
+      <span class="space"></span> 
+</div>
+
+                <p>
+				It's very simple, isn't it? If we change the grandpa reference value, automatically the last
+				name of te grandson will be changed to reflect the new name of the grandpa. So, open up the devTool console in this
+				page, and try to reassign a new value to the grandpa reference, and see the magic happening!
+
+                </p>
+
+                <h3>
+                    <a href="#a-propriedade-setrefs" id="a-propriedade-setrefs" class="hash"> A propriedade setRefs</a>
+                </h3>
+                <div class="warning">
+                    <p>
+					You can not use <span class="hl">setRefs</span> as a reference name, it's a reserved property.</p>
+                </div>
+
+                <p>
+				Well, the goal of this method is already described in its name, do you get it? It's used
+				to set multiple reference names in the same time in a less boring and in a more elegant way,
+				it only recieves an object as its value, and the properties of that object must be the names of the references
+				we're aiming to update, and the values? Are obviously the new values for each reference.
+                </p>
+
+                <textarea id="Editor6">
+                                        
+<div id="target5">
+    <p>{ name } is { personality }</p>
+    <div>
+        <img src={photo} title="{ name }'s photo" alt="{ name }'s photo">
+    </div>
+    <button onclick="toggle()">Ver { other }</button>
+</div>
+
+<script>
+
+const first = {
+    name: "Orlando",
+    other: "Luna",
+    photo: "/images/orlando.jpg",
+    personality: "friendly"
+}
+
+const second = {
+    name: "Luna",
+    other: "Orlando",
+    photo: "/images/luna.jpg",
+    personality: "advicer"
+}
+
+const reactor5 = Ref({
+    in: "target5",
+    data: first
+})
+
+function toggle(){
+
+    if (reactor5.name == "Orlando"){
+        reactor5.setRefs = second;
+
+    } else {
+        reactor5.setRefs = first;
+
+    }
+
+}
+
+</script>
+
+</textarea>
+<div class="demo">
+    <div id="target5">
+
+     <p>{ name } is { personality }</p>
+    <div>
+        <img src={photo} title="{ name }'s photo" alt="{ name }'s photo">
+    </div>
+    <button onclick="toggle()">Ver { other }</button>
+    
+    </div>
+    <span class="space"></span>
+</div>
+
+<p>
+If we try to set a value to unkown reference, Inter will reparse the template searching
+for that reference. Now you know everythng about reference in Inter's universe.
+</p>
+
+                <div class="Space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+
+        const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                       mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                       mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+    const textAreas = Array.from(document.getElementsByTagName("textarea"));
+
+
+      for (let index = 0; index < textAreas.length; index++) {
+
+        const textArea = textAreas[index];
+
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
+
+
+      const reator=Ref({
+       in:"target1",
+       data:{
+           message:"new comer!"
+       }
+   })
+
+const reactor2 = Ref({
+    in: "target2",
+    data: {
+        counter: 0
+    }
+})
+
+setInterval(() => reactor2.counter++, 1000)
+
+const reactor3 = Ref({
+    in: "target3",
+    data: {
+        inputValue: "Interjs"
+    }
+})
+
+    
+  
+const reactor4 = Ref({
+    in: "target4",
+    data: {
+        grandpa: "Dawnton",
+        grandson(){
+
+            return `Henry ${this.grandpa}`
+
+        }
+    }
+})
+
+reactor4.observe((ref, curentValue) => {
+
+ if(ref == "grandpa"){
+
+    reactor4.grandpa = `Henry ${curentValue}`;
+
+ }
+
+})
+
+const first = {
+    name: "Orlando",
+    other: "Luna",
+    photo: "/images/orlando.jpg",
+    personality: "friendly"
+}
+
+const second = {
+    name: "Luna",
+    other: "Orlando",
+    photo: "/images/luna.jpg",
+    personality: "advicer"
+}
+
+const reactor5 = Ref({
+    in: "target5",
+    data: first
+})
+
+function toggle(){
+
+    if (reactor5.name == "Orlando"){
+        reactor5.setRefs = second;
+
+    } else {
+        reactor5.setRefs = first;
+
+    }
+
+}
+
+       </script>
+    </body>
+</html>

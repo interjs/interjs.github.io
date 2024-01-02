@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"><link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <title>Instalation</title>
+        
+    </head>
+    <body>
+        <style>
+       .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+
+        </style>
+        
+        <div class="main">
+           
+            <aside>
+            
+                <nav>
+                    <ul class="social">
+                        
+                       <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                       <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                       <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                    </ul>
+                </nav>
+
+                <nav>
+                    <ul class="nav">
+                    <li>
+                            <a href="/v2/tutorial/pt/introducao/">
+                                Introdução
+                            </a>
+                            </li>
+                            <li>
+                            <a href="/v2/tutorial/pt/instalacao/">
+                                Instalação
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/v2/tutorial/pt/referencia">Referência</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/lista">Lista</a>
+                        </li>
+                        <li>
+                            <a href="/v2/tutorial/pt/reator">Reator</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+          
+        <article>
+<div>
+    <h1><a href="#instalacao" id="instalacao" class="hash"> Instalation</a></h1>
+    
+    <p>
+	  To install Inter, you won't need to make one thousand setup, you will just need
+	  to import Inter from CDN(jsDelivr) or download it and use it straight from your own machine.
+    </p>
+
+    <h3><a href="#cdn" id="cdn" class="hash">CDN</a></h3>
+    <textarea id="Editor1">
+
+<!--Install the latest version of Inter-->
+<script src="https://cdn.jsdelivr.net/gh/interjs/inter/inter.min.js"></script>
+<!--Install a spacific version-->
+<script src="https://cdn.jsdelivr.net/gh/interjs/inter@version-number/inter.min.js"></script>
+<script>
+
+  // Your code here.
+
+</script>
+    </textarea>
+	<p> In <span class="hl">version-number</span> you'll certainily type the version number
+	you are aiming to use, for instance, if we are willing to use the version <span class="hl">2.0.15</span>,
+	there we must type <span class="hl">v2.0.15</span>, you see? It must start with letter v.
+	</p>
+    <h3><a href="#localmente" id="localmente" class="hash">Localmente</a></h3>
+    <p>
+	 Do you want to use Inter straight from your own machine? It's a peace of cake!
+        click on <a href="https://github.com/interjs/inter/releases/download/v2.1.7/inter.min.js" title="Vai baixar a versão 2.1.7(A última versão)">Download - v2.1.7</a>, and now
+     you just have to import it in a script tag.
+    </p>
+
+<textarea id="Editor2">
+
+<script src="inter.min.js"></script>
+<script>
+    
+  // Teu código 
+    
+</script>
+    </textarea>
+    <p>
+	You probably are wondering, if I wanted to download an old version, where will I find it? You will find
+	all Inter's verions in <a href="https://github.com/interjs/inter/releases">Releases</a> in Interjs Github repository.
+	Do not use an old version, only if you need badly.
+	</p>
+    <textarea>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/gh/interjs/inter/inter.min.js"></script>
+        <title>Practicing</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script>
+            // Your code here.
+        </script>
+    </body>
+</html>
+    </textarea>
+	<p>Now, you might be ready to find out how amazing Inter really is, let's write some code?</p>
+    <div class="Space"></div>
+</div>
+</article>
+</div>
+<script>
+    const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula",
+        viewPortMargin: Infinity
+
+      }
+
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
+
+for (let index = 0; index < textAreas.length; index++) {
+
+      const textArea = textAreas[index];
+
+     CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
+
+</script>
+</body>
+</html>
