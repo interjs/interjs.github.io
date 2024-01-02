@@ -69,7 +69,9 @@
                     <li>
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
-                    
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
                     
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -79,40 +81,38 @@
         </aside>
         <article>
             <div>
-                <h1>Referência</h1>
+                <h1><a href="#referencia" id="referencia" class="hash">Referência</a></h1>
 <div class="warning">
 <p>
     Essa e outras matérias nesse tutorial
     pressupõem que você tenha pelo menos conhecimento intermediário em Javascript e HTML.
 </p>
 </div>
-                <p>Referência no Inter, é um aparelho
-                    encaracolhado {}, e nesse aparelho encaracolhado deve ter o nome de uma propriedade
-                    do objecto <span class="hl">data</span> e ele será substituído pelo valor dessa propriedade, calma aí,
+                <p>Referência no Inter, são
+                    chaves {}, e dentro dessas chaves, deve ter o nome de uma propriedade
+                    do objecto <span class="hl">data</span>, e elas(as chaves) serão substituídas pelo valor dessa propriedade, calma aí,
                     vê um exemplo:
                 </p>
 
                 <textarea id="Editor1">
 
-  <div id="alvo1">
+<div id="alvo1">
+ <p>Olá, { mensagem }!</p>
+</div>
 
-    <p>Olá, { mensagem }!</p>
+<script>
 
-  </div>
+const reator = Ref({
+    in: "alvo1",
+    data: {
+        mensagem: "Aprendiz"
+    }
+})
 
-  <script>
-
-   const _reator=Ref({
-       in:"alvo1",
-       data:{
-           mensagem:"Aprendiz"
-       }
-   })
-
-  </script>
+</script>
 
 
-                </textarea>
+                 </textarea>
                 <div class="demo">
                     
   <div id="alvo1">
@@ -123,41 +123,39 @@
   <span class="space"></span>
                 </div>
 
-                <p>Lá na tag script, você vê a função Ref não é? Essa função é usada
+                <p>Lá na tag script, você vê a função <span class="hl">Ref</span> não é? Essa função é usada
                     para analisar o template alvo em busca de referências, e ela deve receber apenas um objecto como o seu argumento,
-                     o valor  da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento pai onde os elementos com
-                    as referências se encontram, no nosso exemplo, o elemento pai é a div não é? E porque que nós estamos chamando ele de elemento
+                     o valor  da propriedade <span class="hl">in</span>, indica o valor do atributo id do elemento pai onde os elementos com
+                    as referências se encontram, no nosso exemplo, o elemento pai é a <span class="hl">div</span> não é? E por que nós estamos chamando ele de elemento
                     pai? Ele tem um filho, que é o elemento <span class="hl">p</span>, e no texto desse elemento tem uma referência chamada <span class="hl">mensagem</span>.
-                     O <span class="hl">data</span> é um objecto em que as suas propriedades serão os nomes das referências
+                     O valor da propriedade <span class="hl">data</span>, deve ser um objecto, em que as suas propriedades serão os nomes das referências,
                     e os seus valores, serão obviamente os textos que vão substituir as referências com os referidos nomes.
                 </p>
 
                 <p>
                     Nós usamos a referência quando quisermos que uma determinada parte da nossa interface seja dinámica, então,
-                    geralmente é esperado que a referência mude de valor, e é para isso que existe o <span class="hl">reator</span>.
-                    A função Ref retorna um objecto reativo com as mesmas propriedades do objecto data, nós usamos esse objecto quando
+                    geralmente é esperado que a referência mude de valor, e é para isso que existe o <a href="/v2/tutorial/pt/reator">reator</a>.
+                    A função <span class="hl">Ref</span> retorna um objecto <span class="hl">reativo</span> com as mesmas propriedades que o objecto <span class="hl">data</span>, nós usamos esse objecto quando
                     pretendermos mudar os valores das referências, agora nessa página abra o console do navegador
-                    e digite: _reator.mensagem="Inter é incrível"; ou qualquer outro valor, verás a interface ser atualizada para refletir o novo valor da referência.
+                    e digite: reator.mensagem="Inter é incrível"; ou qualquer outro valor, verás a interface ser atualizada para refletir o novo valor da referência.
                 </p>
                 
                 <textarea id="Editor2">
 
 <div id="alvo2">
-
-    <p>Contando: { contador }</p>
-
+<p>Contando: { contador }</p>
 </div>
 
 <script>
 
-const reator2=Ref({
-    in:"alvo2",
-    data:{
-        contador:0
+const reator2 = Ref({
+    in: "alvo2",
+    data: {
+        contador: 0
     }
 })
 
-setInterval(()=>reator2.contador++, 1000)
+setInterval(() => reator2.contador++, 1000)
 
 </script>
 
@@ -170,12 +168,12 @@ setInterval(()=>reator2.contador++, 1000)
     </div>
 <span class="space"></span>
 </div>
-                <p>A parte da função Ref você já sabe o que está acontecendo, a novidade está
+                <p>A parte da função <span class="hl">Ref</span> você já sabe o que está acontecendo, a novidade está
                     no <span class="hl">setInterval</span>, você notou que estamos incrementando o valor do <span class="hl">contador</span> em cada 1 segundo não é? Isso significa
                     que estamos definindo um valor para a referência <span class="hl">contador</span>, então a interface vai ser atualizada para refletir o novo valor.
                 </p>
 
-                <h3>Ler o valor de uma referência</h3>
+                <h3><a href="#ler-o-valor-de-uma-referencia" id="ler-o-valor-de-uma-referencia" class="hash">Ler o valor de uma referência</a> </h3>
 
                 <p>
                     Nós não podemos apenas definir o valor de uma referência, mas nós também podemos ler o valor de uma referência, fazendo da seguinte forma:
@@ -185,17 +183,17 @@ setInterval(()=>reator2.contador++, 1000)
 
                 <textarea id="Editor3">
 
- <script>
+<script>
 
-  const retorno=reator.nomeDaReferencia;
+  const retorno = reator.nomeDaReferencia;
 
 </script>
                 </textarea>
 
-                <p>E a variável retorno vai armazenar o valor da referência.</p>
+                <p>E a variável <span class="hl">retorno</span> vai armazenar o valor da referência.</p>
 
                 <h3>
-                    Referência em atributos
+                    <a href="#referencia-em-atributos" id="referencia-em-atributos" class="hash">Referência em atributos</a>
                 </h3>
 
                 <p>Mas deixa eu te contar um secredo, você sabia que a referência pode ser usada também em atributos HTML?
@@ -206,26 +204,19 @@ setInterval(()=>reator2.contador++, 1000)
                 <textarea id="Editor4">
 
 <div id="alvo3">
-
-    <p title="São {hora} horas">
-        Oi, passe o mouse sobre mim para veres o meu título dinámico.
-    </p>
-
+    <p>O valor no input é : " { valorNoInput } "</p>
+    <input type="text" value={valorNoInput} oninput="reator3.valorNoInput = this.value" >
 </div>
 
 <script>
-    const reator3=Ref({
-        in:"alvo3",
-        data:{
-            hora(){
 
-                const data=new Date();
+const reator3 = Ref({
+    in: "alvo3",
+    data: {
+        valorNoInput: "Interjs"
+    }
+})
 
-                return data.getHours();
-
-            }
-        }
-    })
 </script>
       
 </textarea>
@@ -233,23 +224,20 @@ setInterval(()=>reator2.contador++, 1000)
 
     <div id="alvo3">
 
-        <p title="São {hora} horas">
-            Oi, passe o mouse sobre mim para veres o meu título dinámico.
-        </p>
-    
+        <p>O valor no input é : " { valorNoInput } "</p>
+        <input type="text" value={valorNoInput} oninput="reator3.valorNoInput = this.value" >
     </div>
     <span class="space"></span>
 </div>
 
-                <p>
-                    Você notou o valor da referência hora? É mesmo isso! As referências podem
-                    ter funções como os seus valores, essas funções serão invocadas e os valores retornados pelas
-                    funções serão os valores das referências.
-                </p>
-
                 <h3>
-                    O método observe
+                    <a href="#o-metodo-observe" id="o-metodo-observe" class="hash">O método observe</a>
                 </h3>
+                <div class="warning">
+                    <p><span class="hl">observe</span> é uma propriedade reservada, você não pode
+                    criar uma referência com o referido nome.
+                    </p>
+                </div>
                 <p>
                     Eu acredito que você já tenha uma ideia para que esse método
                     serve! Mas vamos lá, ele será um método do objecto reator,
@@ -272,17 +260,17 @@ setInterval(()=>reator2.contador++, 1000)
 
                 <textarea id="Editor5">
 
-   <div id="alvo4">
-    <p>O avô é: { avo }.</p>
-    <p>O neto é: { neto }.</p>
-  </div>
+<div id="alvo4">
+  <p>O avô é: { avo }.</p>
+  <p>O neto é: { neto }.</p>
+</div>
 
 <script>
 
-  const reator4=Ref({
-    in:"alvo4",
-    data:{
-        avo:"Bernardo",
+const reator4 = Ref({
+    in: "alvo4",
+    data: {
+        avo: "Bernardo",
         neto(){
 
             return `William ${this.avo}`
@@ -291,23 +279,24 @@ setInterval(()=>reator2.contador++, 1000)
     }
 })
 
-reator4.observe((ref, valorAtual)=>{
+reator4.observe((ref, valorAtual) => {
 
- if(ref=="avo"){
+ if(ref == "avo"){
 
-    reator4.neto=()=>`William ${valorAtual}`
+    reator4.neto = `William ${valorAtual}`;
 
  }
 
 })
+
 </script>
 
 </textarea>
 <div class="demo">
-    <div id="alvo4">
-        <p>O avô é: { avo }.</p>
+<div id="alvo4">
+       <p>O avô é: { avo }.</p>
         <p>O neto é: { neto }.</p>
-      </div>
+</div>
       <span class="space"></span> 
 </div>
 
@@ -320,8 +309,11 @@ reator4.observe((ref, valorAtual)=>{
                 </p>
 
                 <h3>
-                    A propriedade setRefs
+                    <a href="#a-propriedade-setrefs" id="a-propriedade-setrefs" class="hash"> A propriedade setRefs</a>
                 </h3>
+                <div class="warning">
+                    <p>Você não deve usar uma referência com o mesmo nome que essa propriedade. SetRefs é uma propriedade reservada.</p>
+                </div>
 
                 <p>O nome já diz tudo, mas enfim, ela serve para definir os valores de múltiplas referências de uma
                     forma bem elegante e menos cansativa, essa propriedade apenas aceita um objecto como o seu
@@ -330,51 +322,48 @@ reator4.observe((ref, valorAtual)=>{
                 </p>
 
                 <textarea id="Editor6">
-                    
+                                        
 <div id="alvo5">
-
     <p>{ nome } é { qualidade }</p>
     <div>
-        <img src={imagem} title="Foto de {nome}" alt="Foto de {nome}">
+        <img src={imagem} title="Foto de { nome }" alt="Foto de { nome }">
     </div>
     <button onclick="toggle()">Ver { outro }</button>
-
 </div>
 
 <script>
 
-const primeiro={
-    nome:"Orlando",
-    outro:"Luna",
-    imagem:"/images/luna.jpg",
-    qualidade:"amigável"
+const primeiro = {
+    nome: "Orlando",
+    outro: "Luna",
+    imagem: "/images/orlando.jpg",
+    qualidade: "amigável"
 }
 
-const segundo={
-    nome:"Luna",
-    outro:"Orlando",
-    imagem:"/images/orlando.jpg",
-    qualidade:"conselheira"
+const segundo = {
+    nome: "Luna",
+    outro: "Orlando",
+    imagem: "/images/luna.jpg",
+    qualidade: "conselheira"
 }
 
-const reator5=Ref({
-    in:"alvo5",
-    data:primeiro
+const reator5 = Ref({
+    in: "alvo5",
+    data: primeiro
 })
 
 function toggle(){
 
-    if(reator5.nome=="Orlando"){
+    if(reator5.nome == "Orlando"){
+        reator5.setRefs = segundo;
 
-        reator5.setRefs=segundo;
-
-    }else{
-
-        reator5.setRefs=primeiro;
+    } else {
+        reator5.setRefs = primeiro;
 
     }
 
 }
+
 </script>
 
 </textarea>
@@ -394,7 +383,7 @@ function toggle(){
 <p>
     Se nós tentarmos definir um valor para uma referência que o Inter não conhece, ele vai
     analisar novamente o template em busca da referência com o referido nome. E agora você conhece tudo sobre
-    referência no Inter
+    referência no Inter.
 </p>
 
                 <div class="Space"></div>
@@ -411,21 +400,26 @@ function toggle(){
                        mode: "vbscript"}]
       };
 
-      for(let i=1; i<7; i++){
-
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), {
+      const editorOptions={
         mode: mixedMode,
         readOnly:true,
         lineNumbers:true,
-        theme:"dracula",
-        
-      });
-
+        theme:"dracula"  
       }
 
+    const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      const _reator=Ref({
+
+      for (let index = 0; index < textAreas.length; index++) {
+
+        const textArea = textAreas[index];
+
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
+
+
+      const reator=Ref({
        in:"alvo1",
        data:{
            mensagem:"Aprendiz"
@@ -444,13 +438,7 @@ setInterval(()=>reator2.contador++, 1000)
 const reator3=Ref({
         in:"alvo3",
         data:{
-            hora(){
-
-                const data=new Date();
-
-                return data.getHours();
-
-            }
+            valorNoInput: "Interjs"
         }
     })
 

@@ -73,7 +73,7 @@
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
                     
-                    
+                    <li><a href="/v2/tutorial/pt/reator">Reator</a></li>
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
                     </li>
@@ -84,10 +84,10 @@
         
         <article>
             <div>
-                <h1>Ajax</h1>
+                <h1><a href="#ajax" id="ajax" class="hash">Ajax</a></h1>
                  <div class="warning">
                      <p>Essa matéria pressupõe que você tenha noção
-                         sobre comunicação com servidor.
+                         sobre a comunicação com o servidor.
                      </p>
                  </div>
 
@@ -95,10 +95,10 @@
                      O Ajax é uma técnica usada para se comunicar assincronamente com o servidor,
                      ou seja, o Ajax permite o envio e a recepção de dados do servidor sem que a página recarregue!
                  </p>
-                 <p>Para isso no Inter nós devemos usar o <span class="hl">constructor Backend</span>
+                 <p>Para isso no Inter nós devemos usar o constructor <span class="hl">Backend</span>,
                 nome muito descriptivo né? Quando criarmos uma <span class="hl">instância</span>
-            para o referido <span class="hl">constructor</span>, ele terá o método <span class="hl">request</span> que nós usamos para as configurações
-        da requisição, e o referido método aceita apenas um objecto como o seu argumento, e objecto aceita as seguintes propriedades:</p>
+            para o referido <span class="hl">constructor</span>, ela(a instância) terá o método <span class="hl">request</span>, que nós usamos para as configurações
+        da requisição, e o referido método aceita apenas um objecto como o seu argumento, e o objecto aceita as seguintes propriedades:</p>
 
         <ul class="items">
             <li>
@@ -116,14 +116,14 @@
                 devem ser as funções que serão invocadas quando os eventos ocorrerem.
             </li>
             <li>
-                <span class="hl">security</span> - Deve ser um objecto, será útil quando é requisitado o nome do usuário e a palavra-passe 
+                <span class="hl">security</span> - Deve ser um objecto, será útil quando for requisitado o nome do usuário e a palavra-passe 
                 para estabelecer a comunicação com o servidor. Ele aceita duas propriedades, o <span class="hl">username</span>
                 e o valor dessa propriedade deve indicar o nome do usuário e a <span class="hl">password</span> e o valor
                 dessa propriedade deve indicar a palavra-passe.
             </li>
             <li>
                 <span class="hl">timeout</span> - Essa propriedade apenas aceita número como o seu valor e esse número
-                vai indicar o tempo em mil segundos, se o tempo da requisição ultrapassar o estabelecido com essa propriedade a requesição
+                vai indicar o tempo em mil segundos, se o tempo da requisição ultrapassar o estabelecido com essa propriedade, a requesição
                 será cancelada e o evento <span class="hl">ontimeout</span> será acionado.
             </li>
 
@@ -136,8 +136,8 @@
 
         <p>
             O método <span class="hl">request</span> retorna um objecto com alguns métodos
-            que tem dois objectivos, o primeiro é que quando eles forem invocados
-            vão dar início a requisição, o segundo é que eles vão nos ajudar a reagir ao resultado da requisição. E os métodos são:
+            que têm dois objectivos, o primeiro é que quando eles forem invocados
+            vão dar início à requisição, o segundo é que eles vão nos ajudar a reagir ao resultado da requisição. E os métodos são:
         </p>
 
         <ul class="items">
@@ -159,7 +159,7 @@
         </ul>
 
         <p>
-            As funções passadas como argumento dos referidos métodos serão invocadas com um objecto como o seu argumento, e as propriedades
+            As funções passadas como argumento dos referidos métodos, serão invocadas com um objecto como o seu argumento, e as propriedades
             desse objecto vão indicar o resultado da requisição. As propriedades são:
         </p>
 
@@ -175,7 +175,9 @@
                 pelo servidor.
             </li>
             <li>
-                <span class="hl">headers</span> - É uma propriedade só de leitura que retorna os cabeçalhos enviados pelo servidor.
+                <span class="hl">headers</span> - Antes da versão <span class="hl">2.1.0</span>, essa era uma propriedade só de leitura que retornava os cabeçalhos enviados pelo servidor em uma <span class="hl">string</span>.
+                Agora, o valor dessa propriedade é um objecto, em que as suas propriedades representam os nomes dos cabeçalhos enviados pelo servidor, e os valores das propriedades
+                 representam os valores dos cabeçalhos.
             </li>
             <li>
                 <span class="hl">isObj</span> - É um método que serve para verificar se a resposta enviada pelo servidor foi um objecto <span class="hl">JSON</span>, se for, vai
@@ -190,52 +192,47 @@
                 <textarea id="Editor1">
 
 <div id="ajax1">
-
     <h3>Identidade</h3>
     <ul>
         <li>Nome: { nome }</li>
         <li>Idade: { idade }</li>
-        <li>Moradia: { moradia }</li>
+        <li>País: { pais }</li>
         <li>Estado cívil: { ec }</li>
         <li>Número de filhos: { nf }</li>
     </ul>
-    
     <div>
         <img src={imagem} alt="Foto de { nome }">
     </div>
-
-
    <ul id="lista-de-usuarios"></ul>
-
-
 </div>
+
 <script>
 
-const usuarios=["./user1.json", "./user2.json", "./user3.json"];
+const usuarios = ["./user1.json", "./user2.json", "./user3.json"];
 
-const ref=Ref({
-    in:"ajax1",
-    data:{
-        nome:"...",
-        idade:"...",
-        moradia:"...",
-        ec:"...",
-        nf:"...",
-        imagem:"/images/Inter.png"
+const ref = Ref({
+    in: "ajax1",
+    data: {
+        nome: "...",
+        idade: "...",
+        pais: "...",
+        ec: "...",
+        nf: "...",
+        imagem: "/images/Inter.png"
     }
 })
 
 renderList({
-    in:"lista-de-usuarios",
-    each:usuarios,
+    in: "lista-de-usuarios",
+    each: usuarios,
     do(usuario, i){
 
         return template({
-            tag:"li", children:[{
-                tag:"span", text:`Usuário ${i+1}`
+            tag: "li", children: [{
+                tag: "span", text: `Usuário ${i+1}`
             },{
-                tag:"button", text:"Carregar info", events:{
-                    onclick:()=>carregarInfo(usuario)
+                tag: "button", text: "Carregar info", events: {
+                    onclick: () => carregarInfo(usuario)
                 }
             }]
         })
@@ -245,14 +242,14 @@ renderList({
 
 function carregarInfo(caminho){
 
-    const ajax1=new Backend();
+    const ajax1 = new Backend();
 
-    ajax1.request({
-        type:"get",
-        path:caminho
-    }).okay(({ data })=>{
+    ajax1.request({ 
+        type: "get",
+        path: caminho
+    }).okay(({ data }) => {
 
-        ref.setRefs=data;
+        ref.setRefs = data;
 
     })
 
@@ -269,7 +266,7 @@ function carregarInfo(caminho){
     <ul>
         <li>Nome: { nome }</li>
         <li>Idade: { idade }</li>
-        <li>Moradia: { moradia }</li>
+        <li>País: { pais }</li>
         <li>Estado cívil: { ec }</li>
         <li>Número de filhos: { nf }</li>
     </ul>
@@ -285,7 +282,7 @@ function carregarInfo(caminho){
 </div>
 <div class="space"></div>
 </div>
-<h3>Os eventos no Ajax</h3>
+<h3><a href="#os-eventos-no-ajax" id="os-eventos-no-ajax" class="hash">Os eventos no Ajax</a></h3>
 <p>
     Nós podemos definir os escutadores de eventos em uma requisição feita com o Ajax,
     e esses escutadores devem ser declarados como propriedades do objecto <span class="hl">events</span>, os eventos são:
@@ -296,13 +293,13 @@ function carregarInfo(caminho){
         enquanto a requisição estiver a ser feita, e a função que deve ser invocada quando o evento ocorrer
         será invocada com um argumento, que será um objecto com duas propriedades. A propriedade
         <span class="hl">progress</span> vai indicar o progresso(de 0 à 100) da requisição, principalmente
-        em requisições do tipo <span class="hl">POST</span> e <span class="hl">PUT</span>, e o método
+        quando os dados que estiverem a ser enviados ou recebidos forem muito pesados e o método
         <span class="hl">abort</span> quando for invocado vai abortar/cancelar a requisição e o evento
         <span class="hl">onabort</span> será acionado.
     </li>
     <li>
         <span class="hl">ontimeout</span> - Esse evento vai ser acionado quando o tempo de requisição ultrapassar
-        o estabelecido(pelo navegador ou pelo programador com a propriedade <span class="hl">timeout</span>).
+        o estabelecido(pelo programador, com a propriedade <span class="hl">timeout</span>).
     </li>
     <li>
         <span class="hl">onabort</span> - Esse evento será acionado quando a requisição for cancelada com o método <span class="hl">abort</span>.
@@ -314,6 +311,150 @@ function carregarInfo(caminho){
     até aqui e entendeste tudo, então parabéns, você agora pode programar com o Inter numa boa! Passa
     lá no repositório do Inter no <a href="https://github.com/interjs/inter">Github</a> e deixe uma estrela, dessa forma estarás ajudando na repercussão do Inter.
 </p>
+
+<p>E para terminar o tutorial, dê uma olhada no exemplo abaixo.</p>
+
+<textarea id="Editor2">
+
+<div id="app">
+<h4> Descubra os repositórios de um usuário do Github</h4>
+    <div>
+        <input {...searchinput}>
+        <button {...searchbutton}> { buttonStatus  } </button>
+    </div>
+    <p>
+        Usuário : { userName  },
+        Número de repositórios : { repoLength  }.
+        
+    </p>
+	<p style="color: red;"> { errorMessage }  </p> 
+    <div id="repoList"></div>
+</div>
+
+<script>
+
+ const { searchinput, searchbutton  } = toAttrs({
+    in: "app",
+    data: {
+        searchinput: { type: "text", value: "", placeholder: "Digite o usuário" },
+        searchbutton: { disabled: null, onclick: search }
+    }
+ })
+
+ const refs = Ref({
+    in: "app",
+    data: {
+        userName: "sem usuário",
+        repoLength: 0,
+        buttonStatus: "Buscar",
+        errorMessage: ""
+    }
+ })
+
+  const listReactor = renderList({
+    in: "repoList",
+    each: [],
+    do({ name, description, full_name, forks }){
+
+        const aAttrs = {
+            target: "_blank",
+            href: `https://github.com/${full_name}`
+        }
+
+        return template({
+            tag: "div", children: [{
+                tag: "h2", text: `Nome do repo: ${ name }`
+            },{
+                tag: "p", text: description, renderIf: description
+            },{
+                tag: "p", text: forks > 0 ? `Forks: ${ forks }` : "Sem forks"
+            },{
+                tag: "a", attrs: aAttrs, children: [{
+                    tag: "button", text: "Visitar"
+                }]
+            }]
+        })
+
+    }
+  })
+
+  function search(){
+
+    refs.buttonStatus = "Buscando";
+    searchbutton.disabled = true;
+    
+    const ajax2 = new Backend();
+
+    const requestOptions = {
+        type: "get",
+        path: `https://api.github.com/users/${searchinput.value}/repos`
+    }
+
+    ajax2.request(requestOptions).response(okay, error);
+
+  }
+
+  function okay({ data  }){
+
+    listReactor.setEach = data;
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: searchinput.value,
+        repoLength: data.length,
+        errorMessage: ""
+    };
+
+    clearInputAndEnableTheButton();
+
+  }
+
+  function error({ status, data  }){
+
+    listReactor.setEach = [];
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: "sem usuário",
+        repoLength: 0,
+        errorMessage() {
+
+          return (
+            status == 404 ? `Usuário não encontrado` : data
+          )  
+
+        }
+    };
+
+    clearInputAndEnableTheButton();
+
+  }
+
+  function clearInputAndEnableTheButton(){
+
+     searchinput.value = "";
+     searchbutton.disabled = null;
+
+  }
+
+</script>
+
+</textarea>
+<div class="demo">
+<div id="app">
+<h4> Descubra os repositórios de um usuário do Github</h4>
+<div>
+    <input {...searchinput}>
+    <button {...searchbutton}> { buttonStatus  } </button>
+</div>
+<p>
+    Usuário : { userName  },
+    Número de repositórios : { repoLength  }.
+    
+</p>
+<p style="color: red;"> { errorMessage }  </p> 
+<div id="repoList"></div>
+</div>
+<div class="space"></div>
+</div>
                 <div class="Space"></div>
             </div>
         </article>
@@ -332,13 +473,15 @@ function carregarInfo(caminho){
         theme:"dracula"  
       }
 
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<2; i++){
+      for (let index = 0; index < textAreas.length; index++) {
 
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+            const textArea = textAreas[index];
 
-      }
+           CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
       const usuarios=["./user1.json", "./user2.json", "./user3.json"];
 
@@ -347,7 +490,7 @@ const ref=Ref({
     data:{
         nome:"...",
         idade:"...",
-        moradia:"...",
+        pais:"...",
         ec:"...",
         nf:"...",
         imagem:"/images/Inter.png"
@@ -386,6 +529,111 @@ function carregarInfo(caminho){
     })
 
 }
+
+
+const { searchinput, searchbutton  } = toAttrs({
+    in: "app",
+    data: {
+        searchinput: { type: "text", value: "", placeholder: "Digite o usuário" },
+        searchbutton: { disabled: null, onclick: search }
+    }
+ })
+
+ const refs = Ref({
+    in: "app",
+    data: {
+        userName: "sem usuário",
+        repoLength: 0,
+        buttonStatus: "Buscar",
+        errorMessage: ""
+    }
+ })
+
+  const listReactor = renderList({
+    in: "repoList",
+    each: [],
+    do({ name, description,  forks, full_name}) {
+
+        const aAttrs = {
+            target: "_blank",
+            href: `https://github.com/${full_name}`
+        }
+
+        return template({
+            tag: "div", children: [{
+                tag: "h2", text: `Nome do repo: ${ name }`
+            },{
+                tag: "p", text: description, renderIf: description
+            },{
+                tag: "p", text: forks > 0 ? `Forks: ${ forks }` : "Sem forks"
+            },{
+                tag: "a", attrs: aAttrs, children: [{
+                    tag: "button", text: "Visitar"
+                }]
+            }]
+        })
+
+    }
+  })
+
+  function search() {
+
+    refs.buttonStatus = "Buscando";
+    searchbutton.disabled = true;
+    
+    const ajax2 = new Backend();
+
+    const requestOptions = {
+        type: "get",
+        path: `https://api.github.com/users/${searchinput.value}/repos`
+    }
+
+    ajax2.request(requestOptions).response(okay, error);
+
+  }
+
+  function okay({ data  }){
+    listReactor.setEach = data;
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: searchinput.value,
+        repoLength: data.length,
+        errorMessage: ""
+    };
+
+    
+
+    clearInputAndEnableTheButton();
+
+  }
+
+  function error({ status, data  }){
+
+    listReactor.setEach = [];
+    refs.setRefs = {
+        buttonStatus: "Buscar",
+        userName: "sem usuário",
+        repoLength: 0,
+        errorMessage(){
+
+          return (
+            status == 404 ? `Usuário não encontrado` : data
+          )  
+
+        }
+    };
+
+    clearInputAndEnableTheButton();
+
+  }
+
+  function clearInputAndEnableTheButton(){
+
+     searchinput.value = "";
+     searchbutton.disabled = null;
+
+  }
+
 
        </script>
     </body>

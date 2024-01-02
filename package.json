@@ -1,19 +1,15 @@
 {
   "name": "inter-docs",
-  "version": "2.0.7",
+  "version": "2.1.7",
   "description": "The docs for Interjs",
   "author": "Denis Power",
   "license": "MIT",
-  "repository": "github:interjs/interjs.github.op",
+  "repository": "github:interjs/interjs.github",
   "homepage": "https://interjs.github.io",
   "dependencies":{
-  "inter":">=2.0.0",
-  "codemirror":"5.0.0",
-  "fontawesome":"5.14.0"
+  "inter": "^2.0.0",
+  "codemirror": "5.0.0",
+  "fontawesome": "5.14.0"
     
-  },
-  "devDependencies":{
-  "node":">=14.18.0"
   }
-  
   }

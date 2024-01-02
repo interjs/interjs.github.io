@@ -68,7 +68,9 @@
                     <li>
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
-                    
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
                     
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -78,7 +80,7 @@
         </aside>
         <article>
             <div>
-                <h1>Renderização condicional</h1>
+                <h1><a href="#renderizacao-condicional" id="renderizacao-condicional" class="hash"> Renderização condicional</a></h1>
                  <div class="warning">
                      <p>Essa matéria pressupõe que tenhas conhecimento
                          sobre referência, gerenciador de atributos no Inter e de pelo
@@ -90,60 +92,62 @@
                      os seguintes atributos nativos do Inter:
                  </p>
 
-                  <h3 id="atributo-_if">Atributo _if</h3> 
-                 <p>O valor desse atributo deve ser o nome de uma das propriedades do objecto
-                     data(da função renderIf()), e se o valor da referida propriedade for verdadeiro o elemento será renderizado, caso o contrário o elemento
+                  <h3><a href="#atributo-_if" id="atributo-_if" class="hash">Atributo _if</a></h3> 
+                 <p>O valor desse atributo deve ser o nome de uma propriedade do objecto
+                     data(da função renderIf()), e se o valor da referida propriedade for <span class="hl">true</span>, o elemento será renderizado, caso o contrário(se for <span class="hl">false</span>), o elemento
                      não será renderizado.
                  </p>
+
+</textarea>
 <textarea id="Editor1">
 
 <div id="alvo1">
-
     <div>
         <h5 _if="viveNamesmaCidade">Essa pessoa vive na mesma cidade que você  </h5>
         <img {...imagem}>
         <button onclick="anterior()"  _if="temAnterior">Anterior</button>
         <button onclick="proximo()"  _if="temProximo">Próximo</button>
     </div>
-
 </div>
+
 <script>
 
-const imagens=[{urlDaImagem:"/images/Anny.jpg",
- condicional:{viveNamesmaCidade:true, temAnterior:false, temProximo:true}},...];
+const imagens = [
+    { urlDaImagem: "/images/Anny.jpg", condicional:
+    { viveNamesmaCidade: true, temAnterior: false, temProximo: true } },...];
 
-let pos=0;
+let pos = 0;
 
-const { imagem }=toAttrs({
-    in:"alvo1",
-    data:{
-        imagem:{
-            src:imagens[0].urlDaImagem,
-            alt:"Essa é uma pessoa"
+const { imagem } = toAttrs({
+    in: "alvo1",
+    data: {
+        imagem: {
+            src: imagens[0].urlDaImagem,
+            alt: "Essa é uma pessoa"
         }
     }
-});
+})
 
-const _if=renderIf({
-    in:"alvo1",
-    data:imagens[0].condicional
-});
+const _if = renderIf({
+    in: "alvo1",
+    data: imagens[0].condicional
+})
 
-function trocarImagem(){
+  function trocarImagem(){
 
-    imagem.src=imagens[pos].urlDaImagem;
-    _if.setConds=imagens[pos].condicional;
+    imagem.src = imagens[pos].urlDaImagem;
+    _if.setConds = imagens[pos].condicional;
 
 }
 
-function anterior(){
+  function anterior(){
 
     pos--;
     trocarImagem();
     
 }
 
-function proximo(){
+  function proximo(){
 
     pos++;
     trocarImagem();
@@ -165,24 +169,170 @@ function proximo(){
 
 <p>
     Nós usamos a função <span class="hl">renderIf</span> para analisar o template em busca dos elementos que serão renderizados
-    condicionalmente, e a referida função aceita apenas um objecto como o seu argumento,
-    o valor da propriedade <span class="hl">in</span> indica o valor do atributo id do elemento
-    pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>
+    condicionalmente, e a referida função aceita apenas um objecto como o seu argumento.
+    O valor da propriedade <span class="hl">in</span>, indica o valor do atributo id do elemento
+    pai onde os elementos com os atributos condicionais se encontram, e o valor da propriedade <span class="hl">data</span>,
     deve ser um objecto, em que as suas propriedades vão indicar as propriedades condicionais e os valores dessas
-    propriedades devem ser valores booleanos(true/false). A propriedade <span class="hl">setConds</span> será explicada ao longo dessa matéria.
+    propriedades devem ser valores booleano(true/false). A propriedade <span class="hl">setConds</span> será explicada ao longo dessa matéria.
 </p>
 <p>
     A função <span class="hl">renderIf</span> retorna um objecto reativo, que vai nos permitir alterar os valores das propriedades condicionais, e esse tipo de objecto
-    no Inter chamamos de reator.
+    no Inter chamamos de <a href="/v2/tutorial/pt/reator">reator</a>.
 </p>
-<h3 id="atributo-_else">Atributo _else</h3>
+<h3><a href="#atributo-_elseIf" id="atributo-_elseIf" class="hash">Atributo _elseIf</a></h3>
+<div class="warning">
+    <p>Esse atributo faz parte do Inter desde a versão <a href="">2.1.0</a>.</p>
+</div>
+<p>
+  O elemento com esse atributo condicional deve aparecer inicialmente depois de um elemento
+  com o atributo condicional <a href="#atributo_if">_if</a>. O atributo <span class="hl">_elseIf</span>
+  aceita um valor, e o referido valor deve indicar o nome de uma propriedade condicional, e se o valor
+  da referida propriedade for <span class="hl">true</span> o elemento será renderizado, e o elemento com o
+  atributo <span class="hl">_if</span> não será renderizado, assim como os outros elementos com o atributo <span class="hl">_elseIf</span>.
+
+</p>
+<textarea>
+
+<div id="else-if">
+    <h4>Você já pode trabalhar?</h4>
+    <input type="number" value={idade} oninput="ref.idade = this.value">
+    <p>Valor no input é { idade }</p>
+    <div>
+        <p _if="inputEstaVazio">
+         Digite a tua idade no campo.
+        </p>
+        <p _elseIf="temEntre0A15">
+            { idade } anos ainda é muito pouco!
+        </p>
+        <p _elseIf="temEntre16A18">
+         { idade } anos é aceitável.
+        </p>
+        <p _elseIf="temEntre19A54">
+          { idade } anos é uma idade para trabalhar mesmo!
+        </p>
+        <p _elseIf="idadeMaiorQue54">
+         Hmmm, com { idade } anos você já tinha que estar a curtir a aposentadoria!!!
+     </p>
+    </div>
+</div>
+
+<script>
+
+const ref = Ref({
+    in: "else-if",
+    data: { idade: "" }
+})
+   
+const reator = renderIf({
+    in: "else-if",
+    data: {
+        inputEstaVazio: true,
+        temEntre0A15: false,
+        temEntre16A18: false,
+        temEntre19A54: false,
+        idadeMaiorQue54: false
+    }
+})
+
+ref.observe((nome, valor) => {
+    if(nome == "idade"){
+     reator.setConds = {
+        inputEstaVazio: valor.trim().length == 0,
+        temEntre0A15: valor >= 0 && valor < 16,
+        temEntre16A18: valor > 15 && valor < 19,
+        temEntre19A54: valor > 18 && valor < 55,
+        idadeMaiorQue54: valor > 54
+     }
+    }
+
+})
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="else-if">
+        <h4>Você já pode trabalhar?</h4>
+        <input type="number" value={idade} oninput="ref.idade = this.value">
+        <p>Valor no input é { idade }</p>
+        <div>
+            <p _if="inputEstaVazio">
+             Digite a tua idade no campo.
+            </p>
+            <p _elseIf="temEntre0A15">
+                { idade } anos ainda é muito pouco!
+            </p>
+            <p _elseIf="temEntre16A18">
+             { idade } anos é aceitável.
+            </p>
+            <p _elseIf="temEntre19A54">
+              { idade } anos é uma idade para trabalhar mesmo!
+            </p>
+            <p _elseIf="idadeMaiorQue54">
+             Hmmm, com { idade } anos você já tinha que estar a curtir a aposentadoria!!!
+         </p>
+        </div>
+    </div>
+    <div class="space"></div>
+</div>
+
+<p>Se o valor da propriedade condicional, <span class="hl">inputEstaVazio</span>
+for <span class="hl">true</span>, o elemento com o atributo <span class="hl">_if</span>
+será renderizado, e os outros elementos não serão renderizados, e quando por exemplo o valor
+da propriedade <span class="hl">temEntre16A18</span> for <span class="hl">true</span>,
+o elemento com o atributo _elseIf em que o seu valor for o nome da referida propriedade, será
+renderizado, o elemento com o atributo condicional _if não será renderizado, assim como os outros
+elementos com o atributo <span class="hl">_elseIf</span>.
+</p>
+
+<p>Você vê o agrupamento dos elementos com os atributos condicional 
+    <span class="hl">_if</span> e <span class="hl">_elseIf</span> ? No Inter,
+    esse agrupamento é chamado de <span class="hl">agrupamento condicional</span>. No agrupamento
+    condicional quando uma propriedade condicional tiver o valor <span class="hl">true</span>, 
+    automaticamente as outras propriedades que estiverem a ser usadas
+    no agrupamento terão o valor <span class="hl">false</span> resultando
+    na remoção dos elementos que usam as referidas propriedades.
+</p>
+
+<p>Não é recomendado fazer o seguinte:</p>
+
+<textarea>
+
+<div id="exemplo">
+    <h3 _if="casado">Nelson casou!</h3>
+    <div>
+        <p _if="casado">
+            Ele é casado
+        </p>
+        <p _elseIf="solteiro">
+            Ele está solteiro
+        </p>
+    </div>
+</div>
+
+</textarea>
+
+<p>Porque quando o valor da propriedade <span class="hl">solteiro</span>
+for true, automaticamente o Inter vai definir o valor da propriedade 
+<span class="hl">casado</span> para <span class="hl">false</span>, porque a
+propriedade casado está a ser usada em um agrupamento condicional,
+sendo assim, o primeiro elemento com o atributo _if no exemplo será removido "prematuramente". A lição
+é que, não use as propriedades condicionais usadas no agrupamento condicional mais de uma vez.
+</p>
+
+<h3><a href="#atributo-_else" id="atributo-_else" class="hash">Atributo _else</a></h3>
 <p>
     O elemento com o atributo <span class="hl">_else</span> deve aparecer depois de
-    um elemento com o atributo <span class="hl">_if</span>, se o elemento
-    com o atributo <span class="hl">_if</span> não for renderizado, o elemento
-    com o atributo <span class="hl">_else</span> será renderizado. E o referido atributo
-    não espera nenhum valor.
+    um elemento com o atributo <span class="hl">_if</span> ou depois de um elemento
+    com atributo <span class="hl">elseIf</span>.
 </p>
+
+<p>Se o elemento com o atributo _else for usado depois de um elemento com o atributo
+    _if, se o elemento com o atributo _if não for renderizado, o elemento com o atributo _else será renderizado.</p>
+ <p>
+    Se o elemento com o atributo _else for usado no final de um agrupamento condicional(depois de um elemento com o atributo _elseIf),
+    ele(o elemento) será renderizado se o valor de todas as propriedades usadas no agrupamento condicional forem
+     <spa class="hl">false</span>.
+ </p>   
 
 
 <textarea id="Editor2">
@@ -193,18 +343,19 @@ function proximo(){
         <h4 _else style="color: red;">Não é uma pessoa</h4>
         <div>
             <img src="/images/Inter.png" alt="Logo do Inter">
-            <button onclick="_if2.pessoa=false">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = false">Verificar essa imagem</button>
             <img src="/images/Ramon.jpg" alt="Uma pessoa">
-            <button onclick="_if2.pessoa=true">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = true">Verificar essa imagem</button>
         </div>
     </div>
 </div>
+
 <script>
 
-const _if2=renderIf({
-    in:"alvo2",
-    data:{
-        pessoa:false
+const _if2 = renderIf({
+    in: "alvo2",
+    data: {
+        pessoa: false
     }
 })
 
@@ -217,16 +368,16 @@ const _if2=renderIf({
         <h4 _else style="color: red;">Não é uma pessoa</h4>
         <div>
             <img src="/images/Inter.png" alt="Logo do Inter">
-            <button onclick="_if2.pessoa=false">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = false">Verificar essa imagem</button>
             <img src="/images/Ramon.jpg" alt="Uma pessoa">
-            <button onclick="_if2.pessoa=true">Verificar essa imagem</button>
+            <button onclick="_if2.pessoa = true">Verificar essa imagem</button>
         </div>
     </div>
        </div>
        <div class="space"></div>
 </div>
 
-<h3 id="atributo-_ifNot">Atributo _ifNot </h3>
+<h3><a href="#atributo-_ifNot" id="atributo-_ifNot" class="hash">Atributo _ifNot</a> </h3>
 <p>Esse atributo é o inverso do atributo <span class="hl">_if</span>. O elemento
 com o referido atributo só será renderizado caso o valor da propriedade condicional desse atributo
 for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não for igual a true</span>.
@@ -235,21 +386,19 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <textarea id="Editor3">
 
 <div id="alvo3">
-
-<p _ifNot="amigo">
+  <p _ifNot="amigo">
     Você é mesmo amigo do Interjs?
 </p>
-
 </div>
 
 <script>
 
-  const _if3=renderIf({
-      in:"alvo3",
-      data:{
-          amigo:false
-      }
-  })
+const _if3 = renderIf({
+    in: "alvo3",
+    data: {
+        amigo: false
+    }
+})
 
 </script>
 
@@ -263,7 +412,7 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
     <div class="space"></div>
 </div>
 
-<h3>Método observe</h3>
+<h3><a href="#metodo-observe" id="metodo-observe" class="hash"> Método observe</a></h3>
 <p>Esse método é bem similar ao da referência. Ele será um método
     do objecto reator da renderização condicional, ele recebe apenas uma função como o seu argumento,
     e a referida função será invocada toda vez que o valor de uma propriedade condicional for alterado.
@@ -278,68 +427,54 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 <textarea id="Editor4">
     
 <div id="alvo4">
-
- <p>Geremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
- <button onclick="alternarEstado()">Clica para { estado } </button>
-
+  <p>Jeremias está: <span _if="casado">casado.</span> <span _else>solteirão!</span> </p>
+  <button onclick="_if4.casado = !_if4.casado">Clica para { estado } </button>
 </div>
 
 <script>
-  
-  const _if4=renderIf({
-      in:"alvo4",
-      data:{
-         casado:true 
-      }
-  });
 
-  const ref2=Ref({
-      in:"alvo4",
-      data:{
-          estado:"ficar solteiro"
-      }
-  });
+const _if4 = renderIf({
+    in: "alvo4",
+    data: {
+        casado: true
+    }
+})
 
-  _if4.observe((prop, estaCasado)=>{
+const ref2 = Ref({
+    in: "alvo4",
+    data: {
+        estado: "ficar solteiro"
+    }
+})
 
-    if(prop=="casado"){
 
-        ref2.estado=estaCasado ? "ficar solteiro" : "casar"
+ _if4.observe((prop, estaCasado) => {
+
+    if(prop == "casado"){
+
+        ref2.estado = estaCasado ? "ficar solteiro" : "casar"
 
     }
 
   })
-
-  function alternarEstado(){
-
-    if(_if4.casado){
-
-        _if4.casado=false;
-    }else{
-
-        _if4.casado=true;
-
-    }
-
-  }
   
 </script>
 
 </textarea>
 <div class="demo">
     <div id="alvo4">
-        <p>Geremias está  <span _if="casado">
+        <p>Jeremias está:  <span _if="casado">
             casado.
         </span>
         <span _else>
             solteirão!
         </span>
-        <button onclick="alternarEstado()">Clica para { estado } </button>
+        <button onclick="_if4.casado=!_if4.casado">Clica para { estado } </button>
        </div>
     <div class="space"></div>
 </div>
 
-<h3 id="propriedade-setconds">Propriedade setConds</h3>
+<h3><a href="#propriedade-setCond" id="propriedade-setCond" class="hash"> Propriedade setConds</a></h3>
 <p>
     Nós usamos essa propriedade quando pretendermos definir o valor de múltiplas propriedades condicionais.
     Essa propriedade recebe apenas um objecto como o seu valor, e as propriedades do referido objecto
@@ -348,11 +483,13 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
 </p>
 <div class="warning">
 <p>
-    Um elemento não pode ter mais de um atributo condicional(<span class="hl">_if</span>, <span class="hl">_else</span>, <span class="hl">_ifNot</span>).
-    Essa matéria te explicou tudo sobre a renderização condicional.
+    Um elemento não pode ter mais de um atributo condicional(<span class="hl">_if</span>, <span class="hl">_elseIf</span> ,<span class="hl">_else</span>, <span class="hl">_ifNot</span>).
+    
 
 </p>
+
 </div>
+<p>Essa matéria te explicou tudo sobre a renderização condicional no Inter.</p>
 
                 <div class="Space"></div>
             </div>
@@ -372,13 +509,15 @@ for igual a false. Seria o mesmo que dizer : Renderiza <span class="hl">se não 
         theme:"dracula"  
       }
 
+       const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<5; i++){
+      for(let index = 0; index < textAreas.length; index++){
 
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+       const textArea = textAreas[index];
 
-      }
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
       const imagens=[{urlDaImagem:"/images/Anny.jpg",
  condicional:{viveNamesmaCidade:true, temAnterior:false, temProximo:true}},
@@ -451,6 +590,37 @@ const _if3=renderIf({
       }
   });
 
+  const ref = Ref({
+    in: "else-if",
+    data: { idade: "" }
+})
+
+
+  const reator = renderIf({
+    in: "else-if",
+    data: {
+        inputEstaVazio: true,
+        temEntre0A15: false,
+        temEntre16A18: false,
+        temEntre19A54: false,
+        idadeMaiorQue54: false
+    }
+})
+
+
+ref.observe((nome, valor) => {
+    if(nome == "idade"){
+     reator.setConds = {
+        inputEstaVazio: valor.trim().length == 0,
+        temEntre0A15: valor >= 0 && valor < 16,
+        temEntre16A18: valor > 15 && valor < 19,
+        temEntre19A54: valor > 18 && valor < 55,
+        idadeMaiorQue54: valor > 54
+     }
+    }
+
+})
+
   const ref2=Ref({
       in:"alvo4",
       data:{
@@ -468,18 +638,6 @@ const _if3=renderIf({
 
   })
 
-  function alternarEstado(){
-
-    if(_if4.casado){
-
-        _if4.casado=false;
-    }else{
-
-        _if4.casado=true;
-
-    }
-
-  }
   
        </script>
     </body>

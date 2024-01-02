@@ -76,6 +76,9 @@
                         <a href="/v2/tutorial/pt/lista">Lista</a>
                     </li>
                     
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
                     
                     <li>
                         <a href="/v2/tutorial/pt/ajax">Ajax</a>
@@ -87,14 +90,14 @@
         
         <article>
             <div>
-                <h1>Gerenciador de atributos</h1>
+                <h1><a href="#gerenciador-de-atributos" id="gerenciador-de-atributos" class="hash"> Gerenciador de atributos</a></h1>
                 <div class="warning">
                     <p>Essa matéria pressupõe que você tenha pelo menos
-                        conhecimentos básicos em CSS.
+                        conhecimento básico em CSS.
                     </p>
                 </div>
                  <p>
-                     O gerenciador de atributo permite com que nós façamos
+                     O gerenciador de atributos nos permite fazer
                      as seguintes operações de uma maneira reativa e elegante:
                  </p>
 
@@ -110,35 +113,34 @@
                      </li>
                  </ul>
 
-                 <p>Para definir o gerenciador de atributos em um elemento
-                     nós usamos a seguinte sintáxe: {...nomeDoGerenciador}
+                 <p>Para definir o gerenciador de atributos em um elemento,
+                     nós usamos a seguinte sintaxe: {...nomedogerenciador}
                  </p>
                  <p>A sintaxe acima mencionada deve ser o único atributo do elemento alvo,
                      e para analisar o template em busca de gerenciadores, nós usamos a função
-                     <span class="hl">toAttrs</span> e a referida função
-                     aceita apenas um objecto como o seu argumento, e o objecto deve ter a propriedade <span class="hl">in</span>
-                     que vai indicar o valor do atributo id do elemento pai onde os elementos com os gerenciadores se encontram e 
-                      a propriedade <span class="hl">data</span> que deve ser um objecto em que as suas propriedades 
-                     vão indicar os nomes dos gerenciadores e os valores dessas propriedades devem ser um objecto em que
+                    <span class="hl">toAttrs</span>, e a referida função
+                     aceita apenas um objecto como o seu argumento, e o objecto deve ter a propriedade <span class="hl">in</span>,
+                     que vai indicar o valor do atributo id do elemento pai onde os elementos com os gerenciadores se encontram, e 
+                      a propriedade <span class="hl">data</span>, que deve ser um objecto, em que as suas propriedades 
+                     vão indicar os nomes dos gerenciadores, e os valores dessas propriedades devem ser um objecto em que
                      as suas propriedades vão indicar os nomes dos atributos/eventos que serão definidos no elemento onde o gerenciador for
-                     encontrado, e os valores serão os valores dos respectivos atributos/eventos.
+                     encontrado, e os valores, serão os valores dos respectivos atributos/eventos.
                  </p>
 <textarea id="Editor1">
 
 <div id="alvo1">
-
-<img {...imagem}>
-
+    <img {...imagem}>
 </div>
+
 <script>
 
-const { imagem }=toAttrs({
-    in:"alvo1",
-    data:{
-        imagem:{
-           src:"/images/orlando.jpg",
-           alt:"Foto de Orlando",
-           title:"Foto de Orlando"
+const { imagem } = toAttrs({
+    in: "alvo1",
+    data: {
+        imagem: {
+           src: "/images/orlando.jpg",
+           alt: "Foto de Orlando",
+           title: "Foto de Orlando"
         }
     }
 })
@@ -154,56 +156,55 @@ const { imagem }=toAttrs({
         <div class="space"></div>
 </div>
 
-<h3>Objecto gerenciador</h3>
+<h3><a href="#objecto-gerenciador" id="objecto-gerenciador" class="hash">Objecto gerenciador</a></h3>
 <p>
     A função <span class="hl">toAttrs</span>
      retorna um objecto com as mesmas propriedades que o objecto <span class="hl">data</span>. 
-    No exemplo anterior nós desestruturamos
+    No exemplo anterior, nós desestruturamos
     o referido objecto para extrair o objecto gerenciador <span class="hl">imagem</span>.
-    Se você abrir agora nessa página o console do navegador e modificar
-    uma das propriedades do objecto <span class="hl">imagem</span>
+    Se você abrir agora nessa página o console do navegador e modificar o valor de
+    uma das propriedades do objecto <span class="hl">imagem</span>,
     vais notar que a interface será atualizada para refletir o novo valor. E quando
     a propriedade for o nome de um evento do DOM, por exemplo o <span class="hl">onclick</span>,
     a palavra-chave <span class="hl">this</span> dentro da função que será invocada quando o referido
-    evento ocorrer vai indicar o objecto gerenciador.
+    evento ocorrer, vai indicar o objecto gerenciador.
 </p>
 <p>
-    Para deletar um atributo com o gerenciador basta definirmos o valor
-    <span class="hl">null</span> na propriedade que representa o atributo que pretendermos deletar.
+    Para deletar um atributo com o gerenciador, basta definirmos 
+    <span class="hl">null</span> como o valor da propriedade que representa o atributo que pretendermos deletar.
 </p>
 <textarea id="Editor2">
 
-  <style>
+<style>
 
-      .corAzul{
-          color:rgb(101, 163, 214);
+.corAzul {
+    color: rgb(101, 163, 214);
+}
 
-      }
+</style>
 
-  </style>
+<div id="alvo2">
+  <button {...cor}>Alternar cor</button>  
+</div>
 
-  <div id="alvo2">
-    <button {...cor}>Alternar cor</button>  
-  </div>
-
-  <script>
+<script>
     
   toAttrs({
-    in:"alvo2",
-     data:{
-         cor:{
-            class:"corAzul",
+    in: "alvo2",
+     data: {
+         cor: {
+            class: "corAzul",
             onclick(){
 
             if(this.class){
                     
              // Deleta o atributo class.
 
-             this.class=null
+             this.class = null
 
-             }else{
+             } else {
 
-             this.class="corAzul"
+             this.class = "corAzul"
 
                     
             }
@@ -227,9 +228,9 @@ const { imagem }=toAttrs({
 </div>
 <p>
 O nome do gerenciador deve estar sempre em letras minúsculas, e um gerenciador
-apenas controla um elemento, se tentares definir um gerenciador para mais de um elemento
+apenas controla um elemento, se tentares definir um gerenciador para mais de um elemento,
 o primeiro elemento é o que será controlado. E se você não quiser ainda usar um atributo, basta definir
-o <span class="hl">null</span> como o valor da propriedade que representa o referido atributo, e ele não será
+<span class="hl">null</span> como o valor da propriedade que representa o referido atributo, e ele não será
 criado.
 
 </p>
@@ -239,81 +240,79 @@ criado.
 <script>
 
   toAttrs({
-      in:"id",
-      data:{
-          gerenciador:{
-              title:null, // O atributo title não será criado.
-              class:"class"
+      in: "id",
+      data: {
+          gerenciador: {
+              title: null, // O atributo title não será criado.
+              class: "class"
           }
       }
   })
   
 </script>
 </textarea>
+<h3><a href="#metodo-observe" id="metodo-observe" class="hash">Método observe</a></h3>
+<div class="warning">
+    <p>Esse método faz parte do Inter desde a versão
+    <span class="hl">2.1.0</span></p>
+</div>
+<p>
+   Ele será um método do objecto gerenciador, ele aceita apenas uma função como o seu argumento,
+   e a referida função será invocada toda vez que o valor de uma propriedade do gerenciador for alterado. A função
+   será invocada com dois argumentos:
+</p>
+<ul class="items">
+    <li>
+        O primeiro argumento vai indicar o nome da propriedade que o seu valor foi alterado.
+    </li>
+    <li>
+        O segundo argumento vai indicar o novo valor da propriedade.
+    </li>
 
-<h3>Propriedade setAttrs</h3>
+</ul>
+<h3><a href="#propriedade-setAttrs" id="propriedade-setAttrs" class="hash">Propriedade setAttrs</a></h3>
 <p>
     Ela será uma propriedade do objecto gerenciador, ela é usada
-    para atualizar os valores de múltiplos atributos de uma única vez.
+    para atualizar os valores de múltiplos atributos.
     Ela recebe apenas um objecto como o seu valor, e as propriedades
     do referido objecto devem indicar os nomes dos atributos cujo os seus  valores serão
-    atualizados e os valores serão os valores dos respectivos atributos.
+    atualizados, e os valores, serão os novos valores para os respectivos atributos.
 </p>
 <textarea id="Editor4">
-    
+
 <div id="alvo3">
     <img {...slide}>
 </div>
 
- <script>
+<script>
 
-const slides=[
-{
-  src:"/images/luna.jpg",
-  alt:"Foto de Luna",
-  title:"Slide 1"
-},
-{
-   src:"/images/Inter.png",
-   alt:"Foto de Inter",
-   title:"Slide 2"
-},{
-   src:"/images/Ramon.jpg",
-   alt:"Foto de Ramon",
-   title:"Slide 3"
-}
-]
+ const slides = [
+    { src: "/images/luna.jpg", alt: "Foto de Luna", title: "Slide 1" },
+    { src: "/images/Inter.png", alt: "Foto de Inter", title: "Slide 2" },
+    { src: "/images/Ramon.jpg", alt: "Foto de Ramon", title: "Slide 3" }
+ ]
 
-let pos=0;
+let index = 0;
 
-
-toAttrs({
-    in:"alvo3",
-    data:{
-      slide:{ 
-       src:slides[0].src,
-       alt:slides[0].alt,
-       title:slides[0].title,
-       onclick(){
-
-         if(pos<2){
-
-            pos++;
-            this.setAttrs=slides[pos];
-
-         }else{
-		 
-            pos=0;
-            this.setAttrs=slides[pos];
-
-         }
-
-       } 
+const { slide } = toAttrs({
+    in: "alvo3",
+    data: {
+        slide: {
+            ...slides[0],
+            onclick(){
+                if(index < 2){
+                    index++;
+                    this.setAttrs = slides[index];
+                } else {
+                    index = 0;
+                    this.setAttrs = slides[index];
+                }
+            }
+        }
     }
-}
 })
 
- </script>
+</script>
 
 </textarea>
 <div class="demo">
@@ -343,13 +342,15 @@ toAttrs({
         theme:"dracula"  
       }
 
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
 
-      for(let i=1; i<5; i++){
+      for(let index = 0; index < textAreas.length; index++){
 
-        
-      CodeMirror.fromTextArea(document.getElementById(`Editor${i}`), editorOptions);
+         const textArea = textAreas[index];
 
-      }
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
 
 const {imagem}=toAttrs({
     in:"alvo1",
@@ -362,25 +363,6 @@ const {imagem}=toAttrs({
     }
 })
 
-
-const slides=[
-{
-  src:"/images/luna.jpg",
-  alt:"Foto de Luna",
-  title:"Slide 1"
-},
-{
-   src:"/images/Inter.png",
-   alt:"Foto de Inter",
-   title:"Slide 2"
-},{
-   src:"/images/Ramon.jpg",
-   alt:"Foto de Ramon",
-   title:"Slide 3"
-}
-]
-
-let pos=0;
 
 toAttrs({
     in:"alvo2",
@@ -410,30 +392,30 @@ toAttrs({
   
 })
 
+const slides = [
+    { src: "/images/luna.jpg", alt: "Foto de Luna", title: "Slide 1" },
+    { src: "/images/Inter.png", alt: "Foto de Inter", title: "Slide 2" },
+    { src: "/images/Ramon.jpg", alt: "Foto de Ramon", title: "Slide 3" }
+ ]
 
-toAttrs({
-    in:"alvo3",
-    data:{
-      slide:{ 
-       src:slides[0].src,
-       alt:slides[0].alt,
-       title:slides[0].title,
-       onclick(){
+let index = 0;
 
-         if(pos<2){
-
-            pos++;
-            this.setAttrs=slides[pos];
-
-         }else{
-            pos=0;
-            this.setAttrs=slides[pos];
-
-         }
-
-       } 
+const { slide } = toAttrs({
+    in: "alvo3",
+    data: {
+        slide: {
+            ...slides[0],
+            onclick(){
+                if(index < 2){
+                    index++;
+                    this.setAttrs = slides[index];
+                } else {
+                    index = 0;
+                    this.setAttrs = slides[index];
+                }
+            }
+        }
     }
-}
 })
        </script>
     </body>

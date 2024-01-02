@@ -1,3 +1,7 @@
+:root{
+    --blue: hsl(220, 50%, 50%)
+}
+
 html,body{
 
     height: 100%;
@@ -41,8 +45,20 @@ body{
 }
 .hl{
 
-    color: hsl(220, 50%, 50%);
+    color: var(--blue);
 
+}
+
+p>a{
+
+    text-decoration: none;
+    color: var(--blue);
+
+}
+
+.hash{
+    text-decoration: none;
+    color: var(--blue);
 }
 
 .demo{
@@ -79,7 +95,7 @@ p{
     width: 15vw;
     height: 100vh;
     position: fixed;
-    background-color:hsl(220, 50%, 50%)
+    background-color: var(--blue)
 
 }
 .main>:last-child{
