@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+        <title>Attribute manager</title>
+        <style>
+            img{
+                width: 40vh;
+                height: 20vh;
+            }
+            .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+
+  
+  .blueColor {
+          color:rgb(101, 163, 214);
+
+      }
+
+        </style>
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+
+            <nav>
+                <ul class="social">
+                    
+                   <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                   <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                   <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                </ul>
+            </nav>
+
+            <nav>
+                <ul class="nav">
+                <li>
+                        <a href="/v2/tutorial/pt/introducao/">
+                            Introdução
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/v2/tutorial/pt/instalacao/">
+                            Instalação
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/referencia">Referência</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/lista">Lista</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </aside>
+        
+        <article>
+            <div>
+                <h1><a href="#gerenciador-de-atributos" id="gerenciador-de-atributos" class="hash"> Attribute manager</a></h1>
+                <div class="warning">
+                    <p>
+					This article assumes at least basic knowledge at <span class="hl">CSS</span>.
+                    </p>
+                </div>
+                 <p>
+				 In Inter's universe, with the attributes manager 
+				 we are able to perform these stuffs in a reactive and elegant way:
+                     
+                 </p>
+
+                 <ul class="items">
+                     <li>
+					 To create one or several attributes.
+                     </li>
+                     <li>
+					 To update the value of one or several attributes.
+                     </li>
+                     <li>
+					 To delete one or several attributes.
+                     </li>
+                 </ul>
+
+                 <p>
+				 To set an attributes manager in an element, we use this syntax {...managerName}
+                 </p>
+                 <p>
+				 The above syntax must be the only attribute of the target element and to parse
+				 the template searching for the managers, we use the <span class="hl">toAttrs</span>
+				 function, and the referred function recieves only an object as its argument, and its properties
+				 must be <span class="hl">in</span> which will indicate the value of id attribute of the root element where
+				 the elements that got the managers can be found, and other acceptable property is <span class="hl">data</span>,
+				 guess its goal? That's it! the <span class="hl">data</span> property must be a plain Javascript object, whose
+				 its properties will be the names of the managers, and its values will be an object whose its properties will
+				 be the names of the attributes/events that will be attached in the element where the referred manager was found.
+				 
+                 </p>
+<textarea id="Editor1">
+
+<div id="target1">
+    <img {...photo}>
+</div>
+
+<script>
+
+const { photo } = toAttrs({
+    in: "target1",
+    data: {
+        photo: {
+           src: "/images/orlando.jpg",
+           alt: "Orlando's photo",
+           title: "Orlando's photo"
+        }
+    }
+})
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="target1">
+    <img {...photo}>
+</div>
+
+        <div class="space"></div>
+</div>
+
+<h3><a href="#objecto-gerenciador" id="objecto-gerenciador" class="hash">The manager object</a></h3>
+<p>
+The <span class="hl">toAttrs</span> function returns an object
+with the same properties as the <span class="hl">data</span> object and
+in privious example, we destructed the referred object to take out the object manager 
+<span class="hl">photo</span>, if you open up the browser console right now in this page
+and try to change the value of one of the properties of the <span class="hl">photo</span>
+object, you'll see the interface changing to reflect the new value. And when the property
+of an oject manager is the name of an event, for instance the <span class="hl">onclick</span> event,
+Inside the body function attached to the event, <span class="hl">this</span> will
+be the object manager.
+</p>
+<p>
+To delete an attribute with the manager, we just have  to set it as
+<span class="hl">null</span>
+</p>
+<textarea id="Editor2">
+
+<style>
+
+.blueColor {
+    color: rgb(101, 163, 214);
+}
+
+</style>
+
+<div id="target2">
+  <button {...color}>Change the color</button>  
+</div>
+
+<script>
+    
+  toAttrs({
+    in: "target2",
+     data: {
+         color: {
+            class: "blueColor",
+            onclick(){
+
+            if(this.class){
+                    
+             // Delete the class atribute.
+
+             this.class = null
+
+             } else {
+
+             this.class = "blueColor"
+
+                    
+            }
+               
+        }
+           
+    }
+      
+  }
+  
+})
+
+  </script>
+</textarea>
+<div class="demo">
+    
+  <div id="target2">
+  <button {...color}>Change the color</button>  
+</div>
+  <div class="space"></div>
+</div>
+<p>
+The manager name must be always in lowercase, and one manager only controls
+an element, if you try to set a manager to multiple elements, only the first one
+will be controled. If you're not willing to use an attribute yet, just set it to 
+<span class="hl">null</span>, and it won't be created till you define another value to it.
+
+</p>
+
+<textarea id="Editor3">
+
+<script>
+
+  toAttrs({
+      in: "id",
+      data: {
+          manager: {
+              title: null, // The title attribute won't be created.
+              class: "class"
+          }
+      }
+  })
+  
+</script>
+</textarea>
+<h3><a href="#metodo-observe" id="metodo-observe" class="hash">The observe method</a></h3>
+<div class="warning">
+    <p>
+	This method became available since: <span class="hl">v2.1.0</span></p>
+</div>
+<p>
+It will be a method from the object manager, it only accepts a function as its argument,
+and the referred function will be called every single time a property's value change, will
+be called with two arguments:
+</p>
+<ul class="items">
+    <li>
+	The first argument will indicate the property name.
+    </li>
+    <li>
+	The second argument (the last) will indicate the new property value.
+    </li>
+
+</ul>
+<h3><a href="#propriedade-setAttrs" id="propriedade-setAttrs" class="hash">The setAttrs property</a></h3>
+<p>
+It will be a property from the object manager, it will
+be used to update the value of multiple attributes(like setRefs from reference).
+It only recieve  an oject as its value, the properties of the referred object
+must indicate the attributes names whose their values will be updated, and the values
+of those properties will be new values of the each attribute.</p>
+<textarea id="Editor4">
+
+<div id="target3">
+    <img {...slide}>
+</div>
+
+<script>
+
+ const slides = [
+    { src: "/images/luna.jpg", alt: "Luna's photo", title: "Slide 1" },
+    { src: "/images/Inter.png", alt: "Inter's photo", title: "Slide 2" },
+    { src: "/images/Ramon.jpg", alt: "Ramon's photo", title: "Slide 3" }
+ ]
+
+let index = 0;
+
+const { slide } = toAttrs({
+    in: "target3",
+    data: {
+        slide: {
+            ...slides[0],
+            onclick(){
+                if(index < 2){
+                    index++;
+                    this.setAttrs = slides[index];
+                } else {
+                    index = 0;
+                    this.setAttrs = slides[index];
+                }
+            }
+        }
+    }
+})
+
+</script>
+
+</textarea>
+<div class="demo">
+    <div id="target3">
+        <img {...slide}>
+    </div>
+<div class="space"></div>    
+</div>
+<p>
+Try to click the photo and see what happen. This article explained to you everything
+about the attributes manager.
+</p>
+                <div class="Space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+           const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+      const textAreas = Array.from(document.getElementsByTagName("textarea"));
+
+      for(let index = 0; index < textAreas.length; index++){
+
+         const textArea = textAreas[index];
+
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
+
+const { photo } = toAttrs({
+    in: "target1",
+    data: {
+        photo: {
+           src: "/images/orlando.jpg",
+           alt: "Orlando's photo",
+           title: "Orlando's photo"
+        }
+    }
+})
+
+
+  toAttrs({
+    in: "target2",
+     data: {
+         color: {
+            class: "blueColor",
+            onclick(){
+
+            if(this.class){
+                    
+             // Delete the class atribute.
+
+             this.class = null
+
+             } else {
+
+             this.class = "blueColor"
+
+                    
+            }
+               
+        }
+           
+    }
+      
+  }
+  
+})
+
+const slides = [
+    { src: "/images/luna.jpg", alt: "Luna's photo", title: "Slide 1" },
+    { src: "/images/Inter.png", alt: "Inter's photo", title: "Slide 2" },
+    { src: "/images/Ramon.jpg", alt: "Ramon's photo", title: "Slide 3" }
+ ]
+
+let index = 0;
+
+const { slide } = toAttrs({
+    in: "target3",
+    data: {
+        slide: {
+            ...slides[0],
+            onclick(){
+                if(index < 2){
+                    index++;
+                    this.setAttrs = slides[index];
+                } else {
+                    index = 0;
+                    this.setAttrs = slides[index];
+                }
+            }
+        }
+    }
+})
+</script>
+    </body>
+</html>
