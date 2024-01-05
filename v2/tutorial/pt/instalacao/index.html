@@ -106,7 +106,7 @@
     <h3><a href="#localmente" id="localmente" class="hash">Localmente</a></h3>
     <p>
         Queres usar o Inter directamente em sua máquina? É super simples, baixa
-        ele clicando em <a href="https://github.com/interjs/inter/releases/download/v2.1.7/inter.min.js" title="Vai baixar a versão 2.1.7(A última versão)">Baixar - v2.1.7</a>, e agora é só importar ele em uma tag script.
+        ele clicando em <a href="https://github.com/interjs/inter/releases/download/v2.2.0/inter.min.js" title="Vai baixar a versão 2.2.0(A última versão)">Baixar - v2.2.0</a>, e agora é só importar ele em uma tag script.
     </p>
 
 <textarea id="Editor2">
@@ -139,6 +139,71 @@
     </body>
 </html>
     </textarea>
+    <h3><a href="#modular" id="modular" class="hash">A versão modular</a></h3>
+    <p>Desde a versão <a href="https://github.com/interjs/inter/releases/tag/v2.2.0">2.2.0</a> existe o Inter modular, que permite
+        que você importa funções específicas do Inter sem a necessidade de baixa-lo inteiramente.
+        Assim como a versão global, podemos instalar a versão modular de duas formas,
+        <span class="hl">CDN</span> e <span class="hl">localmente</span>
+    </p>
+    
+    <h3><a href="#cdn2" id="cdn2" class="hash">CDN</a></h3>
+    <textarea>
+
+<script type="module">
+
+ // Instala a última versão
+import { Ref  } from "https://cdn.jsdelivr.net/gh/interjs/inter/inter.m.js"
+
+  // Teu código 
+
+</script>
+
+<script type="module">
+
+ // Instala uma versão específica
+import { Ref  } from "https://cdn.jsdelivr.net/gh/interjs/inter@numero-da-versao/inter.m.js"
+
+    // Teu código 
+
+</script>
+</textarea>
+<p>
+    Atenção, existe o <span class="hl">inter.min.js</span> que é a versão global
+    e o <span class="hl">inter.m.js</span> que é a versão modular, ao instalar preste sempre atenção
+    nesse detalhe.
+</p>
+
+<h3><a href="#localmente1" id="localmente1" class="hash">Localmente</a></h3>
+<p>Para instalar a versão modular localmente, basta baixar o Inter clicando em:
+<a href="https://github.com/interjs/inter/releases/download/v2.2.0/inter.m.js" title="Vai baixar a versão 2.2.0(A última versão)">Baixar - v2.2.0</a>,
+e depois é só importar a função que pretenderes usar.
+</p>
+<textarea>
+
+<script type="module">
+    
+ import { Ref } from "./inter.m.js"
+
+ //Teu código 
+    
+</script>
+
+</textarea>
+
+<p>Se você quiser saber a versão modular que estiveres a usar basta fazer o seguinte:</p>
+
+<textarea>
+
+<script type="module">
+    
+ import { interVersion } from "./inter.m.js"
+
+ console.log(`Rodando a versão ${interVersion}`)
+    
+</script> 
+
+</textarea>
+
 	<p>Agora você deve estar preparado(a) para descobrir o quão fantástico o Inter é. Vamos
 	pôr a mão no código?</p>
     <div class="Space"></div>

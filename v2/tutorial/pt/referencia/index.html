@@ -86,6 +86,7 @@
 <p>
     Essa e outras matérias nesse tutorial
     pressupõem que você tenha pelo menos conhecimento intermediário em Javascript e HTML.
+    Por questão de praticidade, todas as matérias nesse tutorial usam a versão global.
 </p>
 </div>
                 <p>Referência no Inter, são
@@ -281,7 +282,7 @@ const reator4 = Ref({
 
 reator4.observe((ref, valorAtual) => {
 
- if(ref == "avo"){
+ if (ref == "avo") {
 
     reator4.neto = `William ${valorAtual}`;
 
@@ -352,9 +353,9 @@ const reator5 = Ref({
     data: primeiro
 })
 
-function toggle(){
+function toggle() {
 
-    if(reator5.nome == "Orlando"){
+    if (reator5.nome == "Orlando") {
         reator5.setRefs = segundo;
 
     } else {
