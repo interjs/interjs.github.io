@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/codemirror/css/codemirror.css">
+        <link rel="stylesheet" href="/codemirror/css/theme.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <script src="/codemirror/js/codemirror.js"></script>
+        <script src="/codemirror/js/css.js"></script>
+        <script src="/codemirror/js/htmlmixed.js"></script>
+        <script src="/codemirror/js/javascript.js"></script>
+        <script src="/codemirror/js/vbscript.js"></script>
+        <script src="/codemirror/js/xml.js"></script>
+        <script src="/script/inter.js"></script>
+        <title>Conditional rendering</title>
+        <style>
+.CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+  }
+
+  img{
+
+      width: 20vw;
+      height: 20vh;
+  }
+        </style>
+    </head>
+    <body>
+         
+        <div class="main">
+        <aside>
+            <nav>
+                <ul class="social">
+                    
+                   <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+                   <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+                   <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul class="nav">
+                <li>
+                        <a href="/v2/tutorial/pt/introducao/">
+                            Introdução
+                        </a>
+                        </li>
+                        <li>
+                        <a href="/v2/tutorial/pt/instalacao/">
+                            Instalação
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/referencia">Referência</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/lista">Lista</a>
+                    </li>
+                    <li>
+                        <a href="/v2/tutorial/pt/reator">Reator</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/v2/tutorial/pt/ajax">Ajax</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <article>
+            <div>
+                <h1><a href="#renderizacao-condicional" id="renderizacao-condicional" class="hash"> Conditional rendering</a></h1>
+                 <div class="warning">
+                     <p>
+					 This article assumes knowledge at reference, attributes manager in Inter's universe
+					 and at least basic knowledge at CSS.
+                     </p>
+                 </div>
+                 <p>
+				 In Inter's universe to render conditionally a HTML element, we use the following Inter building attributes:
+                
+                 </p>
+
+                  <h3><a href="#atributo-_if" id="atributo-_if" class="hash">The _if attribute</a></h3> 
+                 <p>
+				    The value of this attribute must be the name of one of the properties of the data
+					object (in renderIf function), and if the value of that property is <span class="hl">true</span>,
+					the element will be rendered, otherwise(false value) it(the element) won't be rendered.</p>
+
+</textarea>
+<textarea id="Editor1">
+
+<div id="target1">
+    <div>
+        <h5 _if="liveIntheSameCity">This one lives near you. </h5>
+        <img {...photo}>
+        <button onclick="previous()"  _if="hasPrevious">Previous</button>
+        <button onclick="next()"  _if="hasNext">Next</button>
+    </div>
+</div>
+
+<script>
+
+const photos = [
+    { photoUrl: "/images/Anny.jpg", conditional:
+    { liveIntheSameCity: true, hasPrevious: false, hasNext: true } },...];
+
+let index = 0;
+
+const { photo } = toAttrs({
+    in: "alvo1",
+    data: {
+        photo: {
+            src: photos[0].photoUrl,
+            alt: "This is a person."
+        }
+    }
+})
+
+const _if = renderIf({
+    in: "target1",
+    data: photos[0].conditional
+})
+
+  function changePhoto(){
+
+    photo.src = photos[index].photoUrl;
+    _if.setConds = photos[index].conditional;
+
+}
+
+  function previous(){
+
+    index--;
+    changePhoto();
+    
+}
+
+  function proximo(){
+
+    index++;
+    changePhoto();
+}
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="target1">
+        <h5 _if="liveIntheSameCity">This one lives near you. </h5>
+        <img {...photo}>
+        <button onclick="previous()"  _if="hasPrevious">Previous</button>
+        <button onclick="next()"  _if="hasNext">Next</button>
+    </div>
+    <div class="space"></div>
+</div>
+
+<p>
+We use the <span class="hl">renderIf</span> function to parse the template searching
+for the elements that have to be rendered conditionally, and the referred function accepts
+only an object as its argument. The value of the <span class="hl">in</span> property
+indicates the value of the id attribute of the root element where we can find the element with conditional
+attributes, the value of the <span class="hl">data</span> property must be a plain Javasript object 
+whose the values will be the conditional properties and the type of its values must be boolean(true/false).
+The <span class="hl">setRefs</span> property will be explained throughout the article.
+</p>
+<p>
+
+The <span class="hl">renderIf</span> function returns a reactive object, that object anable us to change the values
+of the conditional properties causing changes in the interface, and this type of object in Inter, we call it
+<a href="#">Reactor</a>.
+</p>
+<h3><a href="#atributo-_elseIf" id="atributo-_elseIf" class="hash">The _elseIf attribute</a></h3>
+<div class="warning">
+    <p>
+	This method is available since <a href="#">2.1.0</a>.</p>
+</div>
+<p>
+The element that got this attribute attached to it must appear at first glance after an element with
+an <span class="hl">_if</span> attribute. The <span class="hl">_elseIf</span> accepts
+a value and the referred value will indicate the name of one of the conditional properties, and if
+the value of the referred property is <span class="hl">true</span> the element will be rendered and the element
+with the <span class="hl">_if</span> won't be rendered and i will happen also with others element with
+<span class="hl">_elseIf</span> attribute inside the conditional group.
+
+</p>
+<textarea>
+
+<div id="else-if">
+    <h4>Do you have the right age to start working?</h4>
+    <input type="number" value={age} oninput="ref.age = this.value">
+    <p>The input value is { idade }</p>
+    <div>
+        <p _if="emptyInput">
+         Type your age in the input.
+        </p>
+        <p _elseIf="isBetween0To15">
+            { age } years old is not enough to start working!
+        </p>
+        <p _elseIf="isBetween16To18">
+         { age } years old is acceptable!
+        </p>
+        <p _elseIf="isBetween19To54">
+          { age } years old is just the right age!
+        </p>
+        <p _elseIf="isGreaterThan54">
+         Hmmm, You're too old! 
+     </p>
+    </div>
+</div>
+
+<script>
+
+const ref = Ref({
+    in: "else-if",
+    data: { age: "" }
+})
+   
+const reactor = renderIf({
+    in: "else-if",
+    data: {
+        emptyInput: true,
+        isBetween0To15: false,
+        isBetween16To18: false,
+        isBetween19To54: false,
+        isGreaterThan54: false
+    }
+})
+
+ref.observe((name, value) => {
+    if(name == "age"){
+     reactor.setConds = {
+        emptyInput: value.trim().length == 0,
+        isBetween0To15: value >= 0 && value < 16,
+        isBetween16To18: value > 15 && value < 19,
+        isBetween19To54: value > 18 && value < 55,
+        isGreaterThan54: value > 54
+     }
+    }
+
+})
+
+</script>
+</textarea>
+<div class="demo"><div id="else-if">
+    <h4>Do you have the right age to start working?</h4>
+    <input type="number" value={age} oninput="ref.age = this.value">
+    <p>The input value is { idade }</p>
+    <div>
+        <p _if="emptyInput">
+         Type your age in the input.
+        </p>
+        <p _elseIf="isBetween0To15">
+            { age } years old is not enough to start working!
+        </p>
+        <p _elseIf="isBetween16To18">
+         { age } years old is acceptable!
+        </p>
+        <p _elseIf="isBetween19To54">
+          { age } years old is just the right age!
+        </p>
+        <p _elseIf="isGreaterThan54">
+         Hmmm, You're too old! 
+     </p>
+    </div>
+</div>
+
+    <div class="space"></div>
+</div>
+
+<p>
+If the value of the conditional property <span class="hl">emptyValue</span>
+is <span class="hl">true</span>, the element with the <span class="hl">_if</span>
+attribute will be rendered and others won't, and for instance if the value of the <span class="hl">isBetween0To15</span>
+property is <span class="hl">true</span>, the element whose the value of the conditional is the referred property
+will be rendered and others won't.
+</p>
+
+<p>
+Do you see the grouping of the elements with conditional attributes?
+Você vê o agrupamento dos elementos com os atributos condicional <span class="hl">_if</span> e <span class="hl">_elseIf</span>
+In Inter's universe we call it conditional grouping. The deal in conditional grouping
+is that when a conditional property is set to <span class="hl">true</span> automatically
+the others are set to false, causing the removal of the others elements that are using
+the conditional properties set to false and the rendering
+of the element whose the conditional property was set to true.
+</p>
+
+<p>it's not recommeded do this:</p>
+
+<textarea>
+
+<div id="example">
+    <h3 _if="married">Brian is married!</h3>
+    <div>
+        <p _if="married">
+            He's married.
+        </p>
+        <p _elseIf="single">
+            He's single
+        </p>
+    </div>
+</div>
+
+</textarea>
+
+<p>
+Why? You wandered, because when the value of the <span class="hl">single</span>
+property changes to true, automatically Inter will set
+<span class="hl">married</span> to false, because that property
+is being used in a conditional grouping, causing unwanted removal of the first element 
+in the example. The deal here is: do not use a conditional property used in a conditional
+group elsewhere.
+</p>
+
+<h3><a href="#atributo-_else" id="atributo-_else" class="hash">The _else attribute</a></h3>
+<p>
+
+  The element with the <span class="hl">_else</span> attribute to be considered valid
+  it must show up after an element with  the <span class="hl">_if</span> attribute or
+  after an element with a valid <span class="hl">_elseIf</span> attribute.
+    
+</p>
+
+<p>
+If the element with _else attribute is used after an element with the _if attribute,
+while one is rendered the other will be unrendered. The element whose this attribute is attached
+to will be rendered in the value of the conditional property of the previous element is set to <span class="hl">false</span>
+
+</p>
+ <p>
+ If the element with the _else attribute is used at the end of a conditional grouping(after an element with the _elseIf attribute)
+   it(the element) will be rendered if all the properties used in conditional grouping are
+   <span class="hl">false</span>
+ </p>   
+
+
+<textarea id="Editor2">
+
+<div id="target2">
+    <div>
+        <h4 _if="person" style="color: green;">This one is a person!</h4>
+        <h4 _else style="color: red;">This one is not a person</h4>
+        <div>
+            <img src="/images/Inter.png" alt="Inter's logo">
+            <button onclick="_if2.person = false">Check this picture</button>
+            <img src="/images/Ramon.jpg" alt="Uma pessoa">
+            <button onclick="_if2.person = true">check this picture</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+const _if2 = renderIf({
+    in: "target2",
+    data: {
+        person: false
+    }
+})
+
+</script>
+
+</textarea>
+<div class="demo">
+<div id="target2">
+    <div>
+        <h4 _if="person" style="color: green;">This one is a person!</h4>
+        <h4 _else style="color: red;">This one is not a person</h4>
+        <div>
+            <img src="/images/Inter.png" alt="Inter's logo">
+            <button onclick="_if2.person = false">Check this picture</button>
+            <img src="/images/Ramon.jpg" alt="Uma pessoa">
+            <button onclick="_if2.person = true">check this picture</button>
+        </div>
+    </div>
+</div>
+       <div class="space"></div>
+</div>
+
+<h3><a href="#atributo-_ifNot" id="atributo-_ifNot" class="hash">_ifNot Attribute</a> </h3>
+<p>
+It behaves like the <span class="hl">_if</span> attribute but in the inverse manner,
+how come? The element with _if attribute will render if the value of its conditional property
+is <span class="hl">true</span> right? So the element whose this attribute is attached to
+will be only rendered if the value of its conditional property is set to <span class="hl">false</span>.
+</p>
+
+<textarea id="Editor3">
+
+<div id="target3">
+  <p _ifNot="friend">
+    Are you really an Inter's friend?
+</p>
+</div>
+
+<script>
+
+const _if3 = renderIf({
+    in: "target3",
+    data: {
+        friend: false
+    }
+})
+
+</script>
+
+</textarea>
+<div class="demo">
+    
+<div id="target3">
+  <p _ifNot="friend">
+    Are you really an Inter's friend?
+</p>
+</div>
+    <div class="space"></div>
+</div>
+
+<h3><a href="#metodo-observe" id="metodo-observe" class="hash"> Observe method</a></h3>
+<p>
+The behaviour of this method is quite similar to the one of the reference.
+It will be a method of the conditional rendering reactor, it recieves
+only a function as its argument and the referred function will be called
+everytime the value of a conditional property change, the function will be called
+with two arguments:
+</p>
+<ul class="items">
+    <li>
+	The first argument will indicate the name of the changed property.
+    </li>
+    <li>The second argument will indicate the (new) value of the property.</li>
+</ul>
+<textarea id="Editor4">
+    
+<div id="target4">
+  <p>Dalton is : <span _if="married">married.</span> <span _else>single!</span> </p>
+  <button onclick="_if4.married = !_if4.married">Click to { status } </button>
+</div>
+
+<script>
+
+const _if4 = renderIf({
+    in: "target4",
+    data: {
+        married: true
+    }
+})
+
+const ref2 = Ref({
+    in: "target4",
+    data: {
+        status: "become single"
+    }
+})
+
+
+ _if4.observe((prop, isMarried) => {
+
+    if(prop == "married"){
+
+        ref2.status = isMarried ? "become single" : "marry"
+
+    }
+
+  })
+  
+</script>
+
+</textarea>
+<div class="demo">
+  <div id="target4">
+  <p>Dalton is : <span _if="married">married.</span> <span _else>single!</span> </p>
+  <button onclick="_if4.married = !_if4.married">Click to { status } </button>
+</div>
+    <div class="space"></div>
+</div>
+
+<h3><a href="#propriedade-setCond" id="propriedade-setCond" class="hash">The setConds property</a></h3>
+<p>
+We use this property when our aiming is to set the value of several properties in the same time
+without much husle. It(the referred property) recieves only an object as its value,
+and the property of the object must indicate the names of the conditional property whose its value will
+be changed and the value? They're certainly the new values for the respective properties.
+</p>
+<div class="warning">
+<p>
+   An element mustn't have more than one conditional property(<span class="hl">_if</span>, <span class="hl">_elseIf</span> ,<span class="hl">_else</span>, <span class="hl">_ifNot</span>).
+    
+
+</p>
+
+</div>
+<p>
+This article explained to you everyting about the conditonal rendering concept in Inter.</p>
+
+                <div class="Space"></div>
+            </div>
+        </article>
+       </div>
+       <script>
+           const mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i, mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,mode: "vbscript"}]
+      };
+
+      const editorOptions={
+        mode: mixedMode,
+        readOnly:true,
+        lineNumbers:true,
+        theme:"dracula"  
+      }
+
+       const textAreas = Array.from(document.getElementsByTagName("textarea"));
+
+      for(let index = 0; index < textAreas.length; index++){
+
+       const textArea = textAreas[index];
+
+        CodeMirror.fromTextArea(textArea, editorOptions);
+
+}
+
+const photos = [{photoUrl:"/images/Anny.jpg",
+ conditional:{liveIntheSameCity:true, hasPrevious:false, hasNext:true}},
+ {photoUrl:"/images/Ramon.jpg",
+ conditional:{liveIntheSameCity:false, hasPrevious:true, hasNext:true}},
+ {photoUrl:"/images/orlando.jpg",
+ conditional:{liveIntheSameCity:true, hasPrevious:true, hasNext:true}},
+ {photoUrl:"/images/luna.jpg",
+ conditional:{liveIntheSameCity:false, hasPrevious:true, hasNext:false}}
+
+];
+
+
+
+let index = 0;
+
+const { photo } = toAttrs({
+    in: "target1",
+    data: {
+        photo: {
+            src: photos[0].photoUrl,
+            alt: "This is a person."
+        }
+    }
+})
+
+const _if = renderIf({
+    in: "target1",
+    data: photos[0].conditional
+})
+
+  function changePhoto(){
+
+    photo.src = photos[index].photoUrl;
+    _if.setConds = photos[index].conditional;
+
+}
+
+  function previous(){
+
+    index--;
+    changePhoto();
+    
+}
+
+  function next(){
+
+    index++;
+    changePhoto();
+}
+  
+const _if2 = renderIf({
+    in: "target2",
+    data: {
+        person: false
+    }
+})
+
+const _if3 = renderIf({
+    in: "target3",
+    data: {
+        friend: false
+    }
+})
+
+
+  
+const _if4 = renderIf({
+    in: "target4",
+    data: {
+        married: true
+    }
+})
+
+const ref2 = Ref({
+    in: "target4",
+    data: {
+        status: "become single"
+    }
+})
+
+
+ _if4.observe((prop, isMarried) => {
+
+    if(prop == "married"){
+
+        ref2.status = isMarried ? "become single" : "marry"
+
+    }
+
+  })
+
+
+
+const ref = Ref({
+    in: "else-if",
+    data: { age: "" }
+})
+   
+const reactor = renderIf({
+    in: "else-if",
+    data: {
+        emptyInput: true,
+        isBetween0To15: false,
+        isBetween16To18: false,
+        isBetween19To54: false,
+        isGreaterThan54: false
+    }
+})
+
+ref.observe((name, value) => {
+    if(name == "age"){
+     reactor.setConds = {
+        emptyInput: value.trim().length == 0,
+        isBetween0To15: value >= 0 && value < 16,
+        isBetween16To18: value > 15 && value < 19,
+        isBetween19To54: value > 18 && value < 55,
+        isGreaterThan54: value > 54
+     }
+    }
+
+})
+
+
+  
+       </script>
+    </body>
+</html>
