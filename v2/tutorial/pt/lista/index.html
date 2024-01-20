@@ -671,6 +671,62 @@ const livro = renderList({
     <div class="space"></div>
 </div>
 
+<h3><a href="#listaAninhada" id="listaAninhada" class="hash">Lista aninhada</a></h3>
+<p>
+    Se por ventura, nós quisermos fazer uma listagem em uma lista? Como fazemos isso? Vamos
+    ter que usar o método <span class="hl">Map</span> da Array. Vê um exemplo
+</p>
+
+<textarea>
+
+<div id="listaDeEncarregados"></div>
+    
+<script>
+
+    const encarregados = [{
+        nome: "Fernando", filhos: ["Berta", "Mário"]
+    },{
+        nome: "Mária", filhos: ["Gildo", "Odeth", "Léo"]
+    }];
+
+    renderList({
+        in: "listaDeEncarregados",
+        each: encarregados,
+        do({nome, filhos}){
+
+            const ulChildren = filhos.map((filho) => {
+                return { tag: "li", text: filho }
+            } )
+
+            return template({
+                tag: "div", children: [{
+                    tag: "h4", text: `Encarregad(a): ${nome}`
+                },{
+                    tag: "p", text: `${nome} tem ${filhos.length} filhos`
+                },{
+                    tag: "ul", children: ulChildren
+                }]
+            })
+        }
+    })
+	
+</script>
+</textarea>
+
+    <div class="demo">
+        <div id="listaDeEncarregados"></div>  
+    <div class="space"></div>
+</div>
+
+<p>O método <span class="hl">Map</span> retorna uma Array não é?
+    No nosso exemplo o valor da variável <span class="hl">ulChildren</span> 
+    será uma Array de objectos e essa mesma Array é passada como o valor da propriedade
+    children, sabes o que acontece depois não é? Esses objectos da Array ulChildren vão representar os elementos
+    da lista. As listas aninhadas também são altamente reativas, se você abrir o console do navegdor
+    nessa página e tentar modificar as Arrays <span class="hl">filhos</span> a interface será
+    atualizada instantaneamente para reflitir os novos dados.
+
+    </p>
 <p>
     Quando por exemplo, o valor da opção <span class="hl">each</span> for uma Array de objectos, o Inter vai definir
     algumas propriedades reativas nos referidos objectos. E elas são:
@@ -819,6 +875,7 @@ renderList({
     informações. Essa propriedade só aceita uma Array como o seu valor, e os itens da referida Array devem ser strings
 	que devem indicar os nomes das propriedades que serão deletadas.
 </p>
+
 
 <p>Essa matéria te explicou tudo sobre lista no Inter. Agora dê uma olhada no exemplo abaixo.</p>
 
@@ -1311,6 +1368,33 @@ const livro = renderList({
     }
 })
 
+
+const encarregados = [{
+        nome: "Fernando", filhos: ["Berta", "Mário"]
+    },{
+        nome: "Mária", filhos: ["Gildo", "Odeth", "Léo"]
+    }];
+
+    renderList({
+        in: "listaDeEncarregados",
+        each: encarregados,
+        do({nome, filhos}){
+
+            const ulChildren = filhos.map((filho) => {
+                return { tag: "li", text: filho }
+            } )
+
+            return template({
+                tag: "div", children: [{
+                    tag: "h4", text: `Encarregad(a): ${nome}`
+                },{
+                    tag: "p", text: `${nome} tem ${filhos.length} filhos`
+                },{
+                    tag: "ul", children: ulChildren
+                }]
+            })
+        }
+    })
 
 
 </script>
