@@ -25,8 +25,8 @@
     height: auto;
   }
 img {
-    width: 30vw;
-    height: 30vh;
+    width: 20vw;
+    height: 20vh;
 }
 
 #lingsDeProgramacao {
@@ -107,6 +107,11 @@ img {
                        <span class="hl">in</span> - Deve ser uma string que vai indicar o valor do atributo id do elemento onde a lista
                         será renderizada.
                     </li>
+                    <li>
+                        <span class="hl">optimize</span> - Essa propriedade foi adicionada desde a versão
+                        <a href="https://github.com/interjs/inter/releases/tag/v2.2.3" target="_blank" class="hash">2.2.3</a>, ela serve para optimizar a performance da lista, vai até a parte
+                        que fala sobre a <a href="#opcao-optimize" class="hash">opção optimize</a> nessa matéria para uma explicação mais detalhada.
+                     </li>
                     <li>
                        <span class="hl">each</span>  - Representa os dados em que a lista será baseada, o valor dessa propriedade pode
 					   ser uma <span class="hl">Array</span> , um <span class="hl">objecto</span>, <span class="hl">Set</span>,
@@ -407,6 +412,97 @@ const lista2 = renderList({
     
 <div class="space"></div>          
 </div>
+<h3 id="opcao-optimize"><a href="#opcao-optimize" id="opcao-optimize" class="hash"> Opção optimize</a> </h3>
+<div class="warning">
+    <p>Essa propriedade(opção) faz parte do Inter dese a versão
+        <span class="hl">2.2.3</span>
+    </p>
+</div>
+<p>
+    Quando a lista for super grande, de milhares de itens e os containeres correspondentes
+    à cada item tiverem inúmeros elementos aninhados, você vai notar uma certa queda de performance
+    ao atualisar a lista, com a propriedade <span class="hl">optimize</span> definida para <span class="hl">true</span>
+    a performance da lista no Inter vai até às nuvens! Mas esse ganho de performance tem uma desvantagem. Vê o exemplo:
+</p>
+
+<textarea >
+
+  <div id="estudantes"></div>
+ <script>
+ 
+    const estudantes = [
+        { nome: "Alberto Sampaio", nota: 14, professor: "João Costa", novoProf: false },
+        { nome: "Angelina Guilherme", nota: 8}
+    ]
+
+    renderList({
+        in: "estudantes",
+        each: estudantes,
+        optimize: true,
+        do(estudante) {
+
+            const { nome, nota, professor, novoProf} = estudante
+            const buttonEvents = { onclick: () => estudante.novoProf = true };
+            const done = { onclick: () => estudante.novoProf = false };
+            const inputAttrs = { type: "text", value: professor, placeholder: "Digite" };
+            const inputEvents = { oninput: (e) => estudante.professor = e.target.value }
+			const h4Text = `Estudante: ${nome} ${nota > 10 ? "passou de ano" : "vai repetir"}`
+
+            return template({
+                tag: "div", children: [{
+                    tag: "h4", text: h4Text
+                },{
+                    tag: "p", text: `O professor: ${this[0].professor}`
+                },{
+                    tag: "button", text: "novo Prof", renderIf: novoProf == false,
+					events: buttonEvents
+                },{
+                    tag: "div", renderIf: novoProf, children: [{
+                        tag: "input", attrs: inputAttrs, events: inputEvents
+                    },{
+                        tag: "button", text: "Feito", events: done
+                    }]
+                }]
+            })
+        }
+    })
+
+
+</script>
+</textarea>
+<div class="demo">
+    <div id="estudantes"></div>
+	<div class="space"></div>
+</div>
+
+<p>No exemplo anterior, nós usamos a opção <span class="hl">optimize</span> para optimizar a listar,
+que particularmente nesse caso é disnecessário só foi usado para exemplificar a desvantagem.
+Nós temos a Array estudantes que vai ser usado como os dados da nossa lista, mas um detalhe curioso é que, 
+apenas o primeiro item(objecto) da lista tem as propriedades <span class="hl">professor</span> e
+<span class="hl">novoProf</span>, tecnicamente não tinha como nós apresentarmos o valor da propriedade
+professor no segundo elemento HTML da lista, baseando-se nas propriedades do segundo objecto, então nós usamos a
+professor do primeiro objecto, até aí tudo bem, o outro porém, é que quando se usa a propriedade
+<span class="hl">optimize</span> por exemplo, se uma das propriedades
+do  primeiro item(objecto) da lista for alterada, o sistema
+de renderização da lista vai atualizar apenas o elemento correspondente(o primeiro container),
+já que o primeiro item da lista representa o primeiro elemento HTML da lista, assim
+o sistema de renderização evita trabalho desnecessário ao procurar alterações em outros elementos HTML 
+da lista. No nosso exemplo, quando uma das propriedades do primeiro objecto da Array for alterada,
+o Inter vai supor que apenas o primeiro elemento da lista foi atualizado, já que seu reator(objecto correspondente) foi atualizado,
+então não vai procurar alterações no segundo elemento HTML da lista, já que as propriedades do segundo objecto da lista estão intáctas.
+
+</p>
+
+<p>A lição é: Quando você utilizar essa opção para optimizar a lista, certifique-se que cada container(elemento da lista)
+    use apenas os dados dos objectos correspondentes, por exemplo, o segundo elemento da lista use apenas os dados do segundo objecto da lista.
+</p>
+
+<p>Eu disse que no nosso exemplo, o uso da referida propriedade não faz diferença, não é?
+Queres um exemplo em que ela faz a diferença(aumenta a performance)?
+clica em <a href="https://codepen.io/Denis-Power/pen/ZEPwvrJ?editors=0010" target="_blank">optimização
+da lista </a>
+ </p>
+
 <h3><a href="#observe" id="observe" class="hash">Método observe</a></h3>
 <div class="warning">
     <p>Esse método faz parte do Inter desde a versão <span class="hl">2.1.0</span>.</p>
@@ -700,7 +796,7 @@ const livro = renderList({
 
             return template({
                 tag: "div", children: [{
-                    tag: "h4", text: `Encarregad(a): ${nome}`
+                    tag: "h4", text: `Encarregado(a): ${nome}`
                 },{
                     tag: "p", text: `${nome} tem ${filhos.length} filhos`
                 },{
@@ -737,7 +833,7 @@ const livro = renderList({
 </h3>
 <p>Essa propriedade funciona como a <a href="#reactor-setProps">setProps do reator da lista</a>, 
     mas só que, as propriedades do objecto que estamos a nos referir é que serão atualizadas, ou seja, ela(setProps)
-    é usada para atualizar os valores das proprieades do objecto de uma maneira elegante e performática. A setProps aceita apenas um objecto
+    é usada para atualizar os valores das propriedades do objecto de uma maneira elegante e performática. A setProps aceita apenas um objecto
     como o seu valor, e as propriedades do referido objecto devem indicar o nome das propriedades que os seus
     valores serão alterados, e os valores, serão os novos valores para as respectivas propriedades.
 </p>
@@ -909,8 +1005,8 @@ const _if = renderIf({
 })
 
 ref1.observe((nome, valor) => {
-    if(nome == "texto") _if.temValorNoInput = valor.trim().length > 0;
-    if(nome == "numeroDeTarefas") _if.temTarefas = valor > 0;
+    if (nome == "texto") _if.temValorNoInput = valor.trim().length > 0;
+    if (nome == "numeroDeTarefas") _if.temTarefas = valor > 0;
 })
 
 const reatorDaLista = renderList({
@@ -1386,11 +1482,46 @@ const encarregados = [{
 
             return template({
                 tag: "div", children: [{
-                    tag: "h4", text: `Encarregad(a): ${nome}`
+                    tag: "h4", text: `Encarregado(a): ${nome}`
                 },{
                     tag: "p", text: `${nome} tem ${filhos.length} filhos`
                 },{
                     tag: "ul", children: ulChildren
+                }]
+            })
+        }
+    })
+    const estudantes = [
+        { nome: "Alberto Sampaio", nota: 14, professor: "João Costa", novoProf: false },
+        { nome: "Angelina Guilherme", nota: 8}
+    ]
+
+    renderList({
+        in: "estudantes",
+        each: estudantes,
+        optimize: true,
+        do(estudante) {
+
+            const { nome, nota, professor, novoProf} = estudante
+            const buttonEvents = { onclick: () => estudante.novoProf = true };
+            const done = { onclick: () => estudante.novoProf = false };
+            const inputAttrs = { type: "text", value: professor, placeholder: "Digite novo professor " };
+            const inputEvents = { oninput: (e) => estudante.professor = e.target.value }
+			const h4Text = `Estudante: ${nome} ${nota > 10 ? "passou de ano" : "vai repetir"}`
+
+            return template({
+                tag: "div", children: [{
+                    tag: "h4", text: h4Text
+                },{
+                    tag: "p", text: `O professor: ${this[0].professor}`
+                },{
+                    tag: "button", text: "novo Prof", renderIf: novoProf == false ,events: buttonEvents
+                },{
+                    tag: "div", renderIf: novoProf, children: [{
+                        tag: "input", attrs: inputAttrs, events: inputEvents
+                    },{
+                        tag: "button", text: "Feito", events: done
+                    }]
                 }]
             })
         }
