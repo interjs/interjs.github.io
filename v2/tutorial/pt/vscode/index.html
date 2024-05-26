@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+         <meta charset="utf-8"><link rel="shortcut icon" href="/images/Inter.png">
+        <link rel="stylesheet" href="/style/docs.css">
+        <link rel="stylesheet" href="/style/all.css">
+        <script src="/script/all.js"></script>
+        <title>Intellisense no Vscode para o Inter</title>
+		
+		<style>
+		
+		img {
+		width: 85%
+		}
+		
+     .CodeMirror {
+    border: 1px solid #eee;
+    height: auto;
+	}
+		
+		</style>
+    </head>
+    <body>
+        
+        
+        <div class="main">
+           
+            <aside>
+<nav>
+    <ul class="social">
+        
+       <li><a href="https://github.com/DenisPower1/inter" title="Github"><i class="fab fa-github"></i></a></li>
+       <li><a href="https://www.facebook.com/groups/3015405535345615/" title="Facebook" ><i class="fab fa-facebook"></i></a></li>
+       <li><a href="https://gitter.im/Interjs/community" title="Gitter" ><i class="fab fa-gitter"></i></a></li>
+    </ul>
+</nav>
+
+<nav>
+    <ul class="nav">
+    <li>
+            <a href="/v2/tutorial/pt/introducao/">
+                Introdução
+            </a>
+            </li>
+            <li>
+            <a href="/v2/tutorial/pt/instalacao/">
+                Instalação
+            </a>
+        </li>
+        <li>
+            <a href="/v2/tutorial/pt/referencia">Referência</a>
+        </li>
+        
+        <li>
+            <a href="/v2/tutorial/pt/gerenciador-de-atributos">Gerenciador<br> de atributos</a>
+        </li>
+        
+        <li>
+            <a href="/v2/tutorial/pt/renderizacao-condicional">Renderização condicional</a>
+        </li>
+        
+        <li>
+            <a href="/v2/tutorial/pt/lista">Lista</a>
+        </li>
+        
+        <li>
+            <a href="/v2/tutorial/pt/reator">Reator</a>
+        </li>
+        
+        <li>
+            <a href="/v2/tutorial/pt/ajax">Ajax</a>
+        </li>
+		<li>
+            <a href="/v2/tutorial/pt/vscode">Vscode</a>
+        </li>
+    </ul>
+</nav>            </aside>
+          
+        <article>
+  <div>
+
+<h1><a href="#intellisense-introducao" id="intellisense-introducao" class="hash">Intellisense no Vscode para o Inter</a></h1>
+
+<p>
+    Programar sem ter suggestões dos parámetros da função que estiveres a digitar
+	é muito chato, a experiência do desenvolvedor fica horrível. Um dos objectivos
+	do Inter é de proporcionar uma óptima experiência para os desenvolvedores, e para você
+	ter essa experiência vais precisar de fazer duas coisinhas:
+</p>
+
+<h3><a href="#extensao" id="extensao" class="hash">Extensão do Vscode</a></h3>
+<p>
+O nome da extensão é <span class="hl">Interjs HTML intellisense</span>,
+o objectivo dela é de habilitar sugestões dos attributos condicionais do Inter
+como mosta a imagem abaixo. </p>
+<img src="https://github.com/interjs/inter-intellisense/raw/HEAD/images/sample.gif">
+<p>A referida extensão fica activa tão logo você abrir 
+um arquilo <span class="hl">HTML</span> no Vscode, agora a pergunta mais
+importante nesse momento, como você vai instalar a extensão?
+Tem duas formas: A extensão está disponível na loja de extensões do Vscode,
+acessa a extensão clicando: <a href="https://marketplace.visualstudio.com/items?itemName=interjs.inter-intellisense">
+Interjs HTML Intellisense</a>, ou você pode abrir o Vscode e fazer a combinação de teclas
+<span class="hl">Ctrl+Shift+X</span> vai aparecer um campo de pesquisa, onde você vai poder pesquisa
+a extensão na loja de extensões do Vscode ao digitar o nome da extensão. A segunda forma é através das releases do repositório oficial da extensão no Github, localiza 
+o arquivo <span class="hl"> inter-intellisense.vsix</span> clicando em <a href="https://github.com/interjs/inter-intellisense/releases">repositório oficial da extensão</a>,
+baixa o referido arquivo e instala ele directamente no Vscode, mas eu te aconselho a usar a primeira forma.
+</p>
+
+<h3><a href="#arquivo-de-declaracao" id="arquivo-de-declaracao" class="hash">Sugestões para API do Interjs</a></h3>
+<p>
+Ok, ter uma extensão para sugestões dos attributos condicionais do Inter é muito fixe, mas quanto
+a verdadeira API do Inter? Claro, tem uma forma, não é a partir de uma extensão, mas a partir
+do arquivo de declaração dos tipos da API do Inter.
+</p>
+
+<p>
+ Para usar esse método, você deve usar o Inter modular, baixa o arquivo
+ do Inter modular (<span class="hl">inter.m.js</span>), põe ele em uma pasta do teu projecto, por exemplo na pasta
+ <span class="hl">lib</span>, depois baixa o arquivo de declaração dos tipos da API do Inter
+ em <a href="https://github.com/interjs/types-releases/releases">tipos</a>, o nome do arquivo é <span Class="hl">inter.m.d.ts</span>, esse arquivo
+ põe na mesma pasta onde você colocou o arquivo do Inter modular, depois
+ cria o arquivo Javascript noutra pasta ou na raíz do teu projecto onde você vai escrever o teu código importando as funções do Inter modular,
+ como mostra o vídeo abaixo, você também pode acessar um exemplo prático do que foi explicado em 
+ <a href="https://github.com/interjs/sample">exemplo da estrutura do projecto usando arquivo de declaração dos tipos da API do Inter</a>.
+ 
+</p>
+
+<iframe src="https://drive.google.com/file/d/1cctD5a2S76XaB3_ORXiLBHuknIRLIYuH/preview" width="640" height="480" allow="autoplay"></iframe>
+
+<div class="warning">
+ <p>
+   O nome do arquivo do Inter modular, deve ser igual ao nome do arquivo de declaração dos tipos da API
+   do Inter.
+ </p>
+</div> 
+ <p>
+ Por exemplo:
+ </p>
+ <ul class="items">
+ <li>Inter Modular - <span class="greenlight">inter.m.js</span></li>
+ <li>Declaração dos tipos - <span class="greenlight">inter.m.d.ts</span></li>
+ <li>Inter modular - <span class="warning">inter.js</span></li>
+ <li>declaração dos tipos - <span class="warning">inter.m.d.ts</span></li>
+ </ul>
+
+<p>Viu como os dois últimos arquivos têm nomes diferente?
+A regra é: 
+</p>
+
+<ul class="items">
+ <li>Inter Modular - <span class="greenlight">nomeDoArquivo.js</span></li>
+ <li>Declaração dos tipos - <span class="greenlight">nomeDoArquivo.d.ts</span></li>
+ </ul>
+ 
+ <p>E os  <span class="hl">nomeDoArquivo</span>s devem ser iguais.</p>
+ <p>
+  Acessa as releases do repositório do Github onde o arquivo de declaração dos tipos da API do Inter
+  é lançado, cada release especifica em que versão do Inter o referido arquivo deve ser usado,
+  baixa o arquivo que suporta a versão do Inter que você estiver usando e seja feliz. Passa no repositório oficial do <a href="https://github.com/interjs/inter">inter</a> e deixa uma estrela para ajudar na repercursão do Inter.
+ </p>
+
+
+
+<div class="Space"></div>
+
+</div>
+
+</article>
+
+</div>
+
+
+</body>
+</html>
