@@ -66,8 +66,9 @@
     }
 
     .main {
-        
-        margin-top: 3%;
+        // We'll need it soon, 
+		// let's not remove it.
+       // margin-top: 3%;
     }
 
     .follow>nav>a {
