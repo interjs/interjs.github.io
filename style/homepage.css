@@ -18,7 +18,7 @@
     :root {
         --offcolor: hsl(219, 60%, 62%);
 
-        ;
+        
     }
 
     header {
@@ -28,6 +28,7 @@
         z-index: 999;
         background-color: var(--offcolor);
         box-shadow: 1px 1px 2px black;
+		
 
     }
 
@@ -682,10 +683,6 @@
             font-size: 1rem;
         }
 
-        header {
-            transform: translateX(-1000px);
-        }
-
         .Inter {
             margin-top: 10%;
         }
@@ -829,6 +826,13 @@
         aside {
             width: 70vw;
         }
+		
+		h1 {
+			
+			font-size: 1.3rem
+			
+		}
+		
     }
 
     .space {
