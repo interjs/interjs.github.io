@@ -669,6 +669,11 @@
             margin-left: 20%;
         }
 
+        .header > p {
+            font-size:  1 rem;
+            
+        }
+
 
         .socials {
             display: flex;
